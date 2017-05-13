@@ -1,0 +1,33 @@
+﻿@using Killer_App.Helpers
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Most Popular Songs @DateTime.Now.DayOfWeek</h2>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Album</th>
+        <th>Duration</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Song song in ViewBag.Songs)
+    {
+        <tr>
+            <td>
+                @song.Name
+            </td>
+            <td>
+                @song.Album
+            </td>
+            <td>
+                @song.Duration.ToString(@"mm\:ss")
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>
