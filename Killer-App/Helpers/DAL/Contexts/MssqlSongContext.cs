@@ -1,7 +1,21 @@
-﻿namespace Killer_App.Helpers.DAL.Contexts
+﻿using System.Collections.Generic;
+
+namespace Killer_App.Helpers.DAL.Contexts
 {
-    public class MssqlSongContext
+    internal class MssqlSongContext : ISongContext
     {
-        ctor
+        //private readonly ContextBase _contextBase;
+
+        //public MssqlSongContext(ContextBase contextBase)
+        //{
+        //    _contextBase = contextBase;
+        //}
+
+        public List<Song> GetAllSongs()
+        {
+            var query = "SELECT * FROM Song";
+            var data = ContextBase.GetData(query);
+            return ContextBase.CreateList(data, ContextBase.CreateSong);
+        }
     }
 }
