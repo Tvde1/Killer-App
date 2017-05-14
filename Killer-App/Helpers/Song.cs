@@ -4,7 +4,7 @@ using Killer_App.Helpers.Providers;
 
 namespace Killer_App.Helpers
 {
-    internal class Song
+    public class Song
     {
         private Provider _provider;
 
@@ -15,36 +15,15 @@ namespace Killer_App.Helpers
 
         public List<Artist> Artists
         {
-            get { _provider.ArtistProvider.GetArtistsFromSong(this); }
+            get { return _provider.ArtistProvider.GetArtistsFromSong(this); }
         }
 
-        public Song(int id, string name, TimeSpan duration)
+        public Song(int id, string name, TimeSpan duration, Provider provider)
         {
             Name = name;
             Id = id;
             Duration = duration;
+            _provider = provider;
         }
     }
-
-    internal class Album
-    {
-        private int v1;
-        private string v2;
-
-        public Album(int v1, string v2)
-        {
-            this.v1 = v1;
-            this.v2 = v2;
-        }
-
-        public int Id { get; }
-        public string Name { get; }
-        public List<Song> Songs { get; } //TODO: Hook up to
-}
-
-    internal class Artist
-    {
-
-    }
-
 }
