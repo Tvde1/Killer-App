@@ -1,27 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Killer_App.Helpers.DAL.Contexts
 {
     internal class MssqlArtistContext : IArtistContext
     {
+        private readonly ContextBase _contextBase;
+
+        public MssqlArtistContext(ContextBase contextBase)
+        {
+            _contextBase = contextBase;
+        }
+
         public Dictionary<int, Artist> GetAllArtists()
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM Artist";
+            var data = ContextBase.GetData(query);
+            var list =  ContextBase.CreateList(data, _contextBase.CreateArtist);
+            return list.ToDictionary(x => x.Id, x => x);
         }
 
         public List<int> GetArtists(Song song)
         {
-            throw new NotImplementedException();
+            var query = $"SELECT ArtistCk FROM ArtistSong WHERE SongCk = {song.Id}";
+            var data = ContextBase.GetData(query);
+            return ContextBase.CreateList(data, row => (int)row["ArtistCk"]);
         }
 
         public List<int> GetArtists(Album album)
         {
-            var query = $"SELECT ArtistCk FROM SongArtist WHERE SongCk = {album.Id}";
+            var query = $"SELECT ArtistCk FROM AlbumArtist WHERE AlbumCk = {album.Id}";
             var data = ContextBase.GetData(query);
-            return ContextBase.CreateList(data, row => (int)row.ItemArray[0]);
+            return ContextBase.CreateList(data, row => (int)row["ArtistCk"]);
         }
     }
 }
