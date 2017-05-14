@@ -12,7 +12,7 @@ namespace Killer_App.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var songs = new List<Song> {new Song("Blue Moon", "Top 100 Sintra Classics", new TimeSpan(0, 3, 49)), new Song("Stormy Wether", "Only The Lonely", new TimeSpan(0, 4, 13))};
+            var songs = new List<Song> {new Song(1, "Blue Moon", new TimeSpan(0, 3, 49)), new Song(2, "Stormy Wether",new TimeSpan(0, 4, 13))};
             ViewBag.Songs = songs;
             return View();
         }

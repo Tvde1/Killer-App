@@ -107,9 +107,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DAL\AlbumRepository.cs" />
     <Compile Include="Helpers\DAL\Contexts\ContextBase.cs" />
+    <Compile Include="Helpers\DAL\Contexts\IAlbumContext.cs" />
+    <Compile Include="Helpers\DAL\Contexts\IArtistContext.cs" />
+    <Compile Include="Helpers\DAL\Contexts\ISongContext.cs" />
+    <Compile Include="Helpers\DAL\Contexts\MssqlAlbumContext.cs" />
+    <Compile Include="Helpers\DAL\Contexts\MssqlArtistContext.cs" />
     <Compile Include="Helpers\DAL\Contexts\MssqlSongContext.cs" />
+    <Compile Include="Helpers\ExtentionMethods.cs" />
+    <Compile Include="Helpers\Providers\AlbumProvider.cs" />
+    <Compile Include="Helpers\Providers\ArtistProvider.cs" />
+    <Compile Include="Helpers\Providers\Providers.cs" />
+    <Compile Include="Helpers\Providers\SongProvider.cs" />
     <Compile Include="Helpers\Song.cs" />
+    <Compile Include="Helpers\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
