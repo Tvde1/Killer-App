@@ -8,7 +8,12 @@ namespace Killer_App.Helpers.DAL
 {
     internal class AlbumRepository
     {
-        private IAlbumContext _albumContext = new MssqlAlbumContext();
+        private IAlbumContext _albumContext;
+
+        public AlbumRepository(ContextBase contextBase)
+        {
+            _albumContext = new MssqlAlbumContext(contextBase);
+        }
 
         public Dictionary<int, Album> GetAllAlbums()
         {
