@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+using Killer_App.Helpers.DAL.Contexts;
 
 namespace Killer_App.Helpers.Providers
 {
-    internal class Provider
+    public class Provider
     {
-        public ArtistProvider ArtistProvider { get; }
-        public SongProvider SongProvider { get; }
-        public AlbumProvider AlbumProvider { get; }
+        internal ArtistProvider ArtistProvider { get; }
+        internal SongProvider SongProvider { get; }
+        internal AlbumProvider AlbumProvider { get; }
 
-        public Provider()
+        internal Provider(ContextBase contextBase)
         {
-            ArtistProvider = new ArtistProvider();
-            SongProvider = new SongProvider();
-            AlbumProvider = new AlbumProvider();
+            ArtistProvider = new ArtistProvider(contextBase);
+            SongProvider = new SongProvider(contextBase);
+            AlbumProvider = new AlbumProvider(contextBase);
         }
     }
 }

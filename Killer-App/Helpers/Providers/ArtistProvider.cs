@@ -8,16 +8,22 @@ namespace Killer_App.Helpers.Providers
     {
         private Dictionary<int, Artist> _artists;
 
-        private IArtistContext _artistContext = new MssqlArtistContext();
+        private IArtistContext _artistContext;
 
-        public ArtistProvider()
+        public ArtistProvider(ContextBase contextBase)
         {
-            _artists = _artistContext.GetAllArtists().ToDictionary(x => x.Id, x => x);
+            _artistContext = new MssqlArtistContext(contextBase);
+            _artists = _artistContext.GetAllArtists();
         }
 
         public List<Artist> GetArtistsFromSong(Song song)
         {
-            
+            return _artistContext.GetArtists(song).Select(x => _artists[x]).ToList();
+        }
+
+        public List<Artist> GetArtistsFromAlbum(Album album)
+        {
+            return _artistContext.GetArtists(album).Select(x => _artists[x]).ToList();
         }
     }
 }
