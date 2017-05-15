@@ -4,11 +4,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Killer_App.Helpers;
+using Killer_App.Helpers.DAL.Contexts;
+using Killer_App.Helpers.Providers;
 
 namespace Killer_App.Controllers
 {
     public class HomeController : Controller
     {
+        private Provider _provider;
+
+        public HomeController()
+        {
+           _provider = new Provider(); 
+        }
+
+
         // GET: Home
         public ActionResult Index()
         {

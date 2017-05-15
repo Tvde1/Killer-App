@@ -107,6 +107,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Album.cs" />
+    <Compile Include="Helpers\Artist.cs" />
     <Compile Include="Helpers\DAL\AlbumRepository.cs" />
     <Compile Include="Helpers\DAL\Contexts\ContextBase.cs" />
     <Compile Include="Helpers\DAL\Contexts\IAlbumContext.cs" />

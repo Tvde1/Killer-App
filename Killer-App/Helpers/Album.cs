@@ -3,7 +3,7 @@ using Killer_App.Helpers.Providers;
 
 namespace Killer_App.Helpers
 {
-    internal class Album
+    public class Album
     {
         private Provider _provider;
 

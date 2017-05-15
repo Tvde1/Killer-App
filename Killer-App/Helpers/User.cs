@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Killer_App.Helpers.Providers;
+﻿using Killer_App.Helpers.Providers;
 
 namespace Killer_App.Helpers
 {
-    internal class User
+    public class User
     {
         protected Provider _provider;
 

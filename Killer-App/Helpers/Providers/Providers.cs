@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Web;
-using Killer_App.Helpers.DAL.Contexts;
+﻿using Killer_App.Helpers.DAL.Contexts;
 
 namespace Killer_App.Helpers.Providers
 {
@@ -11,8 +8,10 @@ namespace Killer_App.Helpers.Providers
         internal SongProvider SongProvider { get; }
         internal AlbumProvider AlbumProvider { get; }
 
-        internal Provider(ContextBase contextBase)
+        internal Provider()
         {
+            var contextBase = new ContextBase(this);
+
             ArtistProvider = new ArtistProvider(contextBase);
             SongProvider = new SongProvider(contextBase);
             AlbumProvider = new AlbumProvider(contextBase);
