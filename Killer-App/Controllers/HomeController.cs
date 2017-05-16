@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Killer_App.Helpers;
 using Killer_App.Helpers.DAL.Contexts;
 using Killer_App.Helpers.Providers;
+using Killer_App.Models;
 
 namespace Killer_App.Controllers
 {
@@ -23,8 +24,25 @@ namespace Killer_App.Controllers
         public ActionResult Index()
         {
             //var songs = new List<Song> {new Song(1, "Blue Moon", new TimeSpan(0, 3, 49)), new Song(2, "Stormy Wether",new TimeSpan(0, 4, 13))};
-            //ViewBag.Songs = songs;
+            ViewBag.Songs = _provider.SongProvider.GetTopSongs();
             return View();
+        }
+
+        //GET: Search
+        [HttpGet]
+        public ActionResult Search()
+        {
+            var model = new SearchModel(_provider) {SearchText = "Me"};
+            model.Search();
+            return View(model);
+        }
+
+        //POST: Search with data.
+        [HttpPost]
+        public ActionResult Search(SearchModel model)
+        {
+            model.Search();
+            return View(model);
         }
     }
 }

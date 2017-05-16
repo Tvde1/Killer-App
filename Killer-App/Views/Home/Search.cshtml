@@ -1,0 +1,63 @@
+﻿@using Killer_App.Helpers
+@using Killer_App.Models
+@model Killer_App.Models.SearchModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+@Html.TextBox("TbSearchText", Model.SearchText);
+
+<select name="CbMode">
+    @foreach (var option in Enum.GetNames(typeof(SearchModel.SearchMode)))
+    {
+        <option>@option</option>
+    }
+</select>
+
+<script>
+    if (@Model.Mode != null) document.getElementById("CbMode").value = @Model.Mode;
+    else document.getElementById("CbMode").value = "";
+</script>
+
+<input id="BtnSearch" type="submit" value="Search" />
+
+<hr/>
+
+<h2>Results</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Album(s)</th>
+            <th>Artists</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Results != null)
+        {
+            foreach (var song in Model.Results)
+            {
+                <tr>
+                    <td>
+                        @song.Name
+                    </td>
+                    <td>
+                        @string.Join(", ", song.Albums.Select(x => x.Name))
+                    </td>
+                    <td>
+                        @string.Join(", ", song.Artists.Select(x => x.UserName))
+                    </td>
+                    <td>
+                        @song.Duration.ToString(@"mm\:ss")
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>

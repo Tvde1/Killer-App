@@ -3,30 +3,37 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Most Popular Songs @DateTime.Now.DayOfWeek</h2>
+<h2>Most Popular Songs on @DateTime.Now.DayOfWeek</h2>
 
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Name</th>
-        <th>Album</th>
+        <th>Album(s)</th>
+        <th>Artists</th>
         <th>Duration</th>
     </tr>
     </thead>
     <tbody>
-    @foreach (Song song in ViewBag.Songs)
+    @if (ViewBag.Songs != null)
     {
-        <tr>
-            <td>
-                @song.Name
-            </td>
-            <td>
-                @song.Albums
-            </td>
-            <td>
-                @song.Duration.ToString(@"mm\:ss")
-            </td>
-        </tr>
+        foreach (Song song in ViewBag.Songs)
+        {
+            <tr>
+                <td>
+                    @song.Name
+                </td>
+                <td>
+                    @string.Join(", ", song.Albums.Select(x => x.Name))
+                </td>
+                <td>
+                    @string.Join(", ", song.Artists.Select(x => x.UserName))
+                </td>
+                <td>
+                    @song.Duration.ToString(@"mm\:ss")
+                </td>
+            </tr>
+        }
     }
     </tbody>
 
