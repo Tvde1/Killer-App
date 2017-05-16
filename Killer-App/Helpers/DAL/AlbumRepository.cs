@@ -8,7 +8,7 @@ namespace Killer_App.Helpers.DAL
 {
     internal class AlbumRepository
     {
-        private IAlbumContext _albumContext;
+        private readonly IAlbumContext _albumContext;
 
         public AlbumRepository(ContextBase contextBase)
         {
@@ -18,6 +18,16 @@ namespace Killer_App.Helpers.DAL
         public Dictionary<int, Album> GetAllAlbums()
         {
             throw new NotImplementedException();
+        }
+
+        public List<int> GetAlbums(Song song)
+        {
+            return _albumContext.GetAlbums(song);
+        }
+
+        public List<int> GetAlbums(Artist artist)
+        {
+            return _albumContext.GetAlbums(artist);
         }
     }
 }

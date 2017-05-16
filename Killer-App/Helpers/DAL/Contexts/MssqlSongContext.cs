@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Killer_App.Helpers.DAL.Contexts
 {
@@ -11,17 +12,15 @@ namespace Killer_App.Helpers.DAL.Contexts
             _contextBase = contextBase;
         }
 
-        public List<Song> GetAllSongs()
+        public Dictionary<int, Song> GetAllSongs()
         {
-            var query = "SELECT * FROM Song";
-            var data = ContextBase.GetData(query);
-            return ContextBase.CreateList(data, _contextBase.CreateSong);
+            var data = ContextBase.GetData("SELECT * FROM Song");
+            return ContextBase.CreateList(data, _contextBase.CreateSong)?.ToDictionary(x => x.Id, x => x);
         }
 
         public List<int> GetSongs(Album album)
         {
-            var query = $"SELECT SongCk FROM AlbumSong WHERE AlbumCk = {album.Id}";
-            var data = ContextBase.GetData(query);
+            var data = ContextBase.GetData($"SELECT SongCk FROM AlbumSong WHERE AlbumCk = {album.Id}");
             return ContextBase.CreateList(data, row => (int)row["SongCk"]);
         }
 

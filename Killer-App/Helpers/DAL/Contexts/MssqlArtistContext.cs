@@ -17,7 +17,7 @@ namespace Killer_App.Helpers.DAL.Contexts
             var query = "SELECT * FROM Artist";
             var data = ContextBase.GetData(query);
             var list =  ContextBase.CreateList(data, _contextBase.CreateArtist);
-            return list.ToDictionary(x => x.Id, x => x);
+            return list.ToDictionary(x => x.ArtistId, x => x);
         }
 
         public List<int> GetArtists(Song song)

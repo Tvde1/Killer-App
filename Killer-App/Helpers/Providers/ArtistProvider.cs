@@ -8,11 +8,16 @@ namespace Killer_App.Helpers.Providers
     {
         private Dictionary<int, Artist> _artists;
 
-        private IArtistContext _artistContext;
+        private readonly IArtistContext _artistContext;
 
         public ArtistProvider(ContextBase contextBase)
         {
             _artistContext = new MssqlArtistContext(contextBase);
+            UpdateArtists();
+        }
+
+        private void UpdateArtists()
+        {
             _artists = _artistContext.GetAllArtists();
         }
 

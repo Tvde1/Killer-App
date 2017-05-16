@@ -4,20 +4,19 @@ namespace Killer_App.Helpers
 {
     public class User
     {
-        protected Provider _provider;
+        protected readonly Provider _provider;
 
         public int Id { get; }
         public string UserName { get; }
-        public string Firstname { get; }
+        public string Name { get; }
         public string LastName { get; }
         public string Email { get; }
 
-        public User(int id, string userName, string firstname, string lastName, string email, Provider provider)
+        public User(int id, string userName, string name, string email, Provider provider)
         {
             Id = id;
             UserName = userName;
-            Firstname = firstname;
-            LastName = lastName;
+            Name = name;
             Email = email;
             _provider = provider;
         }
@@ -26,7 +25,7 @@ namespace Killer_App.Helpers
         {
             Id = user.Id;
             UserName = user.UserName;
-            Firstname = user.Firstname;
+            Name = user.Name;
             LastName = user.LastName;
             Email = user.Email;
             _provider = user._provider;

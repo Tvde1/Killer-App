@@ -11,12 +11,9 @@ namespace Killer_App.Helpers
         public int Id { get; }
         public string Name { get; }
         public TimeSpan Duration { get; }
-        public List<Album> Albums { get; set; } //TODO: Implement the context
+        public List<Album> Albums => _provider.AlbumProvider.GetAlbums(this);
 
-        public List<Artist> Artists
-        {
-            get { return _provider.ArtistProvider.GetArtistsFromSong(this); }
-        }
+        public List<Artist> Artists => _provider.ArtistProvider.GetArtistsFromSong(this);
 
         public Song(int id, string name, TimeSpan duration, Provider provider)
         {
