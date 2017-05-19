@@ -10,5 +10,6 @@ namespace Killer_App.App_Data.Helpers.DAL.Interfaces
         DataTable GetArtistUsers(IEnumerable<int> artistIds);
         bool ValidateUser(string username);
         bool ValidatePassword(string username, string password);
+        DataRow FetchUser(string username, string password);
     }
 }

@@ -20,5 +20,10 @@ namespace Killer_App.App_Data.Helpers.DAL.Providers
         {
             return _userRepository.ValidateUser(username, password);
         }
+
+        public User FetchUser(string username, string password)
+        {
+            return _userRepository.FetchUser(username, password);
+        }
     }
 }

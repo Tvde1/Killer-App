@@ -39,5 +39,11 @@ namespace Killer_App.App_Data.Helpers.DAL.Repositories
 
             return 1;
         }
+
+        public User FetchUser(string username, string password)
+        {
+            var data = _userContext.FetchUser(username, password);
+            return _objectCreator.CreateUser(data);
+        }
     }
 }

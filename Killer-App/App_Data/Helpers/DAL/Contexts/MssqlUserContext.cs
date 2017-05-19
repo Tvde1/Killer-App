@@ -46,5 +46,14 @@ namespace Killer_App.App_Data.Helpers.DAL.Contexts
             var data = _contextBase.GetData(query);
             return data.Rows.Count != 0;
         }
+
+        public DataRow FetchUser(string username, string password)
+        {
+            var query = new SqlCommand("SELECT * FROM [User] WHERE Username = @user AND Password = @pass");
+            query.Parameters.AddWithValue("@user", username);
+            query.Parameters.AddWithValue("@pass", password);
+            var data = _contextBase.GetData(query);
+            return data.Rows.Count == 0 ? null : data.Rows[0];
+        }
     }
 }
