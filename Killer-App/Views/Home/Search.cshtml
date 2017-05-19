@@ -1,14 +1,47 @@
-﻿@using Killer_App.Helpers
-@using Killer_App.Models
+﻿@using Killer_App.Models
 @model Killer_App.Models.SearchModel
 
 @{
     ViewBag.Title = "Search";
 }
 
+@if (Model == null)
+{
+    <div class="alert alert-danger" style="margin-top: 15px; margin-bottom: 0">
+        <p>
+            <a href="#" class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <strong>Error!</strong> An error occured when getting data from the controller.
+        </p>
+    </div>
+}
+else if (Model.Results == null)
+{
+    <div class="alert alert-danger" style="margin-top: 15px; margin-bottom: 0">
+        <p>
+            <a href="#" class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <strong>Error!</strong> An error occured while retrieving info from the database. Click <u>here</u> for more info.
+        </p>
+    </div>
+}
+else if (Model?.Results != null && !string.IsNullOrEmpty(Model.SearchText))
+{
+    <div class="alert alert-success" style="margin-top: 15px; margin-bottom: 0">
+        <p>
+            <a href="#" class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <strong>Sucess!</strong> The search resulted in @Model.Results.Count results.
+        </p>
+    </div>
+}
+
 <h2>Search</h2>
 
-@Html.TextBox("TbSearchText", Model.SearchText);
+@using (Html.BeginForm("Search", "Home", FormMethod.Post))
+{
+    @Html.TextBoxFor(model => model.SearchText)
+    @Html.HiddenFor(Model => Model.Provider)
+
+    <button id="BtnSearch" type="submit">Search</button>
+}
 
 <select name="CbMode">
     @foreach (var option in Enum.GetNames(typeof(SearchModel.SearchMode)))
@@ -18,13 +51,11 @@
 </select>
 
 <script>
-    if (@Model.Mode != null) document.getElementById("CbMode").value = @Model.Mode;
-    else document.getElementById("CbMode").value = "";
+    document.getElementById("CbMode").value = @Model?.Mode;
 </script>
 
-<input id="BtnSearch" type="submit" value="Search" />
 
-<hr/>
+<hr />
 
 <h2>Results</h2>
 
@@ -38,19 +69,25 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.Results != null)
-        {
-            foreach (var song in Model.Results)
+        @if (Model?.Results != null)
             {
+                foreach (var song in Model.Results)
+                {
                 <tr>
                     <td>
                         @song.Name
                     </td>
                     <td>
-                        @string.Join(", ", song.Albums.Select(x => x.Name))
+                        @if (song.Albums != null)
+                        {
+                            string.Join(", ", song.Albums.Select(x => x.Name));
+                        }
                     </td>
                     <td>
-                        @string.Join(", ", song.Artists.Select(x => x.UserName))
+                        @if (song.Artists != null)
+                        {
+                            string.Join(", ", song.Artists.Select(x => x.UserName));
+                        }
                     </td>
                     <td>
                         @song.Duration.ToString(@"mm\:ss")

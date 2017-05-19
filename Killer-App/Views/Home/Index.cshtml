@@ -1,4 +1,6 @@
-﻿@using Killer_App.Helpers
+﻿@model Killer_App.Models.IndexModel
+
+@using Killer_App.App_Data.Helpers
 @{
     ViewBag.Title = "Index";
 }
@@ -15,9 +17,9 @@
     </tr>
     </thead>
     <tbody>
-    @if (ViewBag.Songs != null)
+    @if (Model.TopSongs != null)
     {
-        foreach (Song song in ViewBag.Songs)
+        foreach (var song in Model.TopSongs)
         {
             <tr>
                 <td>

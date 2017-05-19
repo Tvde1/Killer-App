@@ -1,0 +1,19 @@
+﻿@model Killer_App.Models.StatsModel
+
+@{
+    ViewBag.Title = "Stats";
+}
+
+<h2>Stats</h2>
+
+<p>
+    Amount of loaded songs: @Model.SongsCount.<br />
+    Amount of loaded albums: @Model.AlbumCount.<br/>
+    Amount of loaded artists: @Model.ArtistCount.<br/>
+    
+    <hr/>
+    
+    Connection string: @Model.ConnectionString.<br/>
+    <br/>
+    Connection: @Model.ConnectionStatus.<br/>
+</p>
