@@ -1,47 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Killer_App.Helpers;
-using Killer_App.Helpers.DAL.Contexts;
-using Killer_App.Helpers.Providers;
+﻿using System.Web.Mvc;
+using Killer_App.App_Data.Helpers.DAL.Providers;
 using Killer_App.Models;
 
 namespace Killer_App.Controllers
 {
     public class HomeController : Controller
     {
-        private Provider _provider;
-
-        public HomeController()
-        {
-           _provider = new Provider(); 
-        }
-
-
         // GET: Home
         public ActionResult Index()
         {
-            //var songs = new List<Song> {new Song(1, "Blue Moon", new TimeSpan(0, 3, 49)), new Song(2, "Stormy Wether",new TimeSpan(0, 4, 13))};
-            ViewBag.Songs = _provider.SongProvider.GetTopSongs();
-            return View();
-        }
-
-        //GET: Search
-        [HttpGet]
-        public ActionResult Search()
-        {
-            var model = new SearchModel(_provider) {SearchText = "Me"};
-            model.Search();
+            if (Session["Provider"] == null) Session["Provider"] = new Provider();
+            var model = new IndexModel();
+            model.Provider = Session["Provider"] as Provider;
+            model.RefreshTopSongs();
             return View(model);
         }
 
-        //POST: Search with data.
+        [HttpGet]
+        public ActionResult Search()
+        {
+            if (Session["Provider"] == null) Session["Provider"] = new Provider();
+            return View(new SearchModel { Provider = Session["Provider"] as Provider });
+        }
+
+        //POST and GET: Search.
         [HttpPost]
         public ActionResult Search(SearchModel model)
         {
-            model.Search();
+            if (Session["Provider"] == null)
+                Session["Provider"] = model.Provider ?? new Provider();
+
+            model.Provider = Session["Provider"] as Provider;
+
+            if (!string.IsNullOrEmpty(model.SearchText)) model.Search();
+
+            return View(model);
+        }
+
+        //GET: Stats
+        public ActionResult Stats()
+        {
+            var model = new StatsModel { Provider = Session["Provider"] as Provider ?? new Provider() };
             return View(model);
         }
     }
