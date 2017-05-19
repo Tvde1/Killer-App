@@ -7,13 +7,17 @@
 <h2>Stats</h2>
 
 <p>
-    Amount of loaded songs: @Model.SongsCount.<br />
-    Amount of loaded albums: @Model.AlbumCount.<br/>
-    Amount of loaded artists: @Model.ArtistCount.<br/>
+    Amount of loaded songs: @Model.Provider.SongProvider.Songs.Count.<br />
+    Amount of loaded albums: @Model.Provider.AlbumProvider.Albums.Count.<br/>
+    Amount of loaded artists: @Model.Provider.ArtistProvider.Artists.Count.<br/>
     
     <hr/>
     
-    Connection string: @Model.ConnectionString.<br/>
+    Active user: @Model.Provider.UserProvider.CurrentUser.UserName.
+
+    <hr/>
+    
+    Connection string: @Model.Provider.ConnectionString.<br/>
     <br/>
     Connection: @Model.ConnectionStatus.<br/>
 </p>

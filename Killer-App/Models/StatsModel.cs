@@ -5,14 +5,6 @@ namespace Killer_App.Models
 {
     public class StatsModel : BaseModel
     {
-        public int SongsCount => Provider.SongProvider.Songs.Count;
-
-        public int ArtistCount => Provider.ArtistProvider.Artists.Count;
-
-        public int AlbumCount => Provider.AlbumProvider.Albums.Count;
-
-        public string ConnectionString => Provider.ConnectionString;
-
         public string ConnectionStatus
         {
             get

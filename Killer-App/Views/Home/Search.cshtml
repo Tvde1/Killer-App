@@ -9,7 +9,7 @@
 {
     <div class="alert alert-danger" style="margin-top: 15px; margin-bottom: 0">
         <p>
-            <a href="#" class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
             <strong>Error!</strong> An error occured when getting data from the controller.
         </p>
     </div>
@@ -18,7 +18,7 @@ else if (Model.Results == null)
 {
     <div class="alert alert-danger" style="margin-top: 15px; margin-bottom: 0">
         <p>
-            <a href="#" class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
             <strong>Error!</strong> An error occured while retrieving info from the database. Click <u>here</u> for more info.
         </p>
     </div>
@@ -27,7 +27,7 @@ else if (Model?.Results != null && !string.IsNullOrEmpty(Model.SearchText))
 {
     <div class="alert alert-success" style="margin-top: 15px; margin-bottom: 0">
         <p>
-            <a href="#" class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
             <strong>Sucess!</strong> The search resulted in @Model.Results.Count results.
         </p>
     </div>
