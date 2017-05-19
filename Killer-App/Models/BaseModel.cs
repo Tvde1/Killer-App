@@ -3,7 +3,7 @@
 namespace Killer_App.Models
 {
     public class BaseModel
-    { 
+    {
         public Provider Provider { get; set; }
     }
 }
