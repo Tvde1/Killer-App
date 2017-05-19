@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Killer_App.App_Data.Helpers.DAL.Providers;
 using Killer_App.Models;
+using Killer_App.Models.Signin;
 
 namespace Killer_App.Controllers
 {
@@ -9,9 +11,9 @@ namespace Killer_App.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            if (Session["Provider"] == null) Session["Provider"] = new Provider();
-            var model = new IndexModel();
-            model.Provider = Session["Provider"] as Provider;
+            var provider = (Provider)Session["Provider"];
+            if (provider == null) return GoToSignIn();
+            var model = new IndexModel { Provider = provider };
             model.RefreshTopSongs();
             return View(model);
         }
@@ -19,29 +21,34 @@ namespace Killer_App.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            if (Session["Provider"] == null) Session["Provider"] = new Provider();
-            return View(new SearchModel { Provider = Session["Provider"] as Provider });
+            var provider = (Provider)Session["Provider"];
+            return provider == null ? GoToSignIn() : View(new SearchModel { Provider = provider });
         }
 
         //POST and GET: Search.
         [HttpPost]
         public ActionResult Search(SearchModel model)
         {
-            if (Session["Provider"] == null)
-                Session["Provider"] = model.Provider ?? new Provider();
-
-            model.Provider = Session["Provider"] as Provider;
-
+            var provider = (Provider)Session["Provider"];
+            if (provider == null) return GoToSignIn();
+            model.Provider = provider;
             if (!string.IsNullOrEmpty(model.SearchText)) model.Search();
-
             return View(model);
         }
 
         //GET: Stats
         public ActionResult Stats()
         {
-            var model = new StatsModel { Provider = Session["Provider"] as Provider ?? new Provider() };
+            var provider = (Provider)Session["Provider"];
+            if (provider == null) return GoToSignIn();
+            var model = new StatsModel { Provider = provider };
             return View(model);
+        }
+
+        private ActionResult GoToSignIn()
+        {
+            TempData["SigninModel"] = new SigninModel {Error = "You were not logged in."};
+            return RedirectToAction("Index", "Signin");
         }
     }
 }
