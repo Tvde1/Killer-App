@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Killer_App.Helpers.Providers;
+using Killer_App.App_Data.Helpers.DAL.Providers;
 
-namespace Killer_App.Helpers
+namespace Killer_App.App_Data.Helpers
 {
     public class Song
     {
@@ -13,7 +13,7 @@ namespace Killer_App.Helpers
         public TimeSpan Duration { get; }
         public List<Album> Albums => _provider.AlbumProvider.GetAlbums(this);
 
-        public List<Artist> Artists => _provider.ArtistProvider.GetArtistsFromSong(this);
+        public List<Artist> Artists => _provider.ArtistProvider.GetArtists(this);
 
         public Song(int id, string name, TimeSpan duration, Provider provider)
         {

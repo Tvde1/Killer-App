@@ -1,6 +1,4 @@
-﻿using Killer_App.Helpers.Providers;
-
-namespace Killer_App.Helpers
+﻿namespace Killer_App.App_Data.Helpers
 {
     public class Artist : User
     {

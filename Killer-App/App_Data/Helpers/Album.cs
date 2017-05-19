@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
-using Killer_App.Helpers.Providers;
+using Killer_App.App_Data.Helpers.DAL.Providers;
 
-namespace Killer_App.Helpers
+namespace Killer_App.App_Data.Helpers
 {
     public class Album
     {
-        private Provider _provider;
+        private readonly Provider _provider;
 
         public int Id { get; }
         public string Name { get; }
+        public List<Song> Songs => _provider.SongProvider.GetSongs(this);
+        public List<Artist> Artists => _provider.ArtistProvider.GetArtists(this);
 
         public Album(int id, string name, Provider provider)
         {
@@ -16,8 +18,5 @@ namespace Killer_App.Helpers
             Name = name;
             _provider = provider;
         }
-
-        public List<Song> Songs { get; } //TODO: Hook up to
-        public List<Artist> Artists { get; } //TODO: Hook up
     }
 }
