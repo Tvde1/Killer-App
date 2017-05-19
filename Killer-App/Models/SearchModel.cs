@@ -1,36 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Killer_App.Helpers;
-using Killer_App.Helpers.Providers;
+﻿using System.Collections.Generic;
+using Killer_App.App_Data.Helpers;
+using Killer_App.App_Data.Helpers.DAL.Providers;
 
 namespace Killer_App.Models
 {
-    public class SearchModel
+    public class SearchModel : BaseModel
     {
-        private Provider _provider;
-
         public enum SearchMode
         {
             Name,
             Artist,
             Album
         }
-
-        public SearchModel(Provider provider)
-        {
-            _provider = provider;
-        }
-
+        
         public string SearchText { get; set; }
         public SearchMode Mode { get; set; }
-        public List<Song> Results { get; set; }
+        public List<Song> Results { get; private set; } = new List<Song>();
 
         public void Search()
         {
-            Results = _provider.SongProvider.SearchSongs(SearchText, Mode);
+            Results = Provider.SongProvider.SearchSongs(SearchText, Mode);
         }
     }
 }
