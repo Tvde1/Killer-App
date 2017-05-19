@@ -12,6 +12,8 @@
     <title>Login</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/signin.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js" language="javascript"></script>
+    <script src="~/Scripts/jquery-1.10.2.js" language="javascript"></script>
 </head>
 <body>
     <div class="container">
@@ -23,7 +25,7 @@
             {
             <div class="alert alert-danger">
                 <p>
-                    <a href="#" class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+                    <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
                     <strong>Error!</strong> @Model.Error
                 </p>
             </div>
