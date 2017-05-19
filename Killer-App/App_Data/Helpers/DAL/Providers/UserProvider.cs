@@ -2,7 +2,7 @@
 
 namespace Killer_App.App_Data.Helpers.DAL.Providers
 {
-    internal class UserProvider
+    public class UserProvider
     {
         private readonly UserRepository _userRepository;
 
@@ -10,6 +10,8 @@ namespace Killer_App.App_Data.Helpers.DAL.Providers
         {
             _userRepository = new UserRepository(providers, contextBase);
         }
+
+        public User CurrentUser { get; set; }
 
         public User GetUser(int id)
         {

@@ -3,11 +3,11 @@
     public class Provider
     {
         public string ConnectionString { get; } = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Killer-App;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
-        internal ArtistProvider ArtistProvider { get; }
-        internal SongProvider SongProvider { get; }
-        internal AlbumProvider AlbumProvider { get; }
-        internal UserProvider UserProvider { get; }
+        
+        public ArtistProvider ArtistProvider { get; }
+        public SongProvider SongProvider { get; }
+        public AlbumProvider AlbumProvider { get; }
+        public UserProvider UserProvider { get; }
 
         internal Provider()
         {

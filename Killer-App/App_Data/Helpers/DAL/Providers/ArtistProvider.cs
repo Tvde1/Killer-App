@@ -4,7 +4,7 @@ using Killer_App.App_Data.Helpers.DAL.Repositories;
 
 namespace Killer_App.App_Data.Helpers.DAL.Providers
 {
-    internal class ArtistProvider
+    public class ArtistProvider
     {
         private Dictionary<int, Artist> _artists = new Dictionary<int, Artist>();
         private readonly ArtistRepository _repository;

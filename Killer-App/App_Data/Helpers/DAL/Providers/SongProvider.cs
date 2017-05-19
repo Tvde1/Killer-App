@@ -5,7 +5,7 @@ using Killer_App.Models;
 
 namespace Killer_App.App_Data.Helpers.DAL.Providers
 {
-    internal class SongProvider
+    public class SongProvider
     {
         private Dictionary<int, Song> _songs = new Dictionary<int, Song>();
 

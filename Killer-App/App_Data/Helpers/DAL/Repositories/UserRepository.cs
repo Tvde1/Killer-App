@@ -28,11 +28,11 @@ namespace Killer_App.App_Data.Helpers.DAL.Repositories
         /// <returns></returns>
         public int ValidateUser(string username, string password)
         {
-            if (_userContext.ValidateUser(username))
+            if (!_userContext.ValidateUser(username))
             {
                 return -2;
             }
-            if (_userContext.ValidatePassword(username, password))
+            if (!_userContext.ValidatePassword(username, password))
             {
                 return -1;
             }

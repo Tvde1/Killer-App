@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace Killer_App.App_Data.Helpers.DAL
 {
-    internal class ContextBase
+    public class ContextBase
     {
         private readonly string _connectionString;
 
