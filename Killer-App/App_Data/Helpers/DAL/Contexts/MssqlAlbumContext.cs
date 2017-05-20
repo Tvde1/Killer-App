@@ -13,12 +13,6 @@ namespace Killer_App.App_Data.Helpers.DAL.Contexts
             _contextBase = contextBase;
         }
 
-        public DataTable GetAllAlbums()
-        {
-            var query = "SELECT * FROM Album";
-            return _contextBase.GetData(query);
-        }
-
         public DataTable GetAlbums(Song song)
         {
             var query = $"SELECT AlbumCk FROM AlbumSong WHERE SongCk = {song.Id}";
@@ -31,7 +25,7 @@ namespace Killer_App.App_Data.Helpers.DAL.Contexts
             return _contextBase.GetData(query);
         }
 
-        public DataTable FetchAlbums(List<int> ids)
+        public DataTable FetchAlbums(IEnumerable<int> ids)
         {
             var query = $"SELECT * FROM Album WHERE AlbumPk IN ({string.Join(",", ids)})";
             return _contextBase.GetData(query);

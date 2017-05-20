@@ -15,12 +15,7 @@ namespace Killer_App.App_Data.Helpers.DAL.Repositories
             _albumContext = new MssqlAlbumContext(contextBase);
             _objectCreator = new ObjectCreator(provider);
         }
-
-        public List<Album> GetAllAlbums()
-        {
-            return ObjectCreator.CreateList(_albumContext.GetAllAlbums(), _objectCreator.CreateAlbum);
-        }
-
+        
         public List<int> GetAlbums(Song song)
         {
             return ObjectCreator.CreateList(_albumContext.GetAlbums(song), row => (int)row[0]);

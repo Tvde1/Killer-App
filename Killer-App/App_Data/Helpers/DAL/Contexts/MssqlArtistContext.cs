@@ -31,7 +31,7 @@ namespace Killer_App.App_Data.Helpers.DAL.Contexts
             return _contextBase.GetData(query);
         }
 
-        public DataTable FetchArtists(ICollection<int> list)
+        public DataTable FetchArtists(IEnumerable<int> list)
         {
             var query = $@"SELECT [User].UserPk, [User].Username, [User].Password, [User].EmailAdress, Artist.ArtistPk, Artist.ArtistName
             FROM [User] INNER JOIN
