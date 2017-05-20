@@ -18,11 +18,6 @@ namespace Killer_App.App_Data.Helpers.DAL.Repositories
             _objectCreator = new ObjectCreator(providers);
         }
 
-        public List<Song> GetAllSongs()
-        {
-            return ObjectCreator.CreateList(_songContext.GetAllSongs(), _objectCreator.CreateSong);
-        }
-
         public List<int> GetSongs(Album album)
         {
             return ObjectCreator.CreateList(_songContext.GetSongs(album), row => (int) row["SongPk"]).ToList();

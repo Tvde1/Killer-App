@@ -14,14 +14,6 @@ namespace Killer_App.App_Data.Helpers.DAL.Providers
         public SongProvider(Provider providers, ContextBase contextBase)
         {
             _repository = new SongRepository(providers, contextBase);
-            //UpdateSongs();
-        }
-
-        public void UpdateSongs()
-        {
-            var songs = _repository.GetAllSongs();
-            if (songs == null) return;
-            _songs = songs.ToDictionary(x => x.Id, x => x);
         }
 
         public IReadOnlyList<Song> Songs => _songs?.Select(x => x.Value).ToList() ?? new List<Song>();

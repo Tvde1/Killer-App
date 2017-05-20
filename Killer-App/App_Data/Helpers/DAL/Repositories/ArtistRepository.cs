@@ -19,16 +19,6 @@ namespace Killer_App.App_Data.Helpers.DAL.Repositories
             _objectCreator = new ObjectCreator(providers);
         }
 
-        public List<Artist> GetAllArtists()
-        {
-            var data = _userContext.GetAllArtistUsers();
-            if (data == null) return null;
-            var users = ObjectCreator.CreateList(data, _objectCreator.CreateUser).ToDictionary(x => x.Id, x => x);
-            var artistData = _artistContext.GetAllArtists();
-            if (artistData == null) return null;
-            return ObjectCreator.CreateList(artistData, _objectCreator.CreateArtist);
-        }
-
         public List<int> GetArtists(Song song)
         {
             return ObjectCreator.CreateList(_artistContext.GetArtists(song), row => (int)row["ArtistCk"]);
@@ -39,7 +29,7 @@ namespace Killer_App.App_Data.Helpers.DAL.Repositories
             return ObjectCreator.CreateList(_artistContext.GetArtists(album), row => (int)row["ArtistCk"]);
         }
 
-        public List<Artist> GetArtists(ICollection<int> artistIds)
+        public List<Artist> GetArtists(IEnumerable<int> artistIds)
         {
             return ObjectCreator.CreateList(_artistContext.FetchArtists(artistIds), _objectCreator.CreateArtist);
         }

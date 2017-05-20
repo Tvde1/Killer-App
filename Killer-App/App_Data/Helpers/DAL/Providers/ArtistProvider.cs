@@ -17,13 +17,6 @@ namespace Killer_App.App_Data.Helpers.DAL.Providers
 
         public IReadOnlyList<Artist> Artists => _artists?.Select(x => x.Value).ToList() ?? new List<Artist>();
 
-        private void UpdateArtists()
-        {
-            var artists = _repository.GetAllArtists();
-            if (artists == null) return;
-            _artists = artists.ToDictionary(x => x.ArtistId, x => x);
-        }
-
         public List<Artist> GetArtists(Song song)
         {
             var artistIds = _repository.GetArtists(song);

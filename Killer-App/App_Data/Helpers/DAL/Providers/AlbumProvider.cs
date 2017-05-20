@@ -17,14 +17,7 @@ namespace Killer_App.App_Data.Helpers.DAL.Providers
 
         public IReadOnlyList<Album> Albums => _albums?.Select(x => x.Value).ToList() ?? new List<Album>();
 
-        private void UpdateAlbums()
-        {
-            var albums = _repository.GetAllAlbums();
-            if (albums == null) return;
-            _albums = albums.ToDictionary(x => x.Id, x => x);
-        }
-
-        public List<Album> GetAlbums(Song song)
+       public List<Album> GetAlbums(Song song)
         {
             var albumIds = _repository.GetAlbums(song);
             return GetAlbums(albumIds);
