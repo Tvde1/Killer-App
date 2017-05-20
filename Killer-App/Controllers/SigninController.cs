@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
-using Killer_App.App_Data.Helpers.DAL.Providers;
+using Killer_App.App_Data.Helpers.Providers;
 using Killer_App.Models;
 using Killer_App.Models.Signin;
 

@@ -1,6 +1,6 @@
 ﻿using Killer_App.App_Data.Helpers.DAL.Contexts;
 using Killer_App.App_Data.Helpers.DAL.Interfaces;
-using Killer_App.App_Data.Helpers.DAL.Providers;
+using Killer_App.App_Data.Helpers.Providers;
 
 namespace Killer_App.App_Data.Helpers.DAL.Repositories
 {

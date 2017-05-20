@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Killer_App.App_Data.Helpers.DAL;
 using Killer_App.App_Data.Helpers.DAL.Repositories;
 using Killer_App.Models;
 
-namespace Killer_App.App_Data.Helpers.DAL.Providers
+namespace Killer_App.App_Data.Helpers.Providers
 {
     public class SongProvider
     {

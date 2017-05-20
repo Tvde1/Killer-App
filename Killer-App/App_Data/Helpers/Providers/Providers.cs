@@ -1,8 +1,13 @@
-﻿namespace Killer_App.App_Data.Helpers.DAL.Providers
+﻿using Killer_App.App_Data.Helpers.DAL;
+
+namespace Killer_App.App_Data.Helpers.Providers
 {
     public class Provider
     {
-        public string ConnectionString { get; } = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Killer-App;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public string ConnectionString { get; } = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Killer-App.mdf;Integrated Security=True";
+            
+            
+            //@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Killer-App;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         
         public ArtistProvider ArtistProvider { get; }
         public SongProvider SongProvider { get; }

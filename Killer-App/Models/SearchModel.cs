@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Killer_App.App_Data.Helpers;
-using Killer_App.App_Data.Helpers.DAL.Providers;
 
 namespace Killer_App.Models
 {

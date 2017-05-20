@@ -88,6 +88,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Killer-App.mdf" />
+    <Content Include="App_Data\Killer-App_log.ldf">
+      <DependentUpon>Killer-App.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\signin.css" />
@@ -112,7 +116,7 @@
     </Compile>
     <Compile Include="App_Data\Helpers\Album.cs" />
     <Compile Include="App_Data\Helpers\Artist.cs" />
-    <Compile Include="App_Data\Helpers\DAL\Providers\UserProvider.cs" />
+    <Compile Include="App_Data\Helpers\Providers\UserProvider.cs" />
     <Compile Include="App_Data\Helpers\DAL\Repositories\AlbumRepository.cs" />
     <Compile Include="App_Data\Helpers\DAL\ContextBase.cs" />
     <Compile Include="App_Data\Helpers\DAL\Contexts\MssqlUserContext.cs" />
@@ -128,10 +132,10 @@
     <Compile Include="App_Data\Helpers\DAL\ObjectCreator.cs" />
     <Compile Include="App_Data\Helpers\DAL\Repositories\UserRepository.cs" />
     <Compile Include="App_Data\Helpers\ExtentionMethods.cs" />
-    <Compile Include="App_Data\Helpers\DAL\Providers\AlbumProvider.cs" />
-    <Compile Include="App_Data\Helpers\DAL\Providers\ArtistProvider.cs" />
-    <Compile Include="App_Data\Helpers\DAL\Providers\Providers.cs" />
-    <Compile Include="App_Data\Helpers\DAL\Providers\SongProvider.cs" />
+    <Compile Include="App_Data\Helpers\Providers\AlbumProvider.cs" />
+    <Compile Include="App_Data\Helpers\Providers\ArtistProvider.cs" />
+    <Compile Include="App_Data\Helpers\Providers\Providers.cs" />
+    <Compile Include="App_Data\Helpers\Providers\SongProvider.cs" />
     <Compile Include="App_Data\Helpers\Song.cs" />
     <Compile Include="App_Data\Helpers\User.cs" />
     <Compile Include="Models\BaseModel.cs" />
