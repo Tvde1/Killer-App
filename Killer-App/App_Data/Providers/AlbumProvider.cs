@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Killer_App.App_Data.Helpers.DAL;
-using Killer_App.App_Data.Helpers.DAL.Repositories;
+using Killer_App.App_Data.DAL;
+using Killer_App.App_Data.DAL.Repositories;
+using Killer_App.App_Data.Objects;
 
-namespace Killer_App.App_Data.Helpers.Providers
+namespace Killer_App.App_Data.Providers
 {
     public class AlbumProvider
     {

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 
-namespace Killer_App.App_Data.Helpers.DAL.Interfaces
+namespace Killer_App.App_Data.DAL.Interfaces
 {
     public interface IUserContext
     {

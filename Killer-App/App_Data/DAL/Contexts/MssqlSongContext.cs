@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Killer_App.App_Data.Helpers.DAL.Interfaces;
-using Killer_App.Models;
+using Killer_App.App_Data.DAL.Interfaces;
+using Killer_App.App_Data.Objects;
+using Killer_App.Models.Home;
 
-namespace Killer_App.App_Data.Helpers.DAL.Contexts
+namespace Killer_App.App_Data.DAL.Contexts
 {
     internal class MssqlSongContext : ISongContext
     {

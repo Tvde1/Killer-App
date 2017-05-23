@@ -1,8 +1,9 @@
-﻿using Killer_App.App_Data.Helpers.DAL.Contexts;
-using Killer_App.App_Data.Helpers.DAL.Interfaces;
-using Killer_App.App_Data.Helpers.Providers;
+﻿using Killer_App.App_Data.DAL.Contexts;
+using Killer_App.App_Data.DAL.Interfaces;
+using Killer_App.App_Data.Objects;
+using Killer_App.App_Data.Providers;
 
-namespace Killer_App.App_Data.Helpers.DAL.Repositories
+namespace Killer_App.App_Data.DAL.Repositories
 {
     public class UserRepository
     {

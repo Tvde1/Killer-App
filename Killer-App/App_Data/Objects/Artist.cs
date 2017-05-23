@@ -1,4 +1,4 @@
-﻿namespace Killer_App.App_Data.Helpers
+﻿namespace Killer_App.App_Data.Objects
 {
     public class Artist : User
     {
