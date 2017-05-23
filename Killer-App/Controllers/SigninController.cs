@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
-using Killer_App.App_Data.Helpers.Providers;
+using Killer_App.App_Data.Providers;
 using Killer_App.Models;
 using Killer_App.Models.Signin;
 
@@ -15,6 +14,12 @@ namespace Killer_App.Controllers
         public ActionResult Index()
         {
             _provider = GetProvider();
+            var conn = _provider.TestConnection();
+            if (conn != null)
+            {
+                var errorModel = new SigninModel {Error = "Can't connect to the database."};
+                return View(errorModel);
+            }
             var result = TrySignInWithCookies();
             if (result != null) return result;
             var model = TempData["SigninModel"] as SigninModel ?? new SigninModel();
@@ -23,22 +28,27 @@ namespace Killer_App.Controllers
         }
 
         [HttpPost]
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         public ActionResult Index(SigninModel model)
         {
             _provider = GetProvider(model);
+
+            var conn = _provider.TestConnection();
+            if (conn != null)
+            {
+                var errorModel = new SigninModel { Error = "Can't connect to the database." };
+                return View(errorModel);
+            }
+
             if (model != null)
                 return AttemptLogin(model.Username, model.Password, model.RememberMe);
+
+            model.Warning = "Something weird happened wtf.";
 
             model = TempData["SigninModel"] as SigninModel ?? new SigninModel();
             model.Provider = _provider;
 
             return View(model);
         }
-
-
-
-
 
         private ActionResult TrySignInWithCookies()
         {

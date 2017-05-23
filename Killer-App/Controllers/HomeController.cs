@@ -1,7 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
-using Killer_App.App_Data.Helpers.Providers;
-using Killer_App.Models;
+﻿using System.Web.Mvc;
+using Killer_App.App_Data.Providers;
+using Killer_App.Models.Home;
 using Killer_App.Models.Signin;
 
 namespace Killer_App.Controllers
@@ -14,7 +13,6 @@ namespace Killer_App.Controllers
             var provider = (Provider)Session["Provider"];
             if (provider == null) return GoToSignIn();
             var model = new IndexModel { Provider = provider };
-            model.RefreshTopSongs();
             return View(model);
         }
 
