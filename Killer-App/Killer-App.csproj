@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="Helpers\Objects\Album.cs" />
     <Compile Include="Helpers\Objects\Artist.cs" />
+    <Compile Include="Helpers\Providers\QueueProvider.cs" />
     <Compile Include="Helpers\Providers\UserProvider.cs" />
     <Compile Include="Helpers\DAL\Repositories\AlbumRepository.cs" />
     <Compile Include="Helpers\DAL\ContextBase.cs" />
