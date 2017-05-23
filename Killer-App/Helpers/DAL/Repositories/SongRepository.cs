@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Killer_App.App_Data.DAL.Contexts;
-using Killer_App.App_Data.DAL.Interfaces;
-using Killer_App.App_Data.Objects;
-using Killer_App.App_Data.Providers;
+using Killer_App.Helpers.DAL.Contexts;
+using Killer_App.Helpers.DAL.Interfaces;
+using Killer_App.Helpers.Objects;
+using Killer_App.Helpers.Providers;
 using Killer_App.Models.Home;
 
-namespace Killer_App.App_Data.DAL.Repositories
+namespace Killer_App.Helpers.DAL.Repositories
 {
     public class SongRepository
     {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Killer_App.App_Data.Objects;
+using Killer_App.Helpers.Objects;
 
 namespace Killer_App.Models.Home
 {

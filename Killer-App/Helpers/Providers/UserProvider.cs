@@ -1,8 +1,8 @@
-﻿using Killer_App.App_Data.DAL;
-using Killer_App.App_Data.DAL.Repositories;
-using Killer_App.App_Data.Objects;
+﻿using Killer_App.Helpers.DAL;
+using Killer_App.Helpers.DAL.Repositories;
+using Killer_App.Helpers.Objects;
 
-namespace Killer_App.App_Data.Providers
+namespace Killer_App.Helpers.Providers
 {
     public class UserProvider
     {

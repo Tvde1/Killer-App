@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Killer_App.App_Data.DAL.Interfaces
+namespace Killer_App.Helpers.DAL.Interfaces
 {
     public interface IUserContext
     {

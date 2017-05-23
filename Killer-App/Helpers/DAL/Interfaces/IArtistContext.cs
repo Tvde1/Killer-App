@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using Killer_App.App_Data.Objects;
+using Killer_App.Helpers.Objects;
 
-namespace Killer_App.App_Data.DAL.Interfaces
+namespace Killer_App.Helpers.DAL.Interfaces
 {
     internal interface IArtistContext
     {

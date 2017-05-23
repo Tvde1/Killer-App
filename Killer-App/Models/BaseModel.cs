@@ -1,5 +1,5 @@
 ﻿using System.Web.UI;
-using Killer_App.App_Data.Providers;
+using Killer_App.Helpers.Providers;
 
 namespace Killer_App.Models
 {

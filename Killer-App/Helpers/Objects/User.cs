@@ -1,6 +1,6 @@
-﻿using Killer_App.App_Data.Providers;
+﻿using Killer_App.Helpers.Providers;
 
-namespace Killer_App.App_Data.Objects
+namespace Killer_App.Helpers.Objects
 {
     public class User
     {

@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Killer_App.App_Data.DAL
+namespace Killer_App.Helpers.DAL
 {
     public class ContextBase
     {

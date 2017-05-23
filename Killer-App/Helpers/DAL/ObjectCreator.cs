@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Killer_App.App_Data.Objects;
-using Killer_App.App_Data.Providers;
+using Killer_App.Helpers.Objects;
+using Killer_App.Helpers.Providers;
 
-namespace Killer_App.App_Data.DAL
+namespace Killer_App.Helpers.DAL
 {
     public class ObjectCreator
     {

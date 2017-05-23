@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using Killer_App.App_Data.Providers;
+using Killer_App.Helpers.Providers;
 using Killer_App.Models;
 using Killer_App.Models.Signin;
 

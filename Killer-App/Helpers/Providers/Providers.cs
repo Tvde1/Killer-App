@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data.SqlClient;
-using Killer_App.App_Data.DAL;
+using Killer_App.Helpers.DAL;
 
-namespace Killer_App.App_Data.Providers
+namespace Killer_App.Helpers.Providers
 {
     public class Provider
     {

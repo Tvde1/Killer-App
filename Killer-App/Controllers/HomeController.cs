@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using Killer_App.App_Data.Providers;
+using Killer_App.Helpers.Providers;
 using Killer_App.Models.Home;
 using Killer_App.Models.Signin;
 

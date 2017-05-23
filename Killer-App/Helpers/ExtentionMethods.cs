@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Killer_App.App_Data
+namespace Killer_App.Helpers
 {
     public static class ExtentionMethods
     {
