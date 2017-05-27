@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Killer_App.Helpers.Providers;
 using Killer_App.Models.Home;
 using Killer_App.Models.Signin;
@@ -12,7 +13,7 @@ namespace Killer_App.Controllers
         {
             var provider = (Provider)Session["Provider"];
             if (provider == null) return GoToSignIn();
-            var model = new IndexModel { Provider = provider };
+            var model = new IndexModel(provider);
             return View(model);
         }
 
@@ -27,9 +28,8 @@ namespace Killer_App.Controllers
         [HttpPost]
         public ActionResult Search(SearchModel model)
         {
-            var provider = (Provider)Session["Provider"];
-            if (provider == null) return GoToSignIn();
-            model.Provider = provider;
+            if (model == null) throw new Exception("wha");
+            Session["Provider"] = model.Provider;
             if (!string.IsNullOrEmpty(model.SearchText)) model.Search();
             return View(model);
         }
@@ -45,7 +45,7 @@ namespace Killer_App.Controllers
 
         private ActionResult GoToSignIn()
         {
-            TempData["SigninModel"] = new SigninModel {Error = "You were not logged in."};
+            TempData["SigninModel"] = new SigninModel { Error = "You were not logged in." };
             return RedirectToAction("Index", "Signin");
         }
     }

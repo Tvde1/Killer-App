@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Killer_App.Helpers.Objects;
+using Killer_App.Helpers.Providers;
 
 namespace Killer_App.Models.Home
 {
@@ -7,8 +8,10 @@ namespace Killer_App.Models.Home
     {
         public List<Song> TopSongs { get; private set; }
 
-        public IndexModel()
+        public IndexModel(Provider provider)
         {
+            Provider = provider;
+
             try
             {
                 RefreshTopSongs();

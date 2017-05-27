@@ -17,13 +17,12 @@ namespace Killer_App.Controllers
             var conn = _provider.TestConnection();
             if (conn != null)
             {
-                var errorModel = new SigninModel {Error = "Can't connect to the database."};
+                var errorModel = new SigninModel { Error = "Can't connect to the database." };
                 return View(errorModel);
             }
             var result = TrySignInWithCookies();
             if (result != null) return result;
-            var model = TempData["SigninModel"] as SigninModel ?? new SigninModel();
-            model.Provider = _provider;
+            var model = TempData["SigninModel"] as SigninModel ?? new SigninModel{Provider =  _provider};
             return View(model);
         }
 
@@ -44,8 +43,7 @@ namespace Killer_App.Controllers
 
             model.Warning = "Something weird happened wtf.";
 
-            model = TempData["SigninModel"] as SigninModel ?? new SigninModel();
-            model.Provider = _provider;
+            model = TempData["SigninModel"] as SigninModel ?? new SigninModel{Provider =  _provider};
 
             return View(model);
         }
@@ -115,13 +113,13 @@ namespace Killer_App.Controllers
             }
 
             _provider.UserProvider.CurrentUser = _provider.UserProvider.FetchUser(username, password);
+            Session["Provider"] = _provider;
             return RedirectToAction("Index", "Home");
         }
 
         private Provider GetProvider(BaseModel model = null)
         {
-            if (Session["Provider"] == null) Session["Provider"] = model?.Provider ?? new Provider();
-            return (Provider)Session["Provider"];
+            return Session["Provider"] != null ? (Provider) Session["Provider"] : (model?.Provider ?? new Provider());
         }
     }
 }
