@@ -1,0 +1,78 @@
+﻿@using System.Web.Mvc.Html
+@model Killer_App.Helpers.Objects.Song
+
+@{
+    ViewBag.Title = "Song";
+}
+
+<h2>@Model.Name</h2>
+
+<h4>Artists</h4>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Albums</th>
+            <th>Songs</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Artists != null)
+        {
+            foreach (var artist in Model.Artists)
+            {
+                <tr>
+                    <td>
+                        @artist.FirstName
+                    </td>
+                    <td>
+                        @artist.LastName
+                    </td>
+                    <td>
+                        @{ var albums = artist.Albums.Aggregate("", (current, album) => current + @Html.ActionLink(@album.Name, "Album", new {Id = album.Id})); }
+                        @albums
+                    </td>
+                    <td>
+                        @{ var songs = artist.Songs.Aggregate("", (current, song) => current + @Html.ActionLink(song.Name, "Song", new {Id = song.Id})); }
+                        @songs
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h4>Albums</h4>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Artists</th>
+            <th>Songs</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Albums != null)
+        {
+            foreach (var album in Model.Albums)
+            {
+                <tr>
+                    <td>
+                        @album.Name
+                    </td>
+                    <td>
+                        @{ var albums = album.Artists.Aggregate("", (current, artist) => current + @Html.ActionLink(artist.Fullname, "Artist", new {Id = artist.Id})); }
+                        @albums
+                    </td>
+                    <td>
+                        @{ var songs = album.Songs.Aggregate("", (current, song) => current + @Html.ActionLink(song.Name, "Song", new {Id = song.Id})); }
+                        @songs
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
