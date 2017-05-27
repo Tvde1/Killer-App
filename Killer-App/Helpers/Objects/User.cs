@@ -8,7 +8,7 @@ namespace Killer_App.Helpers.Objects
 
         public int Id { get; }
         public string UserName { get; }
-        public string Name { get; }
+        public string FirstName { get; }
         public string LastName { get; }
         public string Email { get; }
 
@@ -16,7 +16,7 @@ namespace Killer_App.Helpers.Objects
         {
             Id = id;
             UserName = userName;
-            Name = name;
+            FirstName = name;
             Email = email;
             _provider = provider;
         }
@@ -25,7 +25,7 @@ namespace Killer_App.Helpers.Objects
         {
             Id = user.Id;
             UserName = user.UserName;
-            Name = user.Name;
+            FirstName = user.FirstName;
             LastName = user.LastName;
             Email = user.Email;
             _provider = user._provider;

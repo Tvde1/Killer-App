@@ -11,7 +11,7 @@ namespace Killer_App.Helpers.Objects
 
         public List<Song> Songs => _provider.SongProvider.GetSongs(_songIds);
         public List<Album> Albums => _provider.AlbumProvider.GetAlbums(_albumIds);
-        public string Fullname => FirstName + " " + LastName;
+        public string FullName => FirstName + " " + LastName;
 
         public Artist(int artistId, User user) : base(user)
         {

@@ -1,45 +1,45 @@
-﻿@using Killer_App.Models
+﻿@using System.Web.Mvc.Html
 @using Killer_App.Models.Home
-@model Killer_App.Models.Home.SearchModel
+@model SearchModel
 
 @{
     ViewBag.Title = "Search";
 }
 
-@if (Model == null)
-{
-    <div class="alert alert-danger" style="margin-top: 15px; margin-bottom: 0">
-        <p>
-            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-            <strong>Error!</strong> An error occured when getting data from the controller.
-        </p>
-    </div>
-}
-else if (Model.Results == null)
-{
-    <div class="alert alert-danger" style="margin-top: 15px; margin-bottom: 0">
-        <p>
-            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-            <strong>Error!</strong> An error occured while retrieving info from the database. Click <u>here</u> for more info.
-        </p>
-    </div>
-}
-else if (Model?.Results != null && !string.IsNullOrEmpty(Model.SearchText))
-{
-    <div class="alert alert-success" style="margin-top: 15px; margin-bottom: 0">
-        <p>
-            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-            <strong>Sucess!</strong> The search resulted in @Model.Results.Count results.
-        </p>
-    </div>
-}
+@*@if (Model == null)
+    {
+        <div class="alert alert-danger" style="margin-top: 15px; margin-bottom: 0">
+            <p>
+                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+                <strong>Error!</strong> An error occured when getting data from the controller.
+            </p>
+        </div>
+    }
+    else if (Model.Results == null)
+    {
+        <div class="alert alert-danger" style="margin-top: 15px; margin-bottom: 0">
+            <p>
+                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+                <strong>Error!</strong> An error occured while retrieving info from the database. Click <u>here</u> for more info.
+            </p>
+        </div>
+    }
+    else if (Model?.Results != null && !string.IsNullOrEmpty(Model.SearchText))
+    {
+        <div class="alert alert-success" style="margin-top: 15px; margin-bottom: 0">
+            <p>
+                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+                <strong>Sucess!</strong> The search resulted in @Model.Results.Count results.
+            </p>
+        </div>
+    }*@
 
 <h2>Search</h2>
 
 @using (Html.BeginForm("Search", "Home", FormMethod.Post))
 {
     @Html.TextBoxFor(model => model.SearchText)
-    @Html.HiddenFor(Model => Model.Provider)
+    @Html.HiddenFor(model => model.Provider)
 
     <button id="BtnSearch" type="submit">Search</button>
 }
@@ -54,7 +54,6 @@ else if (Model?.Results != null && !string.IsNullOrEmpty(Model.SearchText))
 <script>
     document.getElementById("CbMode").value = @Model?.Mode;
 </script>
-
 
 <hr />
 
@@ -87,7 +86,7 @@ else if (Model?.Results != null && !string.IsNullOrEmpty(Model.SearchText))
                     <td>
                         @if (song.Artists != null)
                         {
-                            string.Join(", ", song.Artists.Select(x => x.UserName));
+                            string.Join(", ", song.Artists.Select(x => x.FullName));
                         }
                     </td>
                     <td>
@@ -97,5 +96,4 @@ else if (Model?.Results != null && !string.IsNullOrEmpty(Model.SearchText))
             }
         }
     </tbody>
-
 </table>
