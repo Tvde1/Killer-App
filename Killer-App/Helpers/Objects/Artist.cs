@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Killer_App.Models;
 
 namespace Killer_App.Helpers.Objects
 {
@@ -9,16 +10,16 @@ namespace Killer_App.Helpers.Objects
 
         public int ArtistId { get; }
 
-        public List<Song> Songs => _provider.SongProvider.GetSongs(_songIds);
-        public List<Album> Albums => _provider.AlbumProvider.GetAlbums(_albumIds);
+        public List<Song> Songs => Provider.SongProvider.GetSongs(_songIds);
+        public List<Album> Albums => Provider.AlbumProvider.GetAlbums(_albumIds);
         public string FullName => FirstName + " " + LastName;
 
         public Artist(int artistId, User user) : base(user)
         {
             ArtistId = artistId;
 
-            _songIds = _provider.SongProvider.GetSongIds(this);
-            _albumIds = _provider.AlbumProvider.GetAlbumIds(this);
+            _songIds = Provider.SongProvider.GetSongIds(this);
+            _albumIds = Provider.AlbumProvider.GetAlbumIds(this);
         }
     }
 }

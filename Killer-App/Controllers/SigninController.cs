@@ -6,7 +6,7 @@ using Killer_App.Models.Signin;
 
 namespace Killer_App.Controllers
 {
-    public class SigninController : Controller
+    public class SigninController : BaseController
     {
         private Provider _provider;
 

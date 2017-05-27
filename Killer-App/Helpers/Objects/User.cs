@@ -1,11 +1,10 @@
 ﻿using Killer_App.Helpers.Providers;
+using Killer_App.Models;
 
 namespace Killer_App.Helpers.Objects
 {
-    public class User
+    public class User : BaseModel
     {
-        protected readonly Provider _provider;
-
         public int Id { get; }
         public string UserName { get; }
         public string FirstName { get; }
@@ -18,7 +17,7 @@ namespace Killer_App.Helpers.Objects
             UserName = userName;
             FirstName = name;
             Email = email;
-            _provider = provider;
+            Provider = provider;
         }
 
         protected User(User user)
@@ -28,7 +27,7 @@ namespace Killer_App.Helpers.Objects
             FirstName = user.FirstName;
             LastName = user.LastName;
             Email = user.Email;
-            _provider = user._provider;
+            Provider = user.Provider;
         }
     }
 }

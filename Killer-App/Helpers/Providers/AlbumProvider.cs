@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
@@ -60,7 +59,8 @@ namespace Killer_App.Helpers.Providers
 
         public Album FetchAlbum(string id)
         {
-            return !int.TryParse(id, NumberStyles.None, null, out int newResult) ? null : GetAlbumsInternal(new[] { newResult }).First();
+            int result;
+            return !int.TryParse(id, out result) ? null : GetAlbumsInternal(new[] { result }).First();
         }
     }
 }

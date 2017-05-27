@@ -3,15 +3,15 @@ using Killer_App.Helpers.Providers;
 
 namespace Killer_App.Controllers
 {
-    public class InfoController : Controller
+    public class InfoController : BaseController
     {
         // GET: Info
-        public ActionResult Song()
+        public ActionResult Song(string id)
         {
-            var provider = (Provider)Session["Provider"];
-
-            var id = Request.Params["id"];
             if (id == null) return RedirectToAction("Index", "Home");
+
+            var provider = (Provider)Session["Provider"];
+            if (provider == null) return GoToSignIn();
             
             var song = provider.SongProvider.FetchSong(id);
             if (song == null) return RedirectToAction("Index", "Home");
@@ -19,26 +19,26 @@ namespace Killer_App.Controllers
             return View(song);
         }
 
-        public ActionResult Album()
+        public ActionResult Album(string id)
         {
-            var provider = (Provider)Session["Provider"];
-
-            var id = Request.Params["id"];
             if (id == null) return RedirectToAction("Index", "Home");
 
+            var provider = (Provider)Session["Provider"];
+            if (provider == null) return GoToSignIn();
+            
             var album = provider.AlbumProvider.FetchAlbum(id);
             if (album == null) return RedirectToAction("Index", "Home");
 
             return View(album);
         }
 
-        public ActionResult Artist()
+        public ActionResult Artist(string id)
         {
-            var provider = (Provider)Session["Provider"];
-
-            var id = Request.Params["id"];
             if (id == null) return RedirectToAction("Index", "Home");
 
+            var provider = (Provider)Session["Provider"];
+            if (provider == null) return GoToSignIn();
+            
             var artist = provider.ArtistProvider.FetchArtist(id);
             if (artist == null) return RedirectToAction("Index", "Home");
             return View(artist);

@@ -12,8 +12,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Albums</th>
             <th>Songs</th>
         </tr>
@@ -23,22 +22,22 @@
         {
             foreach (var artist in Model.Artists)
             {
-                <tr>
-                    <td>
-                        @artist.FirstName
-                    </td>
-                    <td>
-                        @artist.LastName
-                    </td>
-                    <td>
-                        @{ var albums = artist.Albums.Aggregate("", (current, album) => current + @Html.ActionLink(@album.Name, "Album", new {Id = album.Id})); }
-                        @albums
-                    </td>
-                    <td>
-                        @{ var songs = artist.Songs.Aggregate("", (current, song) => current + @Html.ActionLink(song.Name, "Song", new {Id = song.Id})); }
-                        @songs
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink(artist.FullName, "Artist", new {Id = artist.ArtistId})
+                </td>
+                <td>
+                    @{
+                        var albums = string.Join(", ", artist.Albums.Select(album => @Html.ActionLink(album.Name, "Album", new {album.Id})));
+                    }
+
+                    @Html.Raw(albums)
+                </td>
+                <td>
+                    @{ var songs = string.Join(", ", artist.Songs.Select(song => @Html.ActionLink(song.Name, "Song", new {song.Id}))); }
+                    @Html.Raw(songs)
+                </td>
+            </tr>
             }
         }
     </tbody>
@@ -59,19 +58,19 @@
         {
             foreach (var album in Model.Albums)
             {
-                <tr>
-                    <td>
-                        @album.Name
-                    </td>
-                    <td>
-                        @{ var albums = album.Artists.Aggregate("", (current, artist) => current + @Html.ActionLink(artist.Fullname, "Artist", new {Id = artist.Id})); }
-                        @albums
-                    </td>
-                    <td>
-                        @{ var songs = album.Songs.Aggregate("", (current, song) => current + @Html.ActionLink(song.Name, "Song", new {Id = song.Id})); }
-                        @songs
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink(album.Name, "Album", new {album.Id})
+                </td>
+                <td>
+                    @{ var artists = string.Join(", ", album.Artists.Select(artist => @Html.ActionLink(artist.FullName, "Artist", new { Id = artist.ArtistId}))); }
+                    @Html.Raw(artists)
+                </td>
+                <td>
+                    @{ var songs = string.Join(", ", album.Songs.Select(song => @Html.ActionLink(song.Name, "Song", new {song.Id}))); }
+                    @Html.Raw(songs)
+                </td>
+            </tr>
             }
         }
     </tbody>

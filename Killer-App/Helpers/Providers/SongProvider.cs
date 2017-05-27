@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
@@ -68,7 +67,8 @@ namespace Killer_App.Helpers.Providers
 
         public Song FetchSong(string idString)
         {
-            return !int.TryParse(idString, NumberStyles.None, null, out int newResult) ? null : GetSongsInternal(new[] {newResult}).First();
+            int result;
+            return !int.TryParse(idString, out result) ? null : GetSongsInternal(new[] { result }).First();
         }
     }
 }

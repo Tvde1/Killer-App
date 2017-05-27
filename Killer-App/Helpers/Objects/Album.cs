@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using Killer_App.Helpers.Providers;
+using Killer_App.Models;
 
 namespace Killer_App.Helpers.Objects
 {
-    public class Album
+    public class Album : BaseModel
     {
         private readonly Provider _provider;
 

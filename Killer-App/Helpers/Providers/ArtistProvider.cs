@@ -53,9 +53,10 @@ namespace Killer_App.Helpers.Providers
 
         public Artist FetchArtist(string id)
         {
-            return !int.TryParse(id, NumberStyles.None, null, out int newResult)
+            int result;
+            return !int.TryParse(id, out result)
                 ? null
-                : GetArtistsInternal(new[] { newResult }).First();
+                : GetArtistsInternal(new[] { result }).First();
         }
     }
 }

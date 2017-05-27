@@ -6,7 +6,7 @@ using Killer_App.Models.Signin;
 
 namespace Killer_App.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Home
         public ActionResult Index()
@@ -41,12 +41,6 @@ namespace Killer_App.Controllers
             if (provider == null) return GoToSignIn();
             var model = new StatsModel { Provider = provider };
             return View(model);
-        }
-
-        private ActionResult GoToSignIn()
-        {
-            TempData["SigninModel"] = new SigninModel { Error = "You were not logged in." };
-            return RedirectToAction("Index", "Signin");
         }
     }
 }
