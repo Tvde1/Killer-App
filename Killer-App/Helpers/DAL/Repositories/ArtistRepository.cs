@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Services.Description;
 using Killer_App.Helpers.DAL.Contexts;
 using Killer_App.Helpers.DAL.Interfaces;
 using Killer_App.Helpers.Objects;
@@ -19,19 +20,21 @@ namespace Killer_App.Helpers.DAL.Repositories
             _objectCreator = new ObjectCreator(providers);
         }
 
-        public List<int> GetArtists(Song song)
+        public IEnumerable<int> GetArtistIds(Song song)
         {
             return ObjectCreator.CreateList(_artistContext.GetArtists(song), row => (int)row["ArtistCk"]);
         }
 
-        internal List<int> GetArtists(Album album)
+        public IEnumerable<int> GetArtistIds(Album album)
         {
             return ObjectCreator.CreateList(_artistContext.GetArtists(album), row => (int)row["ArtistCk"]);
         }
 
-        public List<Artist> GetArtists(IEnumerable<int> artistIds)
+        public List<Artist> FetchArtists(IEnumerable<int> artistIds)
         {
             return ObjectCreator.CreateList(_artistContext.FetchArtists(artistIds), _objectCreator.CreateArtist);
         }
+
+
     }
 }

@@ -22,7 +22,7 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public DataTable GetAlbums(Artist artist)
         {
-            var query = $"SELECT ArtistCk FROM AlbumArtist WHERE SongCk = {artist.ArtistId}";
+            var query = $"SELECT AlbumCk FROM AlbumArtist WHERE ArtistCk = {artist.ArtistId}";
             return _contextBase.GetData(query);
         }
 
@@ -30,6 +30,16 @@ namespace Killer_App.Helpers.DAL.Contexts
         {
             var query = $"SELECT * FROM Album WHERE AlbumPk IN ({string.Join(",", ids)})";
             return _contextBase.GetData(query);
+        }
+
+        public DataTable GetAlbums()
+        {
+            return _contextBase.GetData("SELECT AlbumPk FROM Album");
+        }
+
+        public void AddToSong(int albumId, int songId)
+        {
+            _contextBase.GetData($"INSERT INTO AlbumSong(AlbumCk,SongCk) VALUES ({albumId},{songId})");
         }
     }
 }

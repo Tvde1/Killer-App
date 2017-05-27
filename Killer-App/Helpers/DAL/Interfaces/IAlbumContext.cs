@@ -9,5 +9,7 @@ namespace Killer_App.Helpers.DAL.Interfaces
         DataTable GetAlbums(Song song);
         DataTable GetAlbums(Artist artist);
         DataTable FetchAlbums(IEnumerable<int> artist);
+        DataTable GetAlbums();
+        void AddToSong(int albumId, int songId);
     }
 }

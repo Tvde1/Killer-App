@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
@@ -19,30 +20,42 @@ namespace Killer_App.Helpers.Providers
 
         public IReadOnlyList<Artist> Artists => _artists?.Select(x => x.Value).ToList() ?? new List<Artist>();
 
-        public List<Artist> GetArtists(Song song)
+        public IEnumerable<int> GetArtistIds(Song song)
         {
-            var artistIds = _repository.GetArtists(song);
-            return GetArtists(artistIds);
+            return _repository.GetArtistIds(song);
         }
 
-        public List<Artist> GetArtists(Album album)
+        public IEnumerable<int> GetArtistIds(Album album)
         {
-            var artistIds = _repository.GetArtists(album);
-            return GetArtists(artistIds);
+            return _repository.GetArtistIds(album);
         }
 
-        private List<Artist> GetArtists(ICollection<int> ids)
+        public List<Artist> GetArtists(IEnumerable<int> ids)
         {
-            try
+            return GetArtistsInternal(ids);
+        }
+
+        private List<Artist> GetArtistsInternal(IEnumerable<int> artistIds)
+        {
+            if (artistIds == null) return null;
+            var songsToFetch = artistIds.Where(x => !_artists.ContainsKey(x)).ToList();
+
+            if (songsToFetch.Any())
             {
-                return _artists.Where(x => ids.Contains(x.Key)).Select(x => x.Value).ToList();
+                var newSongs = _repository.FetchArtists(songsToFetch);
+                if (newSongs == null)
+                    return null;
+                newSongs.ForEach(x => _artists.Add(x.ArtistId, x));
             }
-            catch
-            {
-                var albums = _repository.GetArtists(ids.Where(x => !_artists.ContainsKey(x)).ToList());
-                albums.ForEach(x => _artists.Add(x.Id, x));
-                return albums.ToList();
-            }
+
+            return artistIds.Select(id => _artists[id]).ToList();
+        }
+
+        public Artist FetchArtist(string id)
+        {
+            return !int.TryParse(id, NumberStyles.None, null, out int newResult)
+                ? null
+                : GetArtistsInternal(new[] { newResult }).First();
         }
     }
 }

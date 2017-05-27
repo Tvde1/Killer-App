@@ -7,7 +7,7 @@ namespace Killer_App.Helpers.Providers
     public class Provider
     {
         public string ConnectionString { get; } = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Killer-App.mdf;Integrated Security=True";
-
+        //public string ConnectionString { get; } = @"Server=mssql.fhict.local;Database=dbi370704;User Id=dbi370704;Password=Lvl67#Rr;";
         public ArtistProvider ArtistProvider { get; }
         public SongProvider SongProvider { get; }
         public AlbumProvider AlbumProvider { get; }

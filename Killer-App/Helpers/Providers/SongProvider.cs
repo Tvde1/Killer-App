@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
@@ -21,23 +21,26 @@ namespace Killer_App.Helpers.Providers
 
         public IReadOnlyList<Song> Songs => _songs?.Select(x => x.Value).ToList() ?? new List<Song>();
 
+        public IEnumerable<int> GetSongIds(Album album)
+        {
+            return _repository.GetSongIds(album);
+        }
+
+        public IEnumerable<int> GetSongIds(Artist artist)
+        {
+            return _repository.GetSongIds(artist);
+        }
+
         public List<Song> GetTopSongs()
         {
             //TODO: make this real.
-            throw new Exception("xd");
+            //throw new Exception("xd");
             return GetSongs(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
         }
 
-        public List<Song> GetSongs(Album album)
+        public List<Song> GetSongs(IEnumerable<int> ids)
         {
-            var ids = _repository.GetSongs(album);
-            return GetSongs(ids);
-        }
-
-        public List<Song> GetSongs(Artist artist)
-        {
-            var ids = _repository.GetSongs(artist);
-            return GetSongs(ids);
+            return GetSongsInternal(ids);
         }
 
         public List<Song> SearchSongs(string searchText, SearchModel.SearchMode mode)
@@ -47,7 +50,7 @@ namespace Killer_App.Helpers.Providers
             //TODO: Make it work by mode.
         }
 
-        private List<Song> GetSongs(IList<int> ids)
+        private List<Song> GetSongsInternal(IEnumerable<int> ids)
         {
             if (ids == null) return null;
             var songsToFetch = ids.Where(x => !_songs.ContainsKey(x)).ToList();
@@ -61,6 +64,11 @@ namespace Killer_App.Helpers.Providers
             }
 
             return ids.Select(id => _songs[id]).ToList();
+        }
+
+        public Song FetchSong(string idString)
+        {
+            return !int.TryParse(idString, NumberStyles.None, null, out int newResult) ? null : GetSongsInternal(new[] {newResult}).First();
         }
     }
 }

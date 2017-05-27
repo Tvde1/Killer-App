@@ -43,5 +43,10 @@ namespace Killer_App.Helpers.DAL.Contexts
             var query = $@"SELECT * FROM Song WHERE SongPk IN ({string.Join(",", songIds)})";
             return _contextBase.GetData(query);
         }
+
+        public DataTable GetSongs()
+        {
+            return _contextBase.GetData("SELECT SongPk From Song");
+        }
     }
 }

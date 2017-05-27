@@ -19,14 +19,14 @@ namespace Killer_App.Helpers.DAL.Repositories
             _objectCreator = new ObjectCreator(providers);
         }
 
-        public List<int> GetSongs(Album album)
+        public IEnumerable<int> GetSongIds(Album album)
         {
-            return ObjectCreator.CreateList(_songContext.GetSongs(album), row => (int) row["SongPk"]).ToList();
+            return ObjectCreator.CreateList(_songContext.GetSongs(album), row => (int)row["SongCk"]).ToList();
         }
 
-        public List<int> GetSongs(Artist artist)
+        public IEnumerable<int> GetSongIds(Artist artist)
         {
-            return ObjectCreator.CreateList(_songContext.GetSongs(artist), row => (int) row["SongPk"]).ToList();
+            return ObjectCreator.CreateList(_songContext.GetSongs(artist), row => (int)row["SongCk"]).ToList();
         }
 
         public List<Song> FetchSongs(IEnumerable<int> songIds)
@@ -37,7 +37,7 @@ namespace Killer_App.Helpers.DAL.Repositories
         public List<int> SearchSongs(string searchText, SearchModel.SearchMode mode)
         {
             var data = _songContext.SearchSongs(searchText, mode);
-            return ObjectCreator.CreateList(data, row => (int) row["SongPk"]);
+            return ObjectCreator.CreateList(data, row => (int)row["SongPk"]);
         }
     }
 }
