@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Killer_App.Helpers.Providers;
 using Killer_App.Models.Home;
-using Killer_App.Models.Signin;
 
 namespace Killer_App.Controllers
 {
