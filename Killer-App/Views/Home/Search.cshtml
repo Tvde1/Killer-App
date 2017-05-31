@@ -38,8 +38,7 @@
 
 @using (Html.BeginForm("Search", "Home", FormMethod.Post))
 {
-    @Html.TextBoxFor(model => model.SearchText)
-    @Html.HiddenFor(model => model.Provider)
+    @Html.EditorFor(model => model.SearchText)
 
     <button id="BtnSearch" type="submit">Search</button>
 }

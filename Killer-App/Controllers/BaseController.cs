@@ -7,8 +7,7 @@ namespace Killer_App.Controllers
     {
         protected ActionResult GoToSignIn()
         {
-            TempData["SigninModel"] = new SigninModel { Error = "You were not logged in." };
-            return RedirectToAction("Index", "Signin");
+            return RedirectToAction("Index", "Signin", new SigninModel { Error = "You were not logged in." });
         }
     }
 }

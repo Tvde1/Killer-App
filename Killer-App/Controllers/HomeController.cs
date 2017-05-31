@@ -28,7 +28,8 @@ namespace Killer_App.Controllers
         public ActionResult Search(SearchModel model)
         {
             if (model == null) throw new Exception("wha");
-            Session["Provider"] = model.Provider;
+            var provider = (Provider) Session["Provider"];
+            model.Provider = provider;
             if (!string.IsNullOrEmpty(model.SearchText)) model.Search();
             return View(model);
         }
