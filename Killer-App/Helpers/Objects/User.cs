@@ -10,6 +10,7 @@ namespace Killer_App.Helpers.Objects
         public string FirstName { get; }
         public string LastName { get; }
         public string Email { get; }
+        public string Password { get; set; }
 
         public User(int id, string userName, string name, string email, Provider provider)
         {

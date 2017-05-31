@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Killer_App.Helpers.Objects;
 using Killer_App.Helpers.Providers;
 using Killer_App.Models;
 using Killer_App.Models.Signin;
@@ -20,6 +21,9 @@ namespace Killer_App.Controllers
                 var errorModel = new SigninModel { Error = "Can't connect to the database." };
                 return View(errorModel);
             }
+            if (_provider.UserProvider.CurrentUser != null)
+                return LogIn(_provider.UserProvider.CurrentUser.UserName, _provider.UserProvider.CurrentUser.Password, false, true);
+
             var result = TrySignInWithCookies();
             if (result != null) return result;
             var model = TempData["SigninModel"] as SigninModel ?? new SigninModel{Provider =  _provider};
@@ -43,7 +47,7 @@ namespace Killer_App.Controllers
 
             model.Warning = "Something weird happened wtf.";
 
-            model = TempData["SigninModel"] as SigninModel ?? new SigninModel{Provider =  _provider};
+            model = new SigninModel{Provider =  _provider};
 
             return View(model);
         }
@@ -113,6 +117,7 @@ namespace Killer_App.Controllers
             }
 
             _provider.UserProvider.CurrentUser = _provider.UserProvider.FetchUser(username, password);
+            _provider.UserProvider.CurrentUser.Password = password;
             Session["Provider"] = _provider;
             return RedirectToAction("Index", "Home");
         }
