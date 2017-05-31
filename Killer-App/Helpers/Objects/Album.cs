@@ -19,11 +19,16 @@ namespace Killer_App.Helpers.Objects
         public Album(int id, string name, Provider provider)
         {
             Id = id;
-            Name = name;
+            Name = name; 
             _provider = provider;
 
             _songIds = _provider.SongProvider.GetSongIds(this);
             _artistIds = _provider.ArtistProvider.GetArtistIds(this);
+        }
+
+        public override string ToString()
+        {
+            return InfoLink(Name, "Album", "Info", Id);
         }
     }
 }

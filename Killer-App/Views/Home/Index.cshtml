@@ -22,16 +22,16 @@
         {
             <tr>
                 <td>
-                    @song.Name
+                    @Html.Raw(song)
                 </td>
                 <td>
-                    @string.Join(", ", song.Albums.Select(x => x.Name))
+                    @Html.Raw(string.Join(", ", song.Albums))
                 </td>
                 <td>
-                    @string.Join(", ", song.Artists.Select(x => x.UserName))
+                    @Html.Raw(string.Join(", ", song.Artists))
                 </td>
                 <td>
-                    @song.Duration.ToString(@"mm\:ss")
+                    @Html.Raw(song.Duration.ToString(@"mm\:ss"))
                 </td>
             </tr>
         }

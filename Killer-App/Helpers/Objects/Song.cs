@@ -27,5 +27,10 @@ namespace Killer_App.Helpers.Objects
             _artistIds = Provider.ArtistProvider.GetArtistIds(this);
             _albumIds = Provider.AlbumProvider.GetAlbumIds(this);
         }
+
+        public override string ToString()
+        {
+            return InfoLink(Name, "Song", "Info", Id);
+        }
     }
 }

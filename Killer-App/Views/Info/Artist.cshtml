@@ -7,6 +7,8 @@
 
 <h2>@Model.FullName</h2>
 
+@* TODO: Info here *@
+
 <h4>Songs</h4>
 
 <table class="table table-striped">
@@ -23,24 +25,22 @@
         {
             foreach (var song in Model.Songs)
             {
-            <tr>
-                <td>
-                    @Html.ActionLink(song.Name, "Song", new {song.Id})
-                </td>
-                <td>
-                    @{ var albums = string.Join(", ", song.Albums.Select(album => @Html.ActionLink(@album.Name, "Album", new { album.Id }))); }
-                    @Html.Raw(albums)
-                </td>
-                <td>
-                    @{ var artists = string.Join(", ", song.Artists.Select(artist => @Html.ActionLink(artist.FullName, "Artist", new { Id = artist.ArtistId }))); }
-                    @Html.Raw(artists)
-                </td>
-                <td>
-                    @song.Duration
-                </td>
-            </tr>
-                                }
-                            }
+                <tr>
+                    <td>
+                        @Html.Raw(song)
+                    </td>
+                    <td>
+                        @Html.Raw(string.Join(", ", song.Albums))
+                    </td>
+                    <td>
+                        @Html.Raw(string.Join(", ", song.Artists))
+                    </td>
+                    <td>
+                        @song.Duration.ToString(@"mm\:ss")
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>
 
@@ -61,15 +61,13 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(album.Name, "Album", new {album.Id})
+                        @Html.Raw(album)
                     </td>
                     <td>
-                        @{ var albums = string.Join(", ", album.Artists.Select(artist => @Html.ActionLink(artist.FirstName, "Artist", new {Id = artist.ArtistId}))); }
-                        @Html.Raw(albums)
+                        @Html.Raw(string.Join(", ", album.Artists))
                     </td>
                     <td>
-                        @{ var songs = string.Join(", ", album.Songs.Select(song => @Html.ActionLink(song.Name, "Song", new {song.Id}))); }
-                        @Html.Raw(songs)
+                        @Html.Raw(string.Join(", ", album.Songs))
                     </td>
                 </tr>
             }
