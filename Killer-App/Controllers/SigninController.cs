@@ -26,7 +26,7 @@ namespace Killer_App.Controllers
 
             var result = TrySignInWithCookies();
             if (result != null) return result;
-            var model = TempData["SigninModel"] as SigninModel ?? new SigninModel{Provider =  _provider};
+            var model = TempData["SigninModel"] as SigninModel ?? new SigninModel { Provider = _provider };
             return View(model);
         }
 
@@ -42,12 +42,13 @@ namespace Killer_App.Controllers
                 return View(errorModel);
             }
 
-            if (model != null)
-                return AttemptLogin(model.Username, model.Password, model.RememberMe);
+            if (model != null) return AttemptLogin(model.Username, model.Password, model.RememberMe);
 
-            model.Warning = "Something weird happened wtf.";
-
-            model = new SigninModel{Provider =  _provider};
+            model = new SigninModel
+            {
+                Provider = _provider,
+                Warning = "Something weird happened wtf."
+            };
 
             return View(model);
         }
@@ -124,7 +125,7 @@ namespace Killer_App.Controllers
 
         private Provider GetProvider(BaseModel model = null)
         {
-            return Session["Provider"] != null ? (Provider) Session["Provider"] : (model?.Provider ?? new Provider());
+            return Session["Provider"] != null ? (Provider)Session["Provider"] : (model?.Provider ?? new Provider());
         }
     }
 }
