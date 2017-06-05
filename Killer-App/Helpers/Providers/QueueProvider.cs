@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Timers;
+using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.Objects;
 
 namespace Killer_App.Helpers.Providers
@@ -8,9 +10,39 @@ namespace Killer_App.Helpers.Providers
     {
         private readonly List<Song> _queue = new List<Song>();
 
+        public Song CurrentSong { get; private set; }
+        public TimeSpan AtTime { get; private set; }
+        private Provider _provider;
+        private ContextBase _contextBase;
+
+        private readonly Timer _songTimer = new Timer(100);
+
+        public QueueProvider(Provider provider, ContextBase contextBase)
+        {
+            _provider = provider;
+            _contextBase = contextBase;
+
+            Play(_provider.SongProvider.FetchSong("201"));
+
+            _songTimer.Elapsed += (sender, args) => TimerTick();
+        }
+
         private void Play(Song song)
         {
+            CurrentSong = song;
+            AtTime = TimeSpan.Zero;
+            _songTimer.Enabled = true;
+        }
 
+        private void TimerTick()
+        {
+            if (CurrentSong.Duration.Subtract(AtTime).TotalMilliseconds < 100)
+            {
+                AtTime = CurrentSong.Duration;
+                _songTimer.Enabled = false;
+            }
+
+            AtTime = AtTime.Add(new TimeSpan(0, 0, 0, 0, 100));
         }
 
         public bool Next()
@@ -40,6 +72,13 @@ namespace Killer_App.Helpers.Providers
         public void SetNext(Song song)
         {
             _queue.Insert(0, song);
+        }
+
+        public void Skip()
+        {
+            if (_queue.Count == 0) return;
+            Play(_queue[0]);
+            _queue.RemoveAt(0);
         }
     }
 }

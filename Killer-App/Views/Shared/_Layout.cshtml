@@ -57,12 +57,75 @@
 
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Tim van den Essen</p>
-        </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <div class="footer-spacer"></div>
+
+    <div id="SongDisplay">
+        @if (Model?.Provider.QueueProvider.CurrentSong != null)
+            {
+            <h3>@(Model.Provider.QueueProvider.CurrentSong.Name)</h3>
+            @(string.Join(", ", Model.Provider.QueueProvider.CurrentSong.Artists))
+        }
+
+        <br />
+        <br />
+
+        <div class="progress-custom">
+            <div class="progress-value">
+                <img src=""/>
+            </div>
+
+            <div class="progress-value" id="time">
+                00:00
+            </div>
+            <div class="progress">
+                @* style="width: 100%" *@
+                <div class="progress-bar" role="progressbar" aria-valuenow="00" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>
+            </div>
+            <div class="progress-value">
+                @*<span style="float: right">*@ @(Model?.Provider.QueueProvider.CurrentSong?.Duration.ToString(@"mm\:ss")) @*</span>*@
+            </div>
+        </div>
+    </div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js" ></script>
+<script>
+    let display = document.querySelector('#time');
+
+    let currentDuration = @(Model?.Provider.QueueProvider.AtTime.TotalSeconds.ToString() ?? "null");
+    const totalDuration = @(Model?.Provider.QueueProvider.CurrentSong?.Duration.TotalSeconds.ToString() ?? "null");
+
+    let lmao = "lol";
+
+    let counterUpdate = setInterval(function() {
+
+            if (currentDuration == null || totalDuration == null) {
+                $('.progress-bar').css('width', '0%');
+                clearTimeout(counterUpdate);
+                console.log('Completed.');
+                return;
+            }
+
+            const bar = 100 * currentDuration / totalDuration;
+
+            let minutes = parseInt(currentDuration / 60, 10);
+            let seconds = parseInt(currentDuration % 60, 10);
+
+            minutes = minutes < 10 ? `0${minutes}` : minutes;
+            seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            console.log(`Current: ${currentDuration}, Total: ${totalDuration}. That is ${bar} percent.`);
+            $('.progress-bar').css('width', bar + '%');
+
+            currentDuration = currentDuration + 0.1;
+
+        },
+        100);
+
+</script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

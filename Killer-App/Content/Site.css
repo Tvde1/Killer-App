@@ -16,3 +16,38 @@ textarea {
     max-width: 280px;
 }
 
+/* For progress bar */
+
+.progress-custom {
+    display: table;
+    width: 100%;
+    margin-bottom: 20px; /*optionally same aside margin bottom of progress class*/
+}
+
+    .progress-custom .progress {
+        margin-bottom: 0;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .progress-custom .progress-value {
+        display: table-cell;
+        vertical-align: middle;
+        width: 1%;
+        padding: 0 4px; /*optionally*/
+    }
+
+/* Footer */
+
+#SongDisplay {
+    height: 150px;
+    padding: 10px 10px;
+    bottom: 0;
+    position: fixed;
+    color: #999;
+    background: #222;
+}
+
+.footer-spacer {
+    height: 150px;
+}
