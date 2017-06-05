@@ -19,7 +19,7 @@ namespace Killer_App.Helpers.Providers
         }
 
         public IReadOnlyList<Song> Songs => _songs?.Select(x => x.Value).ToList() ?? new List<Song>();
-
+  
         public IEnumerable<int> GetSongIds(Album album)
         {
             return _repository.GetSongIds(album);
