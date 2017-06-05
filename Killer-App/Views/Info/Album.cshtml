@@ -29,10 +29,10 @@
                         @Html.Raw(artist)
                     </td>
                     <td>
-                        @Html.Raw(string.Join(", ", artist.Albums))
+                        @Html.Raw(string.Join(", ", artist.Albums.Select(x => x.LinkString())))
                     </td>
                     <td>
-                        @Html.Raw(string.Join(", ", artist.Songs))
+                        @Html.Raw(string.Join(", ", artist.Songs.Select(x => x.LinkString())))
                     </td>
                 </tr>
             }
@@ -61,10 +61,10 @@
                         @Html.Raw(song)
                     </td>
                     <td>
-                        @Html.Raw(string.Join(", ", song.Albums))
+                        @Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))
                     </td>
                     <td>
-                        @Html.Raw(string.Join(", ", song.Artists))
+                        @Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))
                     </td>
                     <td>
                         @song.Duration.ToString(@"mm\:ss")

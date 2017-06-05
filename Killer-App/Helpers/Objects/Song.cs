@@ -30,6 +30,11 @@ namespace Killer_App.Helpers.Objects
 
         public override string ToString()
         {
+            return Name;
+        }
+
+        public string LinkString()
+        {
             return InfoLink(Name, "Song", "Info", Id);
         }
     }

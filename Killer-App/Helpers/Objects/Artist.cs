@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Killer_App.Models;
 
 namespace Killer_App.Helpers.Objects
 {
     public class Artist : User
     {
-        private IEnumerable<int> _songIds;
-        private IEnumerable<int> _albumIds;
+        private readonly IEnumerable<int> _songIds;
+        private readonly IEnumerable<int> _albumIds;
 
         public int ArtistId { get; }
 
@@ -23,6 +22,11 @@ namespace Killer_App.Helpers.Objects
         }
 
         public override string ToString()
+        {
+            return FullName;
+        }
+
+        public string LinkString()
         {
             return InfoLink(FullName, "Artist", "Info", ArtistId);
         }
