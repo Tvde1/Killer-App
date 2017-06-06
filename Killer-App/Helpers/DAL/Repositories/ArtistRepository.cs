@@ -36,5 +36,9 @@ namespace Killer_App.Helpers.DAL.Repositories
         }
 
 
+        public bool AddArtistToSong(int artistId, int songId)
+        {
+            return _artistContext.AddToSong(artistId, songId);
+        }
     }
 }

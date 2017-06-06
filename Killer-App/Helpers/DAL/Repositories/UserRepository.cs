@@ -1,4 +1,5 @@
-﻿using Killer_App.Helpers.DAL.Contexts;
+﻿using System.Collections.Generic;
+using Killer_App.Helpers.DAL.Contexts;
 using Killer_App.Helpers.DAL.Interfaces;
 using Killer_App.Helpers.Objects;
 using Killer_App.Helpers.Providers;
@@ -45,6 +46,12 @@ namespace Killer_App.Helpers.DAL.Repositories
         {
             var data = _userContext.FetchUser(username, password);
             return _objectCreator.CreateUser(data);
+        }
+
+        public List<Notification> GetNotifications(User user)
+        {
+            var data = _userContext.GetNotifications(user.Id);
+            return ObjectCreator.CreateList(data, _objectCreator.CreateNotification);
         }
     }
 }

@@ -4,31 +4,31 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Most Popular Songs on @DateTime.Now.DayOfWeek</h2>
+<h2>Recommended songs for @DateTime.Now.DayOfWeek</h2>
 
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Name</th>
         <th>Album(s)</th>
-        <th>Artists</th>
+        <th>Artist(s)</th>
         <th>Duration</th>
     </tr>
     </thead>
     <tbody>
-    @if (Model.TopSongs != null)
+    @if (Model.RecommendedSongs != null)
     {
-        foreach (var song in Model.TopSongs)
+        foreach (var song in Model.RecommendedSongs)
         {
             <tr>
                 <td>
-                    @Html.Raw(song)
+                    @Html.Raw(song.LinkString())
                 </td>
                 <td>
-                    @Html.Raw(string.Join(", ", song.Albums))
+                    @Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))
                 </td>
                 <td>
-                    @Html.Raw(string.Join(", ", song.Artists))
+                    @Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))
                 </td>
                 <td>
                     @Html.Raw(song.Duration.ToString(@"mm\:ss"))

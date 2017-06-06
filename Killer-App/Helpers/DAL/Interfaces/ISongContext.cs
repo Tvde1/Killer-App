@@ -13,5 +13,7 @@ namespace Killer_App.Helpers.DAL.Interfaces
         DataTable SearchSongs(string searchText, SearchModel.SearchMode mode);
         DataTable FetchSongs(IEnumerable<int> songIds);
         DataTable GetSongs();
+        DataTable GetTopSongs(int artistid);
+        string GetRandomSong();
     }
 }

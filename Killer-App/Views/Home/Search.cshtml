@@ -74,18 +74,18 @@
                 {
                 <tr>
                     <td>
-                        @song.Name
+                        @Html.Raw(song.LinkString())
                     </td>
                     <td>
                         @if (song.Albums != null)
                         {
-                            string.Join(", ", song.Albums.Select(x => x.Name));
+                            @Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))
                         }
                     </td>
                     <td>
                         @if (song.Artists != null)
                         {
-                            string.Join(", ", song.Artists.Select(x => x.FullName));
+                            @Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())));
                         }
                     </td>
                     <td>

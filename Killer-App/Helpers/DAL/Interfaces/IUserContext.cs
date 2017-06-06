@@ -8,5 +8,6 @@ namespace Killer_App.Helpers.DAL.Interfaces
         bool ValidateUser(string username);
         bool ValidatePassword(string username, string password);
         DataRow FetchUser(string username, string password);
+        DataTable GetNotifications(int userId);
     }
 }

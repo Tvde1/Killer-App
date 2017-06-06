@@ -27,7 +27,7 @@
             {
                 <tr>
                     <td>
-                        @Html.Raw(song)
+                        @Html.Raw(song.LinkString())
                     </td>
                     <td>
                         @Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))
@@ -61,7 +61,7 @@
             {
                 <tr>
                     <td>
-                        @Html.Raw(album)
+                        @Html.Raw(album.LinkString())
                     </td>
                     <td>
                         @Html.Raw(string.Join(", ", album.Artists.Select(x => x.LinkString())))

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Timers;
-using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.Objects;
 
 namespace Killer_App.Helpers.Providers
@@ -12,15 +11,13 @@ namespace Killer_App.Helpers.Providers
 
         public Song CurrentSong { get; private set; }
         public TimeSpan AtTime { get; private set; }
-        private Provider _provider;
-        private ContextBase _contextBase;
+        private readonly Provider _provider;
 
         private readonly Timer _songTimer = new Timer(100);
 
-        public QueueProvider(Provider provider, ContextBase contextBase)
+        public QueueProvider(Provider provider)
         {
             _provider = provider;
-            _contextBase = contextBase;
 
             Play(_provider.SongProvider.FetchSong("201"));
 

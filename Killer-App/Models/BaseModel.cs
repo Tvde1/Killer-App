@@ -5,9 +5,9 @@ namespace Killer_App.Models
     public class BaseModel
     {
         public Provider Provider { get; set; }
-        public string Error { get; protected set; }
-        public string Sucess { get; protected set; }
-        public string Warning { get; protected internal set; }
+        public string Error { get; set; }
+        public string Sucess { get; set; }
+        public string Warning { get; set; }
 
         protected static string InfoLink(string linkText, string actionName, string controllerName, int id)
         {

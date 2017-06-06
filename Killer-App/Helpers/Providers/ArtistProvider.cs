@@ -58,5 +58,10 @@ namespace Killer_App.Helpers.Providers
                 ? null
                 : GetArtistsInternal(new[] { result }).First();
         }
+
+        public bool AddToSong(int artistId, int songId)
+        {
+            return _repository.AddArtistToSong(artistId, songId);
+        }
     }
 }

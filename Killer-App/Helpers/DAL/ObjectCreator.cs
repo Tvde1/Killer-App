@@ -33,12 +33,19 @@ namespace Killer_App.Helpers.DAL
 
         public Artist CreateArtist(DataRow row)
         {
-            return row == null ? null : new Artist((int)row["ArtistPk"], CreateUser(row));
+            return row == null ? null : new Artist((int)row["ArtistPk"], CreateUser(row), (string)row["ArtistName"]);
         }
 
         public static List<T> CreateList<T>(DataTable table, Func<DataRow, T> function)
         {
             return table == null ? null : (from DataRow tableRow in table.Rows select function(tableRow)).ToList();
+        }
+
+        public Notification CreateNotification(DataRow row)
+        {
+            return row == null
+                ? null
+                : new Notification(_provider, (int) row["UserFk"], (int) row["SongFk"], (int) row["ArtistFk"]);
         }
     }
 }

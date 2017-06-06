@@ -1,4 +1,6 @@
-﻿using Killer_App.Helpers.DAL;
+﻿using System;
+using System.Collections.Generic;
+using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
 using Killer_App.Helpers.Objects;
 
@@ -15,7 +17,7 @@ namespace Killer_App.Helpers.Providers
 
         public User CurrentUser { get; set; }
 
-        public User GetUser(int id)
+        public User FetchUser(int id)
         {
             return _userRepository.GetUser(id);
         }
@@ -28,6 +30,13 @@ namespace Killer_App.Helpers.Providers
         public User FetchUser(string username, string password)
         {
             return _userRepository.FetchUser(username, password);
+        }
+
+        public List<Notification> GetNotifications()
+        {
+            var list = _userRepository.GetNotifications(CurrentUser);
+            list.Reverse();
+            return list;
         }
     }
 }

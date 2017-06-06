@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
 using Killer_App.Helpers.Objects;
@@ -30,11 +31,10 @@ namespace Killer_App.Helpers.Providers
             return _repository.GetSongIds(artist);
         }
 
-        public List<Song> GetTopSongs()
+        public List<Song> GetRecommendedSongs(User user)
         {
-            //TODO: make this real.
-            //throw new Exception("xd");
-            return GetSongs(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+            var data = _repository.GetTopSongs(user);
+            return GetSongs(data);
         }
 
         public List<Song> GetSongs(IEnumerable<int> ids)
@@ -69,6 +69,11 @@ namespace Killer_App.Helpers.Providers
         {
             int result;
             return !int.TryParse(idString, out result) ? null : GetSongsInternal(new[] { result }).First();
+        }
+
+        public Song GetRandomSong()
+        {
+            return FetchSong(_repository.GetRandomSong());
         }
     }
 }

@@ -10,12 +10,17 @@ namespace Killer_App.Helpers.Objects
         private readonly IEnumerable<int> _albumIds;
         private readonly IEnumerable<int> _artistIds;
 
-        public int Id { get; }
-        public string Name { get; }
-        public TimeSpan Duration { get; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public TimeSpan Duration { get; set; }
         public List<Album> Albums => Provider.AlbumProvider.GetAlbums(_albumIds);
 
         public List<Artist> Artists => Provider.ArtistProvider.GetArtists(_artistIds);
+
+        public Song()
+        {
+
+        }
 
         public Song(int id, string name, TimeSpan duration, Provider provider)
         {

@@ -39,5 +39,11 @@ namespace Killer_App.Helpers.DAL.Contexts
             Artist ON [User].UserPk = Artist.UserFk WHERE Artist.ArtistPk IN ({string.Join(",", list)})";
             return _contextBase.GetData(query);
         }
+
+        public bool AddToSong(int artistId, int songId)
+        {
+            var query = $"INSERT INTO ArtistSong (ArtistCk,SongCk) VALUES ({artistId},{songId})";
+            return _contextBase.ExecuteQuery(query);
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Killer_App.Helpers.Providers
 {
     public class Provider
     {
-        public string ConnectionString { get; } = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Killer-App.mdf;Integrated Security=True";
+        public string ConnectionString { get; } = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Tim\Killer-App.mdf;Integrated Security=True";
         //public string ConnectionString { get; } = @"Server=mssql.fhict.local;Database=dbi370704;User Id=dbi370704;Password=Lvl67#Rr;";
         public ArtistProvider ArtistProvider { get; }
         public SongProvider SongProvider { get; }
@@ -22,7 +22,7 @@ namespace Killer_App.Helpers.Providers
             ArtistProvider = new ArtistProvider(this, contextBase);
             SongProvider = new SongProvider(this, contextBase);
             AlbumProvider = new AlbumProvider(this, contextBase);
-            QueueProvider = new QueueProvider(this, contextBase);
+            QueueProvider = new QueueProvider(this);
         }
 
         public Exception TestConnection()

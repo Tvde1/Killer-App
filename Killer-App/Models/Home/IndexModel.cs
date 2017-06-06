@@ -6,7 +6,7 @@ namespace Killer_App.Models.Home
 {
     public class IndexModel : BaseModel
     {
-        public List<Song> TopSongs { get; private set; }
+        public List<Song> RecommendedSongs { get; private set; }
 
         public IndexModel(Provider provider)
         {
@@ -25,7 +25,7 @@ namespace Killer_App.Models.Home
 
         private void RefreshTopSongs()
         {
-            TopSongs = Provider.SongProvider.GetTopSongs();
+            RecommendedSongs = Provider.SongProvider.GetRecommendedSongs(Provider.UserProvider.CurrentUser);
         }
     }
 }

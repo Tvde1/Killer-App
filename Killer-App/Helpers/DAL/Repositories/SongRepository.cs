@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Killer_App.Helpers.DAL.Contexts;
 using Killer_App.Helpers.DAL.Interfaces;
@@ -38,6 +39,17 @@ namespace Killer_App.Helpers.DAL.Repositories
         {
             var data = _songContext.SearchSongs(searchText, mode);
             return ObjectCreator.CreateList(data, row => (int)row["SongPk"]);
+        }
+
+        public List<int> GetTopSongs(User user)
+        {
+            var data = _songContext.GetTopSongs(user.Id);
+            return ObjectCreator.CreateList(data, row => (int) row["SongPk"]);
+        }
+
+        public string GetRandomSong()
+        {
+            return _songContext.GetRandomSong();
         }
     }
 }

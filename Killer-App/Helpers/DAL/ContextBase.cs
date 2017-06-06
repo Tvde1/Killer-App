@@ -52,5 +52,26 @@ namespace Killer_App.Helpers.DAL
                 return null;
             }
         }
+
+        public bool ExecuteQuery(string query)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(_connectionString))
+                {
+                    using (var comm = new SqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        comm.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

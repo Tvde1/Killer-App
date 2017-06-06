@@ -33,7 +33,7 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public DataTable SearchSongs(string searchText, SearchModel.SearchMode mode)
         {
-            var query =  new SqlCommand("SELECT SongPk FROM Song WHERE [Name] LIKE @text");
+            var query = new SqlCommand("SELECT SongPk FROM Song WHERE [Name] LIKE @text");
             query.Parameters.AddWithValue("@text", $"%{searchText}%");
             return _contextBase.GetData(query);
         }
@@ -47,6 +47,20 @@ namespace Killer_App.Helpers.DAL.Contexts
         public DataTable GetSongs()
         {
             return _contextBase.GetData("SELECT SongPk From Song");
+        }
+
+        public DataTable GetTopSongs(int artistid)
+        {
+            var query = $@"EXEC	[dbo].[GetRecommended]
+            @artistid = {artistid}";
+            return _contextBase.GetData(query);
+        }
+
+        public string GetRandomSong()
+        {
+            var query = "SELECT TOP 1 SongPk FROM Song ORDER BY NEWID()";
+            var data = _contextBase.GetData(query);
+            return data.Rows.Count == 0 ? null : (string)data.Rows[0]["SongPk"];
         }
     }
 }

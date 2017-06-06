@@ -55,5 +55,10 @@ namespace Killer_App.Helpers.DAL.Contexts
             var data = _contextBase.GetData(query);
             return data.Rows.Count == 0 ? null : data.Rows[0];
         }
+
+        public DataTable GetNotifications(int userId)
+        {
+            return _contextBase.GetData($"SELECT * FROM Notification WHERE UserFk = {userId}");
+        }
     }
 }

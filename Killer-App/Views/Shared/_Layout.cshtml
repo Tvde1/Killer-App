@@ -26,6 +26,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Search", "Search", "Home")</li>
                     <li>@Html.ActionLink("Stats", "Stats", "Home")</li>
+                    <li>@Html.ActionLink("Notifications", "Index", "Notification")</li>
                 </ul>
             </div>
         </div>
@@ -62,22 +63,22 @@
     <div class="footer-spacer"></div>
 
     <div id="SongDisplay">
-        @if (Model?.Provider.QueueProvider.CurrentSong != null)
-            {
-            <h3>@(Model.Provider.QueueProvider.CurrentSong.Name)</h3>
-            @(string.Join(", ", Model.Provider.QueueProvider.CurrentSong.Artists))
-        }
+        <h3><span id="songName"></span></h3>
+        <span id="artistAlbum"></span>
 
         <br />
         <br />
+
+        <img id="prev" src="/Content/Images/previous.png" alt="Previous" height="20" /> @*&nbsp;*@
+        <img id="playpause" src="/Content/Images/pause.png" alt="" height="20" /> @*&nbsp;*@
+        <img id="skip" src="/Content/Images/skip.png" alt="Skip" height="20" /> <br />
 
         <div class="progress-custom">
             <div class="progress-value">
-                <img src=""/>
-            </div>
 
-            <div class="progress-value" id="time">
-                00:00
+                <div id="time">
+                    00:00
+                </div>
             </div>
             <div class="progress">
                 @* style="width: 100%" *@
@@ -89,8 +90,41 @@
         </div>
     </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js" ></script>
-<script>
+1    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+
+    function updateData() {
+
+        @{
+            var artistAlbumString = $"{Model.Provider.QueueProvider.CurrentSong?.Artists.First()} - {Model.Provider.QueueProvider.CurrentSong?.Albums.First()}";
+        }
+
+        $('#songName').html = '@(Model.Provider.QueueProvider.CurrentSong?.Name)';
+        $('#artistAlbum').html = '@artistAlbumString';
+    }
+
+    updateData();
+
+        let playState = 1;
+
+
+    $('#skip').click(function() {
+    });
+
+
+    $('#playpause').click(changeButton);
+
+    function changeButton() {
+        console.log('xd');
+        if (playState === 1) {
+            $('#playpause').attr('src', '/Content/Images/play.png');
+            playState = 0;
+        } else {
+            $('#playpause').attr('src', '/Content/Images/pause.png');
+            playState = 1;
+        }
+    }
+
     let display = document.querySelector('#time');
 
     let currentDuration = @(Model?.Provider.QueueProvider.AtTime.TotalSeconds.ToString() ?? "null");
@@ -99,6 +133,8 @@
     let lmao = "lol";
 
     let counterUpdate = setInterval(function() {
+
+            if (playState !== 1) return;
 
             if (currentDuration == null || totalDuration == null) {
                 $('.progress-bar').css('width', '0%');
@@ -117,7 +153,7 @@
 
             display.textContent = minutes + ":" + seconds;
 
-            console.log(`Current: ${currentDuration}, Total: ${totalDuration}. That is ${bar} percent.`);
+            //console.log(`Current: ${currentDuration}, Total: ${totalDuration}. That is ${bar} percent.`);
             $('.progress-bar').css('width', bar + '%');
 
             currentDuration = currentDuration + 0.1;
@@ -125,7 +161,7 @@
         },
         100);
 
-</script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+    </script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
