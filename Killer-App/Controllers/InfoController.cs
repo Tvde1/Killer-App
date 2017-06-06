@@ -28,9 +28,9 @@ namespace Killer_App.Controllers
 
         public ActionResult Album(string id)
         {
-            //var model = (InfoModel)TempData["AlbumInfoModel"];
-            //if (model != null)
-            //    return View(model);
+            var model = (InfoModel)TempData["AlbumInfoModel"];
+            if (model != null)
+                return View(model);
 
             if (id == null) return RedirectToAction("Index", "Home");
 
@@ -40,14 +40,15 @@ namespace Killer_App.Controllers
             var album = provider.AlbumProvider.FetchAlbum(id);
             if (album == null) return RedirectToAction("Index", "Home");
 
-            return View(album);
+            var newModel = new InfoModel {Album = album, Provider = provider };
+            return View(newModel);
         }
 
         public ActionResult Artist(string id)
         {
-            //var model = (InfoModel)TempData["ArtistInfoModel"];
-            //if (model != null)
-            //    return View(model);
+            var model = (InfoModel)TempData["ArtistInfoModel"];
+            if (model != null)
+                return View(model);
 
             if (id == null) return RedirectToAction("Index", "Home");
 
@@ -56,7 +57,10 @@ namespace Killer_App.Controllers
             
             var artist = provider.ArtistProvider.FetchArtist(id);
             if (artist == null) return RedirectToAction("Index", "Home");
-            return View(artist);
+
+            var newModel = new InfoModel{Artist = artist, Provider = provider };
+            newModel.GetArtistImage();
+            return View(newModel);
         }
 
         public ActionResult AddArtistToSong(InfoModel model)

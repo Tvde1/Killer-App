@@ -1,13 +1,28 @@
-﻿@using System.Web.Mvc.Html
-@model Killer_App.Helpers.Objects.Artist
+﻿@model Killer_App.Models.Info.InfoModel
 
 @{
     ViewBag.Title = "Artist";
 }
 
-<h2>@Model.FullName</h2>
+<h2>@Model.Artist.FullName</h2>
 
 @* TODO: Info here *@
+
+@if (Model.ArtistInfo != null)
+{
+    <img src="@(Model.ArtistInfo.Artist.Images.First(x => x.Size=="large").Text)" alt="@Model.Artist.ArtistName" />
+    @:Tags : @string.Join(", ", Model.ArtistInfo.Artist.Tags.Tag.Select(x => x.Name));
+}
+
+<br/>
+
+@Html.Raw(Model.ArtistInfo?.Artist.Bio.Content)
+
+<br/>
+
+<br/><br/>
+
+@(Model.ArtistInfo?.Artist.Stats.Listeners ?? "0") listeners and @(Model.ArtistInfo?.Artist.Stats.Playcount ?? "0") plays.
 
 <h4>Songs</h4>
 
@@ -21,9 +36,9 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.Songs != null)
+        @if (Model.Artist.Songs != null)
         {
-            foreach (var song in Model.Songs)
+            foreach (var song in Model.Artist.Songs)
             {
                 <tr>
                     <td>
@@ -55,9 +70,9 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.Albums != null)
+        @if (Model.Artist.Albums != null)
         {
-            foreach (var album in Model.Albums)
+            foreach (var album in Model.Artist.Albums)
             {
                 <tr>
                     <td>
