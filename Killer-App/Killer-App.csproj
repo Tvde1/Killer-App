@@ -129,6 +129,7 @@
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\QueueController.cs" />
+    <Compile Include="Controllers\RandomSongController.cs" />
     <Compile Include="Controllers\SigninController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
