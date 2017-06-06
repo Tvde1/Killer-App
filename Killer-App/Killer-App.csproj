@@ -136,6 +136,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Api\LastFmApiResult.cs" />
     <Compile Include="Helpers\Objects\Album.cs" />
     <Compile Include="Helpers\Objects\Artist.cs" />
     <Compile Include="Helpers\Objects\Notification.cs" />
