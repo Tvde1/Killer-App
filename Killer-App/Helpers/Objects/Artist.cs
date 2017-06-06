@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Killer_App.Helpers.Objects
 {
+    [DataContract]
     public class Artist : User
     {
         private readonly IEnumerable<int> _songIds;
@@ -12,6 +14,7 @@ namespace Killer_App.Helpers.Objects
         public List<Song> Songs => Provider.SongProvider.GetSongs(_songIds);
         public List<Album> Albums => Provider.AlbumProvider.GetAlbums(_albumIds);
         public string FullName => UserName; //FirstName + " " + LastName;
+        [DataMember]
         public string ArtistName { get; }
 
         public Artist(int artistId, User user, string artistName) : base(user)
