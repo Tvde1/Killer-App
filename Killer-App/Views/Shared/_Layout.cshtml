@@ -63,8 +63,8 @@
     <div class="footer-spacer"></div>
 
     <div id="SongDisplay">
-        <h3><span id="songName"></span></h3>
-        <span id="artistAlbum"></span>
+        <h3><span id="songName">Loading...</span></h3>
+        <span id="artistAlbum">Loading...</span>
 
         <br />
         <br />
@@ -75,7 +75,6 @@
 
         <div class="progress-custom">
             <div class="progress-value">
-
                 <div id="time">
                     00:00
                 </div>
@@ -96,11 +95,11 @@
     function updateData() {
 
         @{
-            var artistAlbumString = $"{Model.Provider.QueueProvider.CurrentSong?.Artists.First()} - {Model.Provider.QueueProvider.CurrentSong?.Albums.First()}";
+            var artistAlbumString = $"{Model.Provider.QueueProvider.CurrentSong?.Artists.First()?.LinkString()} - {Model.Provider.QueueProvider.CurrentSong?.Albums.First()?.LinkString()}";
         }
 
-        $('#songName').html = '@(Model.Provider.QueueProvider.CurrentSong?.Name)';
-        $('#artistAlbum').html = '@artistAlbumString';
+        $('#songName').html('@Html.Raw(Model.Provider.QueueProvider.CurrentSong?.LinkString())');
+        $('#artistAlbum').html('@Html.Raw(artistAlbumString)');
     }
 
     updateData();
@@ -109,6 +108,7 @@
 
 
     $('#skip').click(function() {
+
     });
 
 
@@ -137,7 +137,7 @@
             if (playState !== 1) return;
 
             if (currentDuration == null || totalDuration == null) {
-                $('.progress-bar').css('width', '0%');
+                $('.progress-bar').css('width', '0');
                 clearTimeout(counterUpdate);
                 console.log('Completed.');
                 return;

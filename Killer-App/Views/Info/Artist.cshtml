@@ -8,7 +8,7 @@
 
 @* TODO: Info here *@
 
-@if (Model.ArtistInfo != null)
+@if (Model.ArtistInfo?.Artist != null)
 {
     <img src="@(Model.ArtistInfo.Artist.Images.First(x => x.Size=="large").Text)" alt="@Model.Artist.ArtistName" />
     @:Tags : @string.Join(", ", Model.ArtistInfo.Artist.Tags.Tag.Select(x => x.Name));
@@ -16,13 +16,13 @@
 
 <br/>
 
-@Html.Raw(Model.ArtistInfo?.Artist.Bio.Content)
+@Html.Raw(Model.ArtistInfo?.Artist?.Bio.Content)
 
 <br/>
 
 <br/><br/>
 
-@(Model.ArtistInfo?.Artist.Stats.Listeners ?? "0") listeners and @(Model.ArtistInfo?.Artist.Stats.Playcount ?? "0") plays.
+@(Model.ArtistInfo?.Artist?.Stats.Listeners ?? "0") listeners and @(Model.ArtistInfo?.Artist?.Stats.Playcount ?? "0") plays.
 
 <h4>Songs</h4>
 

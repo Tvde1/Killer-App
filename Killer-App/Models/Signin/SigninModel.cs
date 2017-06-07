@@ -8,6 +8,5 @@ namespace Killer_App.Models.Signin
         public string Password { get; set; }
         [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
-        public string Error { get; set; }
     }
 }

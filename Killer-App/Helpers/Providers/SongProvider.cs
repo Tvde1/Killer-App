@@ -52,7 +52,8 @@ namespace Killer_App.Helpers.Providers
         private List<Song> GetSongsInternal(IEnumerable<int> ids)
         {
             if (ids == null) return null;
-            var songsToFetch = ids.Where(x => !_songs.ContainsKey(x)).ToList();
+            var enumerable = ids as int[] ?? ids.ToArray();
+            var songsToFetch = enumerable.Where(x => !_songs.ContainsKey(x)).ToList();
 
             if (songsToFetch.Any())
             {
@@ -62,7 +63,7 @@ namespace Killer_App.Helpers.Providers
                 newSongs.ForEach(x => _songs.Add(x.Id, x));
             }
 
-            return ids.Select(id => _songs[id]).ToList();
+            return enumerable.Select(id => _songs[id]).ToList();
         }
 
         public Song FetchSong(string idString)
