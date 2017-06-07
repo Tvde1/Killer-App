@@ -130,6 +130,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\PlaylistController.cs" />
     <Compile Include="Controllers\QueueController.cs" />
     <Compile Include="Controllers\RandomSongController.cs" />
     <Compile Include="Controllers\SigninController.cs" />
@@ -138,12 +139,17 @@
     </Compile>
     <Compile Include="Helpers\Api\LastFmApiResult.cs" />
     <Compile Include="Helpers\DAL\Contexts\MssqlCommentContext.cs" />
+    <Compile Include="Helpers\DAL\Contexts\MssqlPlaylistContext.cs" />
     <Compile Include="Helpers\DAL\Interfaces\ICommentContext.cs" />
+    <Compile Include="Helpers\DAL\Interfaces\IPlaylistContext.cs" />
     <Compile Include="Helpers\DAL\Repositories\CommentRepository.cs" />
+    <Compile Include="Helpers\DAL\Repositories\PlaylistRepository.cs" />
     <Compile Include="Helpers\Objects\Album.cs" />
     <Compile Include="Helpers\Objects\Artist.cs" />
+    <Compile Include="Helpers\Objects\BaseOject.cs" />
     <Compile Include="Helpers\Objects\Comment.cs" />
     <Compile Include="Helpers\Objects\Notification.cs" />
+    <Compile Include="Helpers\Objects\Playlist.cs" />
     <Compile Include="Helpers\Providers\CommentProvider.cs" />
     <Compile Include="Helpers\Providers\QueueProvider.cs" />
     <Compile Include="Helpers\Providers\UserProvider.cs" />
@@ -173,6 +179,7 @@
     <Compile Include="Models\Home\SearchModel.cs" />
     <Compile Include="Models\Info\InfoModel.cs" />
     <Compile Include="Models\Notification\NotificationModel.cs" />
+    <Compile Include="Models\Playlist\PlaylistModel.cs" />
     <Compile Include="Models\Queue\QueueModel.cs" />
     <Compile Include="Models\Signin\SigninModel.cs" />
     <Compile Include="Models\Home\StatsModel.cs" />
@@ -197,6 +204,7 @@
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Comment.cshtml" />
     <Content Include="Views\Queue\Index.cshtml" />
+    <Content Include="Views\Playlist\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

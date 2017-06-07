@@ -63,5 +63,15 @@ namespace Killer_App.Helpers.DAL
             var text = (string) row["Content"];
             return new Comment(_provider, id, song, user, text, parent);
         }
+
+        public Playlist CreatePlaylist(DataRow row)
+        {
+            if (row == null) return null;
+            var id = (int) row["PlaylistPk"];
+            var user = (int) row["UserFk"];
+            var songs = _provider.PlaylistProvider.GetSongsInPlaylist(id);
+
+            return new Playlist(_provider, id, user, songs);
+        }
     }
 }

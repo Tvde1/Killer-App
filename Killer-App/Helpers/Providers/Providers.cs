@@ -29,6 +29,7 @@ namespace Killer_App.Helpers.Providers
         public UserProvider UserProvider { get; }
         public QueueProvider QueueProvider { get; }
         public CommentProvider CommentProvider { get; set; }
+        public PlaylistProvider PlaylistProvider { get; set; }
 
         public Exception TestConnection()
         {
