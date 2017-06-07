@@ -32,10 +32,10 @@ namespace Killer_App.Helpers.Providers
         public List<Song> GetRecommendedSongs(User user)
         {
             var data = _repository.GetTopSongs(user);
-            return GetSongs(data);
+            return FetchSongs(data);
         }
 
-        public List<Song> GetSongs(IEnumerable<int> ids)
+        public List<Song> FetchSongs(IEnumerable<int> ids)
         {
             return GetSongsInternal(ids);
         }
@@ -43,7 +43,7 @@ namespace Killer_App.Helpers.Providers
         public List<Song> SearchSongs(string searchText, SearchModel.SearchMode mode)
         {
             var songList = _repository.SearchSongs(searchText, mode);
-            return GetSongs(songList);
+            return FetchSongs(songList);
             //TODO: Make it work by mode.
         }
 

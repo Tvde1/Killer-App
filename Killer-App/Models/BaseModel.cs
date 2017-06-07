@@ -8,10 +8,5 @@ namespace Killer_App.Models
         public string Error { get; set; }
         public string Sucess { get; set; }
         public string Warning { get; set; }
-
-        protected static string InfoLink(string linkText, string actionName, string controllerName, int id)
-        {
-            return $@"<a href=""/{controllerName}/{actionName}/{id}"">{linkText}</a>";
-        }
     }
 }

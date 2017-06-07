@@ -37,7 +37,8 @@ namespace Killer_App.Helpers.Providers
         private List<Artist> GetArtistsInternal(IEnumerable<int> artistIds)
         {
             if (artistIds == null) return null;
-            var songsToFetch = artistIds.Where(x => !_artists.ContainsKey(x)).ToList();
+            var enumerable = artistIds as int[] ?? artistIds.ToArray();
+            var songsToFetch = enumerable.Where(x => !_artists.ContainsKey(x)).ToList();
 
             if (songsToFetch.Any())
             {
@@ -47,7 +48,7 @@ namespace Killer_App.Helpers.Providers
                 newSongs.ForEach(x => _artists.Add(x.ArtistId, x));
             }
 
-            return artistIds.Select(id => _artists[id]).ToList();
+            return enumerable.Select(id => _artists[id]).ToList();
         }
 
         public Artist FetchArtist(string id)
