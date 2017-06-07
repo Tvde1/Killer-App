@@ -3,148 +3,149 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Killer-App</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Html.ActionLink("Killer-App", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Search", "Search", "Home")</li>
-                <li>@Html.ActionLink("Stats", "Stats", "Home")</li>
-                <li>@Html.ActionLink("Notifications", "Index", "Notification")</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div class="container body-content">
-
-    @if (Model.Error != null)
-    {
-        <div class="alert alert-danger" style="margin-top: 20px">
-            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-            <strong>Error!</strong> @Model.Error
-        </div>
-    }
-    else if (Model.Sucess != null)
-    {
-        <div class="alert alert-success" style="margin-top: 20px">
-            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-            <strong>Sucess!</strong> @Model.Sucess
-        </div>
-    }
-    else if (Model.Warning != null)
-    {
-        <div class="alert alert-warning" style="margin-top: 20px">
-            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-            <strong>Warning!</strong> @Model.Warning
-        </div>
-    }
-
-    @RenderBody()
-    <hr/>
-</div>
-
-<div class="footer-spacer"></div>
-
-<div id="SongDisplay">
-    <h3>
-        <span id="songName">Loading...</span>
-    </h3>
-    <span id="artistAlbum">Loading...</span>
-
-    <br/>
-    <br/>
-
-    <img id="prev" src="/Content/Images/previous.png" alt="Previous" height="20"/> @*&nbsp;*@
-    <img id="playpause" src="/Content/Images/pause.png" alt="" height="20"/> @*&nbsp;*@
-    <img id="skip" src="/Content/Images/skip.png" alt="Skip" height="20"/> <br/>
-
-    <div class="progress-custom">
-        <div class="progress-value">
-            <div id="time">
-                00:00
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Killer-App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Search", "Search", "Home")</li>
+                    <li>@Html.ActionLink("Stats", "Stats", "Home")</li>
+                    <li>@Html.ActionLink("Notifications", "Index", "Notification")</li>
+                    <li>@Html.ActionLink("Queue", "Index", "Queue")</li>
+                </ul>
             </div>
         </div>
-        <div class="progress">
-            @* style="width: 100%" *@
-            <div class="progress-bar" role="progressbar" aria-valuenow="00" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>
-        </div>
-        <div class="progress-value">
-            @*<span style="float: right">*@ @(Model?.Provider.QueueProvider.CurrentSong?.Duration.ToString(@"mm\:ss")) @*</span>*@
-        </div>
     </div>
-</div>
 
-1 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script>
+    <div class="container body-content">
 
-    function updateData() {
+        @if (Model.Error != null)
+        {
+            <div class="alert alert-danger" style="margin-top: 20px">
+                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+                <strong>Error!</strong> @Model.Error
+            </div>
+        }
+        else if (Model.Sucess != null)
+        {
+            <div class="alert alert-success" style="margin-top: 20px">
+                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+                <strong>Sucess!</strong> @Model.Sucess
+            </div>
+        }
+        else if (Model.Warning != null)
+        {
+            <div class="alert alert-warning" style="margin-top: 20px">
+                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+                <strong>Warning!</strong> @Model.Warning
+            </div>
+        }
 
+        @RenderBody()
+        <hr />
+    </div>
+
+    <div class="footer-spacer"></div>
+
+    <div id="SongDisplay">
         @{
             var artistAlbumString = $"{Model.Provider.QueueProvider.CurrentSong?.Artists.First()?.LinkString()} - {Model.Provider.QueueProvider.CurrentSong?.Albums.First()?.LinkString()}";
         }
+        <h3>
+            <span id="songName">@Html.Raw(Model.Provider.QueueProvider.CurrentSong?.LinkString().Replace("'", "\\'") ?? "Not playing.")</span>
+        </h3>
+        <span id="artistAlbum">@Html.Raw(artistAlbumString.Replace("'", "\\'"))</span>
 
-        $('#songName').html('@Html.Raw(Model.Provider.QueueProvider.CurrentSong?.LinkString().Replace("'", "\\'"))');
-        $('#artistAlbum').html('@Html.Raw(artistAlbumString.Replace("'", "\\'"))');
-    }
+        <br />
+        <br />
 
-    updateData();
+        <img id="prev" src="/Content/Images/previous.png" alt="Previous" height="20" /> @*&nbsp;*@
+        <img id="playpause" src="/Content/Images/pause.png" alt="" height="20" /> @*&nbsp;*@
+        <img id="skip" src="/Content/Images/skip.png" alt="Skip" height="20" /> <br />
 
-    let playState = 1;
+        <div class="progress-custom">
+            <div class="progress-value">
+                <div id="time">
+                    00:00
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="00" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>
+            </div>
+            <div class="progress-value">
+                @(Model?.Provider.QueueProvider.CurrentSong?.Duration.ToString(@"mm\:ss"))
+            </div>
+        </div>
+    </div>
 
+    1
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
 
-    $('#skip').click(function() {
+    let playState = @Model.Provider.QueueProvider.Playing.ToString().ToLower();
+        let counterUpdate = setInterval(updateTimer, 100);
 
+    $('#prev').click(function() {
+        location.href = '@Url.Action("Restart", "Queue")';
     });
 
+    $('#skip').click(function() {
+        location.href = '@Url.Action("Skip", "Queue")';
+    });
 
-    $('#playpause').click(changeButton);
-
-    function changeButton() {
-        console.log('xd');
-        if (playState === 1) {
-            $('#playpause').attr('src', '/Content/Images/play.png');
-            playState = 0;
-        } else {
+    function updateButton() {
+        if (playState) {
             $('#playpause').attr('src', '/Content/Images/pause.png');
-            playState = 1;
+        } else {
+            $('#playpause').attr('src', '/Content/Images/play.png');
         }
     }
 
-    let display = document.querySelector('#time');
+        function changeButton() {
+
+            $.ajax({
+            type: "GET",
+            url: '@Url.Action("PausePlay", "Queue")'
+        });
+
+        playState = !playState;
+
+if (playState) {
+    counterUpdate = setInterval(updateTimer, 100);
+} else {
+    clearTimeout(counterUpdate);
+}
+
+        updateButton();
+        }
+
+        $('#playpause').click(changeButton);
+
+        updateButton();
+
+    const display = document.querySelector('#time');
 
     let currentDuration = @(Model?.Provider.QueueProvider.AtTime.TotalSeconds.ToString() ?? "null");
     const totalDuration = @(Model?.Provider.QueueProvider.CurrentSong?.Duration.TotalSeconds.ToString() ?? "null");
 
-    let lmao = "lol";
 
-    let counterUpdate = setInterval(function() {
-
-            if (playState !== 1) return;
-
-            if (currentDuration == null || totalDuration == null) {
-                $('.progress-bar').css('width', '0');
-                clearTimeout(counterUpdate);
-                console.log('Completed.');
-                return;
-            }
-
+        function updateBar() {
             const bar = 100 * currentDuration / totalDuration;
 
             let minutes = parseInt(currentDuration / 60, 10);
@@ -153,17 +154,35 @@
             minutes = minutes < 10 ? `0${minutes}` : minutes;
             seconds = seconds < 10 ? `0${seconds}` : seconds;
 
+            if (minutes === 0 && seconds === 0) {
+                document.href = '@Url.Action("Skip", "Queue")';
+            }
+
             display.textContent = minutes + ":" + seconds;
 
-            //console.log(`Current: ${currentDuration}, Total: ${totalDuration}. That is ${bar} percent.`);
             $('.progress-bar').css('width', bar + '%');
+        }
+
+    updateBar();
+
+    function updateTimer() {
+
+        if (!playState) return;
+
+        if (currentDuration == null || totalDuration == null) {
+            $('.progress-bar').css('width', '0');
+            clearTimeout(counterUpdate);
+            console.log('Completed.');
+            return;
+        }
+
+        updateBar();
 
             currentDuration = currentDuration + 0.1;
 
-        },
-        100);
+        };
 
-</script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+    </script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

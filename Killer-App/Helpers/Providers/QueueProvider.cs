@@ -20,10 +20,11 @@ namespace Killer_App.Helpers.Providers
 
         public Song CurrentSong { get; private set; }
         public TimeSpan AtTime { get; private set; }
+        public bool Playing => _songTimer.Enabled;
 
         public IReadOnlyList<Song> Queue => _queue;
 
-        public void Play(Song song)
+        private void Play(Song song)
         {
             CurrentSong = song;
             AtTime = TimeSpan.Zero;
@@ -32,23 +33,19 @@ namespace Killer_App.Helpers.Providers
 
         private void TimerTick()
         {
+            if (CurrentSong == null)
+            {
+                _songTimer.Enabled = false;
+                return;
+            }
+
             if (CurrentSong.Duration.Subtract(AtTime).TotalMilliseconds < 100)
             {
-                AtTime = CurrentSong.Duration;
-                _songTimer.Enabled = false;
+                Skip();
             }
 
             AtTime = AtTime.Add(new TimeSpan(0, 0, 0, 0, 100));
         }
-
-        public bool Next()
-        {
-            if (_queue.Count == 0) return false;
-            Play(_queue[0]);
-            _queue.RemoveAt(0);
-            return true;
-        }
-
 
         public void Add(Song song)
         {
@@ -72,9 +69,30 @@ namespace Killer_App.Helpers.Providers
 
         public void Skip()
         {
-            if (_queue.Count == 0) return;
-            Play(_queue[0]);
-            _queue.RemoveAt(0);
+            if (_queue.Count == 0)
+            {
+                CurrentSong = null;
+                AtTime = TimeSpan.Zero;
+                _songTimer.Enabled = false;
+            }
+            else
+            {
+                Play(_queue[0]);
+                _queue.RemoveAt(0);
+            }
+        }
+
+        public void StartStopTimer()
+        {
+            _songTimer.Enabled = !_songTimer.Enabled;
+        }
+
+        public void Restart()
+        {
+            if (CurrentSong != null)
+                AtTime = TimeSpan.Zero;
+
+            _songTimer.Enabled = true;
         }
     }
 }

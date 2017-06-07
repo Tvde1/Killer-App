@@ -1,0 +1,33 @@
+﻿@model Killer_App.Models.Queue.QueueModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Queue</h2>
+
+Now playing: @Html.Raw(Model.NowPlaying?.LinkString() ?? "Nothing")
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Artist(s)</th>
+            <th>Album(s)</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var song in Model.Queue)
+        {
+            <tr>
+                <td>@Html.Raw(song.LinkString())</td>
+                <td>@Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))</td>
+                <td>@Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))</td>
+                <td>@song.Duration.ToString(@"mm\:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>
