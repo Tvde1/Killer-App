@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using Killer_App.Helpers.Api;
 using Killer_App.Helpers.Objects;
@@ -17,6 +16,12 @@ namespace Killer_App.Models.Info
         public string ArtistId { get; set; }
         public LastFmApi ArtistInfo { get; private set; }
         public List<Comment> Comments { get; set; }
+
+        public void GetComments()
+        {
+            if (Song != null) return;
+            Comments = Provider.CommentProvider.FetchComments(Song);
+        }
 
         public void GetArtistImage()
         {

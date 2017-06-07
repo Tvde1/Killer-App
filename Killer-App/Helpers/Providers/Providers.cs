@@ -13,6 +13,7 @@ namespace Killer_App.Helpers.Providers
         public AlbumProvider AlbumProvider { get; }
         public UserProvider UserProvider { get; }
         public QueueProvider QueueProvider { get; }
+        public CommentProvider CommentProvider { get; set; }
 
         internal Provider()
         {
@@ -23,6 +24,7 @@ namespace Killer_App.Helpers.Providers
             SongProvider = new SongProvider(this, contextBase);
             AlbumProvider = new AlbumProvider(this, contextBase);
             QueueProvider = new QueueProvider(this);
+            CommentProvider = new CommentProvider(this, contextBase);
         }
 
         public Exception TestConnection()

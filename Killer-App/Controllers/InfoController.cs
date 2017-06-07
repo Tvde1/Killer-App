@@ -6,7 +6,6 @@ namespace Killer_App.Controllers
 {
     public class InfoController : BaseController
     {
-        // GET: Info
         public ActionResult Song(string id)
         {
             var model = (InfoModel) TempData["SongInfoModel"];
@@ -22,6 +21,7 @@ namespace Killer_App.Controllers
             if (song == null) return RedirectToAction("Index", "Home");
 
             var newModel = new InfoModel {Song = song, Provider = provider};
+            newModel.GetComments();
 
             return View(newModel);
         }
@@ -84,6 +84,24 @@ namespace Killer_App.Controllers
             TempData["SongInfoModel"] = newModel;
 
             return RedirectToAction("Song");
+        }
+
+        public ActionResult Reply(int songid, int commentid, string text)
+        {
+            var provider = (Provider)Session["Provider"];
+            if (provider == null) return GoToSignIn();
+
+            provider.CommentProvider.Reply(commentid, songid, text);
+            return RedirectToAction("Song", new { id = songid });
+        }
+
+        public ActionResult Comment(int songid, string text)
+        {
+            var provider = (Provider)Session["Provider"];
+            if (provider == null) return GoToSignIn();
+
+            provider.CommentProvider.Comment(songid, text);
+            return RedirectToAction("Song", new {id = songid});
         }
     }
 }

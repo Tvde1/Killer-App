@@ -47,5 +47,12 @@ namespace Killer_App.Helpers.DAL
                 ? null
                 : new Notification(_provider, (int) row["UserFk"], (int) row["SongFk"], (int) row["ArtistFk"]);
         }
+
+        public Comment CreateComment(DataRow row)
+        {
+            return row == null
+                ? null
+                : new Comment(_provider, (int) row["SongFk"], (int) row["UserFk"], (string) row["Content"]);
+        }
     }
 }

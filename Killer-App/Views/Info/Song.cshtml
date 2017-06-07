@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc.Html
+@using Killer_App.Helpers.Objects
 @model Killer_App.Models.Info.InfoModel
 
 @{
@@ -22,7 +23,7 @@
                 <h4 class="modal-title">Modal Header</h4>
             </div>
             @using (Html.BeginForm("AddArtistToSong", "Info", FormMethod.Post))
-            { 
+            {
                 <div class="modal-body">
                     <p>Add an artist to the song:</p>
                     @Html.TextBoxFor(x => x.ArtistId)
@@ -38,9 +39,29 @@
     </div>
 </div>
 
-@foreach (var comment in Model.Comments)
+Post a comment:
+@using (Html.BeginForm("Comment", "Info", FormMethod.Post))
 {
-    
+    @Html.HiddenFor(x => x.Song.Id, new { Name = "songid" })
+    @Html.TextBox("Text", "Text", new { @class = "text-primary" })
+    <button class="btn" type="submit">Comment</button>
+}
+
+@foreach (var comment in Model.Comments ?? new List<Comment>())
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">@comment.User.UserName said:</div>
+        <div class="panel-body">@comment.Content</div>
+        <div class="panel-footer">
+            @using (Html.BeginForm("Reply", "Info", FormMethod.Post))
+            {
+                @Html.HiddenFor(x => comment.UserId, new { Name = "commentid" })
+                @Html.HiddenFor(x => x.Song.Id, new { name = "songid" })
+                @Html.TextArea("Text", new { @class = "text-primary" })
+                <button class="btn" type="submit">Reply</button>
+            }
+        </div>
+    </div>
 }
 
 <h4>Artists</h4>
