@@ -1,0 +1,22 @@
+﻿@model Killer_App.Helpers.Objects.Comment
+
+<div class="panel panel-default">
+    <div class="panel-heading">@Model.User.UserName said:</div>
+    <div class="panel-body">@Model.Content</div>
+    <div class="panel-footer">
+        @using (Html.BeginForm("Reply", "Info", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => Model.Id, new {Name = "commentid"})
+            @Html.HiddenFor(x => x.Song.Id, new {Name = "songid"})
+            @Html.TextArea("Text", new {@class = "text-primary", Name = "Text"})
+            <button class="btn" type="submit">Reply</button>
+        }
+
+        @Html.Raw(Model.Replies.Count != 0 ? "<br/>" : "")
+
+        @foreach (var reply in Model.Replies)
+        {
+            @Html.DisplayFor(x => reply)
+        }
+    </div>
+</div>

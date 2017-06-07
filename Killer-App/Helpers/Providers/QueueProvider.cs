@@ -9,22 +9,21 @@ namespace Killer_App.Helpers.Providers
     {
         private readonly List<Song> _queue = new List<Song>();
 
-        public Song CurrentSong { get; private set; }
-        public TimeSpan AtTime { get; private set; }
-        private readonly Provider _provider;
-
         private readonly Timer _songTimer = new Timer(100);
 
         public QueueProvider(Provider provider)
         {
-            _provider = provider;
-
-            Play(_provider.SongProvider.FetchSong("201"));
+            Play(provider.SongProvider.FetchSong("201"));
 
             _songTimer.Elapsed += (sender, args) => TimerTick();
         }
 
-        private void Play(Song song)
+        public Song CurrentSong { get; private set; }
+        public TimeSpan AtTime { get; private set; }
+
+        public IReadOnlyList<Song> Queue => _queue;
+
+        public void Play(Song song)
         {
             CurrentSong = song;
             AtTime = TimeSpan.Zero;

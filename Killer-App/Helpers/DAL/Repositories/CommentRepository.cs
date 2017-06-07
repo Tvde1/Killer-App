@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Killer_App.Helpers.DAL.Contexts;
 using Killer_App.Helpers.DAL.Interfaces;
 using Killer_App.Helpers.Objects;
@@ -21,7 +22,16 @@ namespace Killer_App.Helpers.DAL.Repositories
         public List<Comment> FetchComments(Song song)
         {
             var data = _commentContext.FetchComments(song.Id);
-            return ObjectCreator.CreateList(data, _objectCreator.CreateComment);
+            var comments = ObjectCreator.CreateList(data, _objectCreator.CreateComment);
+            var newList = new Dictionary<int, Comment>();
+            foreach (var comment in comments)
+            {
+                newList.Add(comment.Id, comment);
+
+                if (comment.ParentId != null)
+                    newList[comment.ParentId.Value].Replies.Add(comment);
+            }
+            return newList.Values.Where(x => x.ParentId == null).ToList();
         }
 
         public void Reply(int commentid, int songid, int userid, string text)

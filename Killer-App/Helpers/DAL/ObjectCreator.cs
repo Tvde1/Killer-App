@@ -18,22 +18,27 @@ namespace Killer_App.Helpers.DAL
 
         public Song CreateSong(DataRow row)
         {
-            return row == null ? null : new Song((int)row["SongPk"], (string)row["Name"], (TimeSpan)row["Duration"], _provider);
+            return row == null
+                ? null
+                : new Song((int) row["SongPk"], (string) row["Name"], (TimeSpan) row["Duration"], _provider);
         }
 
         public Album CreateAlbum(DataRow row)
         {
-            return row == null ? null : new Album((int)row["AlbumPk"], (string)row["Name"], _provider);
+            return row == null ? null : new Album((int) row["AlbumPk"], (string) row["Name"], _provider);
         }
 
         public User CreateUser(DataRow row)
         {
-            return row == null ? null : new User((int)row["UserPk"], (string)row["Username"], "Jan", (string)row["EmailAdress"], _provider);
+            return row == null
+                ? null
+                : new User((int) row["UserPk"], (string) row["Username"], "Jan", (string) row["EmailAdress"],
+                    _provider);
         }
 
         public Artist CreateArtist(DataRow row)
         {
-            return row == null ? null : new Artist((int)row["ArtistPk"], CreateUser(row), (string)row["ArtistName"]);
+            return row == null ? null : new Artist((int) row["ArtistPk"], CreateUser(row), (string) row["ArtistName"]);
         }
 
         public static List<T> CreateList<T>(DataTable table, Func<DataRow, T> function)
@@ -50,9 +55,13 @@ namespace Killer_App.Helpers.DAL
 
         public Comment CreateComment(DataRow row)
         {
-            return row == null
-                ? null
-                : new Comment(_provider, (int) row["SongFk"], (int) row["UserFk"], (string) row["Content"]);
+            if (row == null) return null;
+            var id = (int) row["CommentPk"];
+            var parent = row["ParentFk"] == DBNull.Value ? null : (int?) row["ParentFk"];
+            var song = (int) row["SongFk"];
+            var user = (int) row["AuthorFk"];
+            var text = (string) row["Content"];
+            return new Comment(_provider, id, song, user, text, parent);
         }
     }
 }
