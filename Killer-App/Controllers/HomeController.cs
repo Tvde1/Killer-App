@@ -10,7 +10,7 @@ namespace Killer_App.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
             var model = new IndexModel(provider);
             return View(model);
@@ -19,8 +19,8 @@ namespace Killer_App.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            var provider = (Provider)Session["Provider"];
-            return provider == null ? GoToSignIn() : View(new SearchModel { Provider = provider });
+            var provider = (Provider) Session["Provider"];
+            return provider == null ? GoToSignIn() : View(new SearchModel {Provider = provider});
         }
 
         //POST and GET: Search.
@@ -37,9 +37,9 @@ namespace Killer_App.Controllers
         //GET: Stats
         public ActionResult Stats()
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
-            var model = new StatsModel { Provider = provider };
+            var model = new StatsModel {Provider = provider};
             return View(model);
         }
     }

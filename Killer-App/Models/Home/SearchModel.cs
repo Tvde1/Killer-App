@@ -11,7 +11,7 @@ namespace Killer_App.Models.Home
             Artist,
             Album
         }
-        
+
         public string SearchText { get; set; }
         public SearchMode Mode { get; set; }
         public List<Song> Results { get; private set; } = new List<Song>();

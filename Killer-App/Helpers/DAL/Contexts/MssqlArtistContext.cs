@@ -14,12 +14,6 @@ namespace Killer_App.Helpers.DAL.Contexts
             _contextBase = contextBase;
         }
 
-        public DataTable GetAllArtists()
-        {
-            var query = "SELECT * FROM Artist";
-            return _contextBase.GetData(query);
-        }
-
         public DataTable GetArtists(Song song)
         {
             var query = $"SELECT ArtistCk FROM ArtistSong WHERE SongCk = {song.Id}";
@@ -34,7 +28,8 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public DataTable FetchArtists(IEnumerable<int> list)
         {
-            var query = $@"SELECT [User].UserPk, [User].Username, [User].Password, [User].EmailAdress, Artist.ArtistPk, Artist.ArtistName
+            var query =
+                $@"SELECT [User].UserPk, [User].Username, [User].Password, [User].EmailAdress, Artist.ArtistPk, Artist.ArtistName
             FROM [User] INNER JOIN
             Artist ON [User].UserPk = Artist.UserFk WHERE Artist.ArtistPk IN ({string.Join(",", list)})";
             return _contextBase.GetData(query);
@@ -44,6 +39,12 @@ namespace Killer_App.Helpers.DAL.Contexts
         {
             var query = $"INSERT INTO ArtistSong (ArtistCk,SongCk) VALUES ({artistId},{songId})";
             return _contextBase.ExecuteQuery(query);
+        }
+
+        public DataTable GetAllArtists()
+        {
+            var query = "SELECT * FROM Artist";
+            return _contextBase.GetData(query);
         }
     }
 }

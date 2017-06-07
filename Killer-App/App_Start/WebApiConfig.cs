@@ -11,9 +11,9 @@ namespace Killer_App
 
             // Add default route using convention-based routing
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}",
-                defaults: new { controller = "RandomSong" }
+                "DefaultApi",
+                "api/{controller}",
+                new {controller = "RandomSong"}
             );
         }
     }

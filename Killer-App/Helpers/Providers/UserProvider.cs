@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
 using Killer_App.Helpers.Objects;

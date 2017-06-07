@@ -17,7 +17,8 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public void Reply(int commentid, int songid, int userid, string text)
         {
-            var query = new SqlCommand("INSERT INTO Comment (ParentFk, SongFk, UserFk, Content) VALUES (@parent,@song,@user,@content)");
+            var query = new SqlCommand(
+                "INSERT INTO Comment (ParentFk, SongFk, AuthorFk, Content) VALUES (@parent,@song,@user,@content)");
             query.Parameters.AddWithValue("@parent", commentid);
             query.Parameters.AddWithValue("@song", songid);
             query.Parameters.AddWithValue("@content", text);
@@ -32,7 +33,8 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public void Comment(int songid, int userid, string text)
         {
-            var query = new SqlCommand("INSERT INTO Comment (ParentFk, SongFk, UserFk, Content) VALUES (@parent,@song,@user,@content)");
+            var query = new SqlCommand(
+                "INSERT INTO Comment (ParentFk, SongFk, AuthorFk, Content) VALUES (@parent,@song,@user,@content)");
             query.Parameters.AddWithValue("@parent", DBNull.Value);
             query.Parameters.AddWithValue("@song", songid);
             query.Parameters.AddWithValue("@content", text);

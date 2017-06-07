@@ -2,7 +2,7 @@
 
 namespace Killer_App.Helpers.DAL.Interfaces
 {
-    interface ICommentContext
+    internal interface ICommentContext
     {
         void Reply(int commentid, int songid, int userid, string text);
         DataTable FetchComments(int songId);

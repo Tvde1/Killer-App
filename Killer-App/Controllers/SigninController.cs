@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using Killer_App.Helpers.Objects;
 using Killer_App.Helpers.Providers;
 using Killer_App.Models;
 using Killer_App.Models.Signin;
@@ -18,15 +17,16 @@ namespace Killer_App.Controllers
             var conn = _provider.TestConnection();
             if (conn != null)
             {
-                var errorModel = new SigninModel { Error = "Can't connect to the database." };
+                var errorModel = new SigninModel {Error = "Can't connect to the database."};
                 return View(errorModel);
             }
             if (_provider.UserProvider.CurrentUser != null)
-                return LogIn(_provider.UserProvider.CurrentUser.UserName, _provider.UserProvider.CurrentUser.Password, false, true);
+                return LogIn(_provider.UserProvider.CurrentUser.UserName, _provider.UserProvider.CurrentUser.Password,
+                    false, true);
 
             var result = TrySignInWithCookies();
             if (result != null) return result;
-            var model = TempData["SigninModel"] as SigninModel ?? new SigninModel { Provider = _provider };
+            var model = TempData["SigninModel"] as SigninModel ?? new SigninModel {Provider = _provider};
             return View(model);
         }
 
@@ -38,7 +38,7 @@ namespace Killer_App.Controllers
             var conn = _provider.TestConnection();
             if (conn != null)
             {
-                var errorModel = new SigninModel { Error = "Can't connect to the database." };
+                var errorModel = new SigninModel {Error = "Can't connect to the database."};
                 return View(errorModel);
             }
 
@@ -74,36 +74,34 @@ namespace Killer_App.Controllers
             switch (result)
             {
                 case 1:
-                    {
-                        return LogIn(username, password, rememberMe);
-                    }
+                {
+                    return LogIn(username, password, rememberMe);
+                }
                 default:
-                    {
-                        var model = new SigninModel();
+                {
+                    var model = new SigninModel();
 
-                        switch (result)
-                        {
-                            case -2:
-                                model.Error = "This account doesn't exist.";
-                                break;
-                            case -1:
-                                model.Error = "This username and password don't match.";
-                                break;
-                            default:
-                                model.Error = "An uncaught login error has occured.";
-                                break;
-                        }
-                        return Index(model);
+                    switch (result)
+                    {
+                        case -2:
+                            model.Error = "This account doesn't exist.";
+                            break;
+                        case -1:
+                            model.Error = "This username and password don't match.";
+                            break;
+                        default:
+                            model.Error = "An uncaught login error has occured.";
+                            break;
                     }
+                    return Index(model);
+                }
             }
         }
-
 
 
         private ActionResult LogIn(string username, string password, bool rememberme, bool isAutomatic = false)
         {
             if (!isAutomatic)
-            {
                 if (rememberme)
                 {
                     Response.Cookies["UserSettings"]["Username"] = username;
@@ -115,7 +113,6 @@ namespace Killer_App.Controllers
                 {
                     Response.Cookies["UserSettings"].Expires = DateTime.Now.AddDays(-1);
                 }
-            }
 
             _provider.UserProvider.CurrentUser = _provider.UserProvider.FetchUser(username, password);
             _provider.UserProvider.CurrentUser.Password = password;
@@ -125,7 +122,7 @@ namespace Killer_App.Controllers
 
         private Provider GetProvider(BaseModel model = null)
         {
-            return Session["Provider"] != null ? (Provider)Session["Provider"] : (model?.Provider ?? new Provider());
+            return Session["Provider"] != null ? (Provider) Session["Provider"] : (model?.Provider ?? new Provider());
         }
     }
 }

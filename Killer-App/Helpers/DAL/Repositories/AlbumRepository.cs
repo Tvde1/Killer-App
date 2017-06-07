@@ -9,10 +9,10 @@ namespace Killer_App.Helpers.DAL.Repositories
 {
     internal class AlbumRepository
     {
+        private static readonly Random rnd = new Random();
         private readonly IAlbumContext _albumContext;
         private readonly ObjectCreator _objectCreator;
         private readonly ISongContext _songContext;
-        private static Random rnd = new Random();
 
         public AlbumRepository(Provider provider, ContextBase contextBase)
         {
@@ -23,12 +23,12 @@ namespace Killer_App.Helpers.DAL.Repositories
 
         public IEnumerable<int> GetAlbumIds(Song song)
         {
-            return ObjectCreator.CreateList(_albumContext.GetAlbums(song), row => (int)row["AlbumCk"]);
+            return ObjectCreator.CreateList(_albumContext.GetAlbums(song), row => (int) row["AlbumCk"]);
         }
 
         public IEnumerable<int> GetAlbumIds(Artist artist)
         {
-            return ObjectCreator.CreateList(_albumContext.GetAlbums(artist), row => (int)row["AlbumCk"]);
+            return ObjectCreator.CreateList(_albumContext.GetAlbums(artist), row => (int) row["AlbumCk"]);
         }
 
         public List<Album> FetchAlbums(IEnumerable<int> list)
@@ -38,7 +38,7 @@ namespace Killer_App.Helpers.DAL.Repositories
 
         public void AssignAlumArtists()
         {
-            var albumIds = ObjectCreator.CreateList(_albumContext.GetAlbums(), row => (int)row["AlbumPk"]);
+            var albumIds = ObjectCreator.CreateList(_albumContext.GetAlbums(), row => (int) row["AlbumPk"]);
             var songIds = ObjectCreator.CreateList(_songContext.GetSongs(), row => (int) row["SongPk"]);
 
             foreach (var songId in songIds)
@@ -47,7 +47,5 @@ namespace Killer_App.Helpers.DAL.Repositories
                 _albumContext.AddToSong(albumId, songId);
             }
         }
-
- 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
 using Killer_App.Helpers.Objects;
@@ -10,9 +9,8 @@ namespace Killer_App.Helpers.Providers
 {
     public class SongProvider
     {
-        private Dictionary<int, Song> _songs = new Dictionary<int, Song>();
-
         private readonly SongRepository _repository;
+        private readonly Dictionary<int, Song> _songs = new Dictionary<int, Song>();
 
         public SongProvider(Provider providers, ContextBase contextBase)
         {
@@ -20,7 +18,7 @@ namespace Killer_App.Helpers.Providers
         }
 
         public IReadOnlyList<Song> Songs => _songs?.Select(x => x.Value).ToList() ?? new List<Song>();
-  
+
         public IEnumerable<int> GetSongIds(Album album)
         {
             return _repository.GetSongIds(album);
@@ -69,7 +67,7 @@ namespace Killer_App.Helpers.Providers
         public Song FetchSong(string idString)
         {
             int result;
-            return !int.TryParse(idString, out result) ? null : GetSongsInternal(new[] { result }).First();
+            return !int.TryParse(idString, out result) ? null : GetSongsInternal(new[] {result}).First();
         }
 
         public Song GetRandomSong()

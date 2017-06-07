@@ -5,7 +5,7 @@ using Killer_App.Helpers.DAL.Interfaces;
 
 namespace Killer_App.Helpers.DAL.Contexts
 {
-    public class MssqlUserContext :  IUserContext
+    public class MssqlUserContext : IUserContext
     {
         private readonly ContextBase _contextBase;
 
@@ -20,16 +20,6 @@ namespace Killer_App.Helpers.DAL.Contexts
             return data.Rows.Count == 0 ? null : data.Rows[0];
         }
 
-        public DataTable GetAllArtistUsers()
-        {
-            return _contextBase.GetData("SELECT * FROM [User] WHERE UserPk in (SELECT UserFk FROM Artist)");
-        }
-
-        public DataTable GetArtistUsers(IEnumerable<int> artistIds)
-        {
-            return _contextBase.GetData($"SELECT * FROM Artist WHERE ArtistPk IN ({string.Join(",", artistIds)})");
-        }
-
         public bool ValidateUser(string username)
         {
             var query = new SqlCommand("SELECT TOP(1) Username FROM [User] WHERE Username = @name");
@@ -40,7 +30,8 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public bool ValidatePassword(string username, string password)
         {
-            var query = new SqlCommand("SELECT TOP(1) Username FROM [User] WHERE Username = @name AND Password = @password");
+            var query = new SqlCommand(
+                "SELECT TOP(1) Username FROM [User] WHERE Username = @name AND Password = @password");
             query.Parameters.AddWithValue("@name", username);
             query.Parameters.AddWithValue("@password", password);
             var data = _contextBase.GetData(query);
@@ -59,6 +50,16 @@ namespace Killer_App.Helpers.DAL.Contexts
         public DataTable GetNotifications(int userId)
         {
             return _contextBase.GetData($"SELECT * FROM Notification WHERE UserFk = {userId}");
+        }
+
+        public DataTable GetAllArtistUsers()
+        {
+            return _contextBase.GetData("SELECT * FROM [User] WHERE UserPk in (SELECT UserFk FROM Artist)");
+        }
+
+        public DataTable GetArtistUsers(IEnumerable<int> artistIds)
+        {
+            return _contextBase.GetData($"SELECT * FROM Artist WHERE ArtistPk IN ({string.Join(",", artistIds)})");
         }
     }
 }

@@ -6,8 +6,6 @@ namespace Killer_App.Models.Home
 {
     public class IndexModel : BaseModel
     {
-        public List<Song> RecommendedSongs { get; private set; }
-
         public IndexModel(Provider provider)
         {
             Provider = provider;
@@ -22,6 +20,8 @@ namespace Killer_App.Models.Home
                 Error = "Could not fetch songs!";
             }
         }
+
+        public List<Song> RecommendedSongs { get; private set; }
 
         private void RefreshTopSongs()
         {

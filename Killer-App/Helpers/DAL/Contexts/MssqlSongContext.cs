@@ -60,7 +60,7 @@ namespace Killer_App.Helpers.DAL.Contexts
         {
             var query = "SELECT TOP 1 SongPk FROM Song ORDER BY NEWID()";
             var data = _contextBase.GetData(query);
-            return data.Rows.Count == 0 ? null : ((int)data.Rows[0]["SongPk"]).ToString();
+            return data.Rows.Count == 0 ? null : ((int) data.Rows[0]["SongPk"]).ToString();
         }
     }
 }

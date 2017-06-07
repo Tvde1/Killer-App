@@ -19,12 +19,12 @@ namespace Killer_App.Helpers.Providers
             //UpdateAlbums();
         }
 
+        public IReadOnlyList<Album> Albums => _albums?.Select(x => x.Value).ToList() ?? new List<Album>();
+
         private void AssignAlbums()
         {
             _repository.AssignAlumArtists();
         }
-
-        public IReadOnlyList<Album> Albums => _albums?.Select(x => x.Value).ToList() ?? new List<Album>();
 
         public IEnumerable<int> GetAlbumIds(Song song)
         {
@@ -40,7 +40,7 @@ namespace Killer_App.Helpers.Providers
         {
             return GetAlbumsInternal(ids);
         }
-        
+
         private List<Album> GetAlbumsInternal(IEnumerable<int> ids)
         {
             if (ids == null) return null;
@@ -60,7 +60,7 @@ namespace Killer_App.Helpers.Providers
         public Album FetchAlbum(string id)
         {
             int result;
-            return !int.TryParse(id, out result) ? null : GetAlbumsInternal(new[] { result }).First();
+            return !int.TryParse(id, out result) ? null : GetAlbumsInternal(new[] {result}).First();
         }
     }
 }

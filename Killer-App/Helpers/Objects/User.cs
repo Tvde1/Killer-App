@@ -5,13 +5,6 @@ namespace Killer_App.Helpers.Objects
 {
     public class User : BaseModel
     {
-        public int Id { get; }
-        public string UserName { get; }
-        public string FirstName { get; }
-        public string LastName { get; }
-        public string Email { get; }
-        public string Password { get; set; }
-
         public User(int id, string userName, string name, string email, Provider provider)
         {
             Id = id;
@@ -30,5 +23,12 @@ namespace Killer_App.Helpers.Objects
             Email = user.Email;
             Provider = user.Provider;
         }
+
+        public int Id { get; }
+        public string UserName { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string Email { get; }
+        public string Password { get; set; }
     }
 }

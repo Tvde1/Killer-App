@@ -7,26 +7,26 @@
 <h2>Stats</h2>
 
 <p>
-    Amount of loaded songs: @Model.Provider.SongProvider.Songs.Count.<br />
-    Amount of loaded albums: @Model.Provider.AlbumProvider.Albums.Count.<br />
-    Amount of loaded artists: @Model.Provider.ArtistProvider.Artists.Count.<br />
+    Amount of loaded songs: @Model.Provider.SongProvider.Songs.Count.<br/>
+    Amount of loaded albums: @Model.Provider.AlbumProvider.Albums.Count.<br/>
+    Amount of loaded artists: @Model.Provider.ArtistProvider.Artists.Count.<br/>
 
-    <hr />
+    <hr/>
 
     Active user: @Model.Provider.UserProvider.CurrentUser.UserName.
-    
-    <hr/> 
-    
+
+    <hr/>
+
     Browser: @Request.Browser.Browser<br/>
     Platform: @Request.Browser.Platform<br/>
     Ip: @Request.UserHostAddress<br/>
     Hostname: @Request.UserHostName<br/>
     Identity: @Request.LogonUserIdentity.Name
 
-    <hr />
+    <hr/>
 
-    Connection string: @Model.Provider.ConnectionString.<br />
-    <br />
-    @{ var connection = Model.Provider.TestConnection()?.Message ?? "Working.";  }
-    Connection:  @connection <br />
+    Connection string: @Model.Provider.ConnectionString.<br/>
+    <br/>
+    @{ var connection = Model.Provider.TestConnection()?.Message ?? "Working."; }
+    Connection: @connection <br/>
 </p>

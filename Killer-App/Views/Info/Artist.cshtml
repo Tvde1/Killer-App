@@ -10,7 +10,7 @@
 
 @if (Model.ArtistInfo?.Artist != null)
 {
-    <img src="@(Model.ArtistInfo.Artist.Images.First(x => x.Size=="large").Text)" alt="@Model.Artist.ArtistName" />
+    <img src="@(Model.ArtistInfo.Artist.Images.First(x => x.Size == "large").Text)" alt="@Model.Artist.ArtistName"/>
     @:Tags : @string.Join(", ", Model.ArtistInfo.Artist.Tags.Tag.Select(x => x.Name));
 }
 
@@ -28,34 +28,34 @@
 
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Albums</th>
-            <th>Artists</th>
-            <th>Duration</th>
-        </tr>
+    <tr>
+        <th>Name</th>
+        <th>Albums</th>
+        <th>Artists</th>
+        <th>Duration</th>
+    </tr>
     </thead>
     <tbody>
-        @if (Model.Artist.Songs != null)
+    @if (Model.Artist.Songs != null)
+    {
+        foreach (var song in Model.Artist.Songs)
         {
-            foreach (var song in Model.Artist.Songs)
-            {
-                <tr>
-                    <td>
-                        @Html.Raw(song.LinkString())
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))
-                    </td>
-                    <td>
-                        @song.Duration.ToString(@"mm\:ss")
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.Raw(song.LinkString())
+                </td>
+                <td>
+                    @Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))
+                </td>
+                <td>
+                    @Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))
+                </td>
+                <td>
+                    @song.Duration.ToString(@"mm\:ss")
+                </td>
+            </tr>
         }
+    }
     </tbody>
 </table>
 
@@ -63,29 +63,29 @@
 
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Artists</th>
-            <th>Songs</th>
-        </tr>
+    <tr>
+        <th>Name</th>
+        <th>Artists</th>
+        <th>Songs</th>
+    </tr>
     </thead>
     <tbody>
-        @if (Model.Artist.Albums != null)
+    @if (Model.Artist.Albums != null)
+    {
+        foreach (var album in Model.Artist.Albums)
         {
-            foreach (var album in Model.Artist.Albums)
-            {
-                <tr>
-                    <td>
-                        @Html.Raw(album.LinkString())
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join(", ", album.Artists.Select(x => x.LinkString())))
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join(", ", album.Songs.Select(x => x.LinkString())))
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.Raw(album.LinkString())
+                </td>
+                <td>
+                    @Html.Raw(string.Join(", ", album.Artists.Select(x => x.LinkString())))
+                </td>
+                <td>
+                    @Html.Raw(string.Join(", ", album.Songs.Select(x => x.LinkString())))
+                </td>
+            </tr>
         }
+    }
     </tbody>
 </table>

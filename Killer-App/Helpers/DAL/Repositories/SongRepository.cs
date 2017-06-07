@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Killer_App.Helpers.DAL.Contexts;
 using Killer_App.Helpers.DAL.Interfaces;
@@ -11,8 +10,8 @@ namespace Killer_App.Helpers.DAL.Repositories
 {
     public class SongRepository
     {
-        private readonly ISongContext _songContext;
         private readonly ObjectCreator _objectCreator;
+        private readonly ISongContext _songContext;
 
         internal SongRepository(Provider providers, ContextBase contextBase)
         {
@@ -22,12 +21,12 @@ namespace Killer_App.Helpers.DAL.Repositories
 
         public IEnumerable<int> GetSongIds(Album album)
         {
-            return ObjectCreator.CreateList(_songContext.GetSongs(album), row => (int)row["SongCk"]).ToList();
+            return ObjectCreator.CreateList(_songContext.GetSongs(album), row => (int) row["SongCk"]).ToList();
         }
 
         public IEnumerable<int> GetSongIds(Artist artist)
         {
-            return ObjectCreator.CreateList(_songContext.GetSongs(artist), row => (int)row["SongCk"]).ToList();
+            return ObjectCreator.CreateList(_songContext.GetSongs(artist), row => (int) row["SongCk"]).ToList();
         }
 
         public List<Song> FetchSongs(IEnumerable<int> songIds)
@@ -38,7 +37,7 @@ namespace Killer_App.Helpers.DAL.Repositories
         public List<int> SearchSongs(string searchText, SearchModel.SearchMode mode)
         {
             var data = _songContext.SearchSongs(searchText, mode);
-            return ObjectCreator.CreateList(data, row => (int)row["SongPk"]);
+            return ObjectCreator.CreateList(data, row => (int) row["SongPk"]);
         }
 
         public List<int> GetTopSongs(User user)

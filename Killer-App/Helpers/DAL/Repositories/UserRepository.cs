@@ -8,8 +8,8 @@ namespace Killer_App.Helpers.DAL.Repositories
 {
     public class UserRepository
     {
-        private readonly IUserContext _userContext;
         private readonly ObjectCreator _objectCreator;
+        private readonly IUserContext _userContext;
 
         internal UserRepository(Provider providers, ContextBase contextBase)
         {
@@ -23,7 +23,7 @@ namespace Killer_App.Helpers.DAL.Repositories
         }
 
         /// <summary>
-        /// 1 = Sucess, -1 = Wrong password, -2 = Nonexistant user.
+        ///     1 = Sucess, -1 = Wrong password, -2 = Nonexistant user.
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -31,13 +31,9 @@ namespace Killer_App.Helpers.DAL.Repositories
         public int ValidateUser(string username, string password)
         {
             if (!_userContext.ValidateUser(username))
-            {
                 return -2;
-            }
             if (!_userContext.ValidatePassword(username, password))
-            {
                 return -1;
-            }
 
             return 1;
         }

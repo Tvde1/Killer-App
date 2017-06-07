@@ -1,6 +1,5 @@
-﻿@using System.Web.Mvc.Html
-@using Killer_App.Models.Home
-@model SearchModel
+﻿@using Killer_App.Models.Home
+@model Killer_App.Models.Home.SearchModel
 
 @{
     ViewBag.Title = "Search";
@@ -54,45 +53,46 @@
     document.getElementById("CbMode").value = @Model?.Mode;
 </script>
 
-<hr />
+<hr/>
 
 <h2>Results</h2>
 
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Album(s)</th>
-            <th>Artists</th>
-            <th>Duration</th>
-        </tr>
+    <tr>
+        <th>Name</th>
+        <th>Album(s)</th>
+        <th>Artists</th>
+        <th>Duration</th>
+    </tr>
     </thead>
     <tbody>
-        @if (Model?.Results != null)
-            {
-                foreach (var song in Model.Results)
-                {
-                <tr>
-                    <td>
-                        @Html.Raw(song.LinkString())
-                    </td>
-                    <td>
-                        @if (song.Albums != null)
-                        {
-                            @Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))
-                        }
-                    </td>
-                    <td>
-                        @if (song.Artists != null)
-                        {
-                            @Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())));
-                        }
-                    </td>
-                    <td>
-                        @song.Duration.ToString(@"mm\:ss")
-                    </td>
-                </tr>
-            }
+    @if (Model?.Results != null)
+    {
+        foreach (var song in Model.Results)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(song.LinkString())
+                </td>
+                <td>
+                    @if (song.Albums != null)
+                    {
+                        @Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))
+                    }
+                </td>
+                <td>
+                    @if (song.Artists != null)
+                    {
+                        @Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))
+                        ;
+                    }
+                </td>
+                <td>
+                    @song.Duration.ToString(@"mm\:ss")
+                </td>
+            </tr>
         }
+    }
     </tbody>
 </table>

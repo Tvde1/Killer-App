@@ -12,17 +12,8 @@ namespace Killer_App.Helpers.Objects
         private readonly IEnumerable<int> _albumIds;
         private readonly IEnumerable<int> _artistIds;
 
-        public int Id { get; set; }
-        [DataMember]
-        public string Name { get; set; }
-        public TimeSpan Duration { get; set; }
-        public List<Album> Albums => Provider.AlbumProvider.GetAlbums(_albumIds);
-        [DataMember]
-        public List<Artist> Artists => Provider.ArtistProvider.GetArtists(_artistIds);
-
         public Song()
         {
-
         }
 
         public Song(int id, string name, TimeSpan duration, Provider provider)
@@ -35,6 +26,17 @@ namespace Killer_App.Helpers.Objects
             _artistIds = Provider.ArtistProvider.GetArtistIds(this);
             _albumIds = Provider.AlbumProvider.GetAlbumIds(this);
         }
+
+        public int Id { get; set; }
+
+        [DataMember]
+        public string Name { get; set; }
+
+        public TimeSpan Duration { get; set; }
+        public List<Album> Albums => Provider.AlbumProvider.GetAlbums(_albumIds);
+
+        [DataMember]
+        public List<Artist> Artists => Provider.ArtistProvider.GetArtists(_artistIds);
 
         public override string ToString()
         {

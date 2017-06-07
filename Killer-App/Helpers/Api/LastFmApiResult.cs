@@ -20,7 +20,7 @@ namespace Killer_App.Helpers.Api
         [JsonProperty("playcount")]
         public string Playcount { get; set; }
     }
-    
+
     public class Tag
     {
         [JsonProperty("name")]
@@ -82,10 +82,10 @@ namespace Killer_App.Helpers.Api
 
         [JsonProperty("image")]
         public IList<ApiImage> Images { get; set; }
-        
+
         [JsonProperty("stats")]
         public Stats Stats { get; set; }
-        
+
         [JsonProperty("tags")]
         public Tags Tags { get; set; }
 

@@ -7,18 +7,18 @@
 
 <table class="table table-striped table-hover">
     <thead>
-        <tr>
-            <th>Song</th>
-            <th>Artist</th>
-        </tr>
+    <tr>
+        <th>Song</th>
+        <th>Artist</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var notification in Model.Notifications)
-        {
-            <tr>
-                <td>@Html.Raw(notification.Song.LinkString())</td>
+    @foreach (var notification in Model.Notifications)
+    {
+        <tr>
+            <td>@Html.Raw(notification.Song.LinkString())</td>
             <td>@Html.Raw(notification.Artist.LinkString())</td>
         </tr>
-        }
+    }
     </tbody>
 </table>
