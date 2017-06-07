@@ -151,6 +151,7 @@
     <Compile Include="Helpers\Objects\Notification.cs" />
     <Compile Include="Helpers\Objects\Playlist.cs" />
     <Compile Include="Helpers\Providers\CommentProvider.cs" />
+    <Compile Include="Helpers\Providers\PlaylistProvider.cs" />
     <Compile Include="Helpers\Providers\QueueProvider.cs" />
     <Compile Include="Helpers\Providers\UserProvider.cs" />
     <Compile Include="Helpers\DAL\Repositories\AlbumRepository.cs" />
