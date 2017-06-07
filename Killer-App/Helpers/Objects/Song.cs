@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Killer_App.Helpers.Providers;
-using Killer_App.Models;
 
 namespace Killer_App.Helpers.Objects
 {
     [DataContract]
-    public class Song : BaseModel
+    public class Song : BaseOject
     {
         private readonly IEnumerable<int> _albumIds;
         private readonly IEnumerable<int> _artistIds;
@@ -26,8 +25,7 @@ namespace Killer_App.Helpers.Objects
             _artistIds = Provider.ArtistProvider.GetArtistIds(this);
             _albumIds = Provider.AlbumProvider.GetAlbumIds(this);
         }
-
-        public int Id { get; set; }
+        
 
         [DataMember]
         public string Name { get; set; }

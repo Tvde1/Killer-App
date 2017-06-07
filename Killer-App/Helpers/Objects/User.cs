@@ -3,7 +3,7 @@ using Killer_App.Models;
 
 namespace Killer_App.Helpers.Objects
 {
-    public class User : BaseModel
+    public class User : BaseOject
     {
         public User(int id, string userName, string name, string email, Provider provider)
         {
@@ -23,8 +23,7 @@ namespace Killer_App.Helpers.Objects
             Email = user.Email;
             Provider = user.Provider;
         }
-
-        public int Id { get; }
+        
         public string UserName { get; }
         public string FirstName { get; }
         public string LastName { get; }

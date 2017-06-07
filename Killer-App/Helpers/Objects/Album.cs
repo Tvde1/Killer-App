@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using Killer_App.Helpers.Providers;
-using Killer_App.Models;
 
 namespace Killer_App.Helpers.Objects
 {
-    public class Album : BaseModel
+    public class Album : BaseOject
     {
         private readonly IEnumerable<int> _artistIds;
         private readonly Provider _provider;
@@ -20,10 +19,9 @@ namespace Killer_App.Helpers.Objects
             _songIds = _provider.SongProvider.GetSongIds(this);
             _artistIds = _provider.ArtistProvider.GetArtistIds(this);
         }
-
-        public int Id { get; }
+        
         public string Name { get; }
-        public List<Song> Songs => _provider.SongProvider.GetSongs(_songIds);
+        public List<Song> Songs => _provider.SongProvider.FetchSongs(_songIds);
         public List<Artist> Artists => _provider.ArtistProvider.GetArtists(_artistIds);
 
         public override string ToString()

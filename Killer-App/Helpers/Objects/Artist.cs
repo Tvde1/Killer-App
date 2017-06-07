@@ -20,7 +20,7 @@ namespace Killer_App.Helpers.Objects
 
         public int ArtistId { get; }
 
-        public List<Song> Songs => Provider.SongProvider.GetSongs(_songIds);
+        public List<Song> Songs => Provider.SongProvider.FetchSongs(_songIds);
         public List<Album> Albums => Provider.AlbumProvider.GetAlbums(_albumIds);
         public string FullName => UserName; //FirstName + " " + LastName;
 
