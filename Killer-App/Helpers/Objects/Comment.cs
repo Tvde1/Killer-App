@@ -5,6 +5,9 @@ namespace Killer_App.Helpers.Objects
 {
     public class Comment : BaseOject
     {
+        private readonly int _songId;
+        private readonly int _userId;
+
         public Comment()
         {
         }
@@ -13,18 +16,16 @@ namespace Killer_App.Helpers.Objects
         {
             Provider = provider;
             Id = id;
-            SongId = songid;
-            UserId = userid;
+            _songId = songid;
+            _userId = userid;
             Content = content;
             ParentId = parentId;
         }
-        
-        public int SongId { get; set; }
-        public int UserId { get; set; }
-        public string Content { get; set; }
-        public int? ParentId { get; set; }
-        public List<Comment> Replies { get; set; } = new List<Comment>();
-        public Song Song => Provider.SongProvider.FetchSong(SongId.ToString());
-        public User User => Provider.UserProvider.FetchUser(UserId);
+
+        public string Content { get; }
+        public int? ParentId { get; }
+        public List<Comment> Replies { get; } = new List<Comment>();
+        public Song Song => Provider.SongProvider.FetchSong(_songId.ToString());
+        public User User => Provider.UserProvider.FetchUser(_userId);
     }
 }

@@ -13,7 +13,7 @@ namespace Killer_App.Models.Home
         }
 
         public string SearchText { get; set; }
-        public SearchMode Mode { get; set; }
+        public SearchMode Mode { get; } = SearchMode.Name; //TODO: Implement different searching modes.
         public List<Song> Results { get; private set; } = new List<Song>();
 
         public void Search()

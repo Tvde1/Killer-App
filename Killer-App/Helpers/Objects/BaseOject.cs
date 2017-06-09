@@ -2,7 +2,7 @@
 
 namespace Killer_App.Helpers.Objects
 {
-    public class BaseOject  
+    public abstract class BaseOject  
     {
         public int Id { get; set; }
         protected Provider Provider;

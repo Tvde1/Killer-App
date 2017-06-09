@@ -11,18 +11,18 @@ namespace Killer_App.Helpers.Objects
         public Notification(Provider provider, int userId, int songId, int artistId)
         {
             Provider = provider;
-            UserId = userId;
-            SongId = songId;
-            ArtistId = artistId;
+            _userId = userId;
+            _songId = songId;
+            _artistId = artistId;
         }
 
-        public int UserId { get; set; }
-        public int SongId { get; set; }
-        public int ArtistId { get; set; }
+        private readonly int _userId;
+        private readonly int _songId;
+        private readonly int _artistId;
 
-        public User User => Provider.UserProvider.FetchUser(UserId);
-        public Artist Artist => Provider.ArtistProvider.FetchArtist(ArtistId.ToString());
-        public Song Song => Provider.SongProvider.FetchSong(SongId.ToString());
+        public User User => Provider.UserProvider.FetchUser(_userId);
+        public Artist Artist => Provider.ArtistProvider.FetchArtist(_artistId.ToString());
+        public Song Song => Provider.SongProvider.FetchSong(_songId.ToString());
 
         //Todo: Set read
     }

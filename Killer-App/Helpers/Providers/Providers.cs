@@ -6,7 +6,7 @@ namespace Killer_App.Helpers.Providers
 {
     public class Provider
     {
-        internal Provider()
+        public Provider()
         {
             var contextBase = new ContextBase(ConnectionString);
 
@@ -21,14 +21,16 @@ namespace Killer_App.Helpers.Providers
 
         public string ConnectionString { get; } =
             @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Tim\Killer-App.mdf;Integrated Security=True";
-        
+
+        //TODO: Connection string for INFRA client.
+
         public ArtistProvider ArtistProvider { get; }
         public SongProvider SongProvider { get; }
         public AlbumProvider AlbumProvider { get; }
         public UserProvider UserProvider { get; }
         public QueueProvider QueueProvider { get; }
-        public CommentProvider CommentProvider { get; set; }
-        public PlaylistProvider PlaylistProvider { get; set; }
+        public CommentProvider CommentProvider { get; }
+        public PlaylistProvider PlaylistProvider { get; }
 
         public Exception TestConnection()
         {

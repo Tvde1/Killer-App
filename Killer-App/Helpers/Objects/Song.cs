@@ -30,7 +30,7 @@ namespace Killer_App.Helpers.Objects
         [DataMember]
         public string Name { get; set; }
 
-        public TimeSpan Duration { get; set; }
+        public TimeSpan Duration { get; }
         public List<Album> Albums => Provider.AlbumProvider.GetAlbums(_albumIds);
 
         [DataMember]

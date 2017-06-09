@@ -14,7 +14,7 @@ namespace Killer_App.Models.Info
 
         public string ArtistId { get; set; }
         public LastFmApi ArtistInfo { get; private set; }
-        public List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; private set; }
 
         public void GetComments()
         {

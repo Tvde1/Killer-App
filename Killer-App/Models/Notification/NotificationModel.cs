@@ -15,6 +15,6 @@ namespace Killer_App.Models.Notification
             Notifications = Provider.UserProvider.GetNotifications();
         }
 
-        public List<Helpers.Objects.Notification> Notifications { get; set; }
+        public List<Helpers.Objects.Notification> Notifications { get; }
     }
 }
