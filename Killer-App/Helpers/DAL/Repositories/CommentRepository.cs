@@ -18,7 +18,6 @@ namespace Killer_App.Helpers.DAL.Repositories
             _objectCreator = new ObjectCreator(provider);
         }
 
-
         public List<Comment> FetchComments(Song song)
         {
             var data = _commentContext.FetchComments(song.Id);

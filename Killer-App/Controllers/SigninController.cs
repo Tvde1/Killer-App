@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Killer_App.Helpers.Providers;
 using Killer_App.Models;
@@ -99,6 +100,7 @@ namespace Killer_App.Controllers
         }
 
 
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private ActionResult LogIn(string username, string password, bool rememberme, bool isAutomatic = false)
         {
             if (!isAutomatic)

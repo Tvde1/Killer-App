@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 
 namespace Killer_App.Helpers.DAL
@@ -24,7 +23,7 @@ namespace Killer_App.Helpers.DAL
                     return dataTable;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //throw;
                 return null;
@@ -46,7 +45,7 @@ namespace Killer_App.Helpers.DAL
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //throw;
                 return null;

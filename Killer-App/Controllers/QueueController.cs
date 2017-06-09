@@ -21,7 +21,6 @@ namespace Killer_App.Controllers
             return View(model);
         }
 
-
         public ActionResult Skip()
         {
             var provider = (Provider)Session["Provider"];

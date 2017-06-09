@@ -22,7 +22,6 @@ namespace Killer_App.Helpers.Objects
 
         public List<Song> Songs => Provider.SongProvider.FetchSongs(_songIds);
         public List<Album> Albums => Provider.AlbumProvider.GetAlbums(_albumIds);
-        public string FullName => UserName; //FirstName + " " + LastName;
 
         [DataMember]
         public string ArtistName { get; }

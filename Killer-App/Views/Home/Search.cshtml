@@ -1,5 +1,5 @@
 ﻿@using Killer_App.Models.Home
-@model Killer_App.Models.Home.SearchModel
+@model SearchModel
 
 @{
     ViewBag.Title = "Search";
@@ -85,7 +85,6 @@
                     @if (song.Artists != null)
                     {
                         @Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))
-                        ;
                     }
                 </td>
                 <td>
