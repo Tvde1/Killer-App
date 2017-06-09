@@ -21,16 +21,19 @@ namespace Killer_App.Helpers.Providers
 
         public IEnumerable<int> GetArtistIds(Song song)
         {
+            if (song == null) return null;
             return _repository.GetArtistIds(song);
         }
 
         public IEnumerable<int> GetArtistIds(Album album)
         {
+            if (album == null) return null;
             return _repository.GetArtistIds(album);
         }
 
         public List<Artist> GetArtists(IEnumerable<int> ids)
         {
+            if (ids == null) return null;
             return GetArtistsInternal(ids);
         }
 
@@ -38,17 +41,23 @@ namespace Killer_App.Helpers.Providers
         {
             if (artistIds == null) return null;
             var enumerable = artistIds as int[] ?? artistIds.ToArray();
-            var songsToFetch = enumerable.Where(x => !_artists.ContainsKey(x)).ToList();
+            var artistsToFetch = enumerable.Where(x => !_artists.ContainsKey(x)).ToList();
 
-            if (songsToFetch.Any())
+            if (artistsToFetch.Any())
             {
-                var newSongs = _repository.FetchArtists(songsToFetch);
-                if (newSongs == null)
+                var newArtists = _repository.FetchArtists(artistsToFetch);
+                if (newArtists == null)
                     return null;
-                newSongs.ForEach(x => _artists.Add(x.ArtistId, x));
+                newArtists.ForEach(x => _artists.Add(x.ArtistId, x));
             }
-
-            return enumerable.Select(id => _artists[id]).ToList();
+            try
+            {
+                return enumerable.Select(id => _artists[id]).ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public Artist FetchArtist(string id)
@@ -56,7 +65,7 @@ namespace Killer_App.Helpers.Providers
             int result;
             return !int.TryParse(id, out result)
                 ? null
-                : GetArtistsInternal(new[] {result}).First();
+                : GetArtistsInternal(new[] { result }).First();
         }
 
         public bool AddToSong(int artistId, int songId)

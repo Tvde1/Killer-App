@@ -62,5 +62,11 @@ namespace Killer_App.Helpers.Providers
             int result;
             return !int.TryParse(id, out result) ? null : GetAlbumsInternal(new[] {result}).First();
         }
+
+        public Album Refetch(int id)
+        {
+            _albums.Remove(id);
+            return FetchAlbum(id.ToString());
+        }
     }
 }

@@ -21,11 +21,13 @@ namespace Killer_App.Helpers.Providers
 
         public IEnumerable<int> GetSongIds(Album album)
         {
+            if (album == null) return null;
             return _repository.GetSongIds(album);
         }
 
         public IEnumerable<int> GetSongIds(Artist artist)
         {
+            if (artist == null) return null;
             return _repository.GetSongIds(artist);
         }
 
@@ -42,6 +44,7 @@ namespace Killer_App.Helpers.Providers
 
         public List<Song> SearchSongs(string searchText, SearchModel.SearchMode mode)
         {
+            if (string.IsNullOrEmpty(searchText)) return null;
             var songList = _repository.SearchSongs(searchText, mode);
             return FetchSongs(songList);
             //TODO: Make it work by mode.
@@ -67,12 +70,18 @@ namespace Killer_App.Helpers.Providers
         public Song FetchSong(string idString)
         {
             int result;
-            return !int.TryParse(idString, out result) ? null : GetSongsInternal(new[] {result}).First();
+            return !int.TryParse(idString, out result) ? null : GetSongsInternal(new[] { result }).First();
         }
 
         public Song GetRandomSong()
         {
             return FetchSong(_repository.GetRandomSong());
+        }
+
+        public Song Refetch(int id)
+        {
+            _songs.Remove(id);
+            return FetchSong(id.ToString());
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Killer_App.Helpers.DAL.Repositories
 
         public List<int> GetTopSongs(User user)
         {
+            if (user == null) return null;
             var data = _songContext.GetTopSongs(user.Id);
             return ObjectCreator.CreateList(data, row => (int) row["SongPk"]);
         }

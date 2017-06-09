@@ -9,7 +9,7 @@ namespace Killer_App.Helpers.DAL.Repositories
 {
     internal class AlbumRepository
     {
-        private static readonly Random rnd = new Random();
+        private static readonly Random Rnd = new Random();
         private readonly IAlbumContext _albumContext;
         private readonly ObjectCreator _objectCreator;
         private readonly ISongContext _songContext;
@@ -43,7 +43,7 @@ namespace Killer_App.Helpers.DAL.Repositories
 
             foreach (var songId in songIds)
             {
-                var albumId = albumIds[rnd.Next(albumIds.Count)];
+                var albumId = albumIds[Rnd.Next(albumIds.Count)];
                 _albumContext.AddToSong(albumId, songId);
             }
         }
