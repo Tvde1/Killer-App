@@ -8,8 +8,8 @@ namespace Killer_App.Helpers.DAL.Repositories
 {
     public class PlaylistRepository
     {
-        private readonly IPlaylistContext _playlistContext;
         private readonly ObjectCreator _objectCreator;
+        private readonly IPlaylistContext _playlistContext;
 
         public PlaylistRepository(Provider provider, ContextBase contextBase)
         {

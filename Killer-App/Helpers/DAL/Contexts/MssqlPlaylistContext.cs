@@ -21,17 +21,21 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public List<int> GetSongIdsFromPlaylist(int id)
         {
-            return ObjectCreator.CreateList(_contextBase.GetData($"SELECT SongCk FROM PlaylistSong WHERE PlaylistCk = {id}"), row => (int)row["SongCk"]);
+            return ObjectCreator.CreateList(
+                _contextBase.GetData($"SELECT SongCk FROM PlaylistSong WHERE PlaylistCk = {id}"),
+                row => (int) row["SongCk"]);
         }
 
         public bool AddSongToPlaylist(int song, int playlist)
         {
-            return _contextBase.ExecuteQuery($"INSERT INTO PlaylistSong (PlaylistCk,SongCk) VALUES ({playlist},{song})");
+            return _contextBase.ExecuteQuery(
+                $"INSERT INTO PlaylistSong (PlaylistCk,SongCk) VALUES ({playlist},{song})");
         }
 
         public bool RemoveSongFromPlaylist(int playlist, int song)
         {
-            return _contextBase.ExecuteQuery($"DELETE FROM PlaylistSong WHERE PlaylistCk = {playlist} AND SongCk = {song}");
+            return _contextBase.ExecuteQuery(
+                $"DELETE FROM PlaylistSong WHERE PlaylistCk = {playlist} AND SongCk = {song}");
         }
 
         public bool DoesPlaylistExist(string name, int user)
@@ -60,7 +64,8 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public bool DoesPlaylistExist(int id, int user)
         {
-            var data = _contextBase.GetData($"SELECT PlaylistPk FROM Playlist WHERE PlaylistPk = {id} AND UserFk = {user}");
+            var data = _contextBase.GetData(
+                $"SELECT PlaylistPk FROM Playlist WHERE PlaylistPk = {id} AND UserFk = {user}");
             return data.Rows.Count != 0;
         }
 

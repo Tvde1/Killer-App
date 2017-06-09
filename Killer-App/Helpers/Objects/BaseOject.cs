@@ -2,10 +2,10 @@
 
 namespace Killer_App.Helpers.Objects
 {
-    public abstract class BaseOject  
+    public abstract class BaseOject
     {
-        public int Id { get; set; }
         protected Provider Provider;
+        public int Id { get; set; }
 
         protected static string InfoLink(string linkText, string actionName, string controllerName, int id)
         {

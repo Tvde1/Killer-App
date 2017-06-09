@@ -28,12 +28,16 @@ namespace Killer_App.Helpers.Providers
 
         public string AddSongToPlaylist(int song, int playlist)
         {
-            return _repository.AddSongToPlaylist(song, playlist) ? null : "There was a problem with adding the song to the playlist.";
+            return _repository.AddSongToPlaylist(song, playlist)
+                ? null
+                : "There was a problem with adding the song to the playlist.";
         }
 
         public string RemoveSongFromPlaylist(int playlist, int song)
         {
-            return _repository.RemoveSongFromPlaylist(playlist, song) ? null : "There was a problem with adding the song to the playlist.";
+            return _repository.RemoveSongFromPlaylist(playlist, song)
+                ? null
+                : "There was a problem with adding the song to the playlist.";
         }
 
         private bool DoesPlaylistExist(string name, int currentUserId)

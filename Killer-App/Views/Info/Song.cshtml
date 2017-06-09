@@ -9,12 +9,12 @@
 
 @*TODO: Info here*@
 
-<br />
+<br/>
 
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#artistModal">Add Artist</button>
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#playlistModal">Add to Playlist</button>
 
-@Html.ActionLink("Refresh", "Refresh", new { id = @Model.Song.Id })
+@Html.ActionLink("Refresh", "Refresh", new {id = Model.Song.Id})
 
 <a href="@Url.Action("Play", "Queue", new {songid = Model.Song.Id})">
     <img src="/Content/Images/play.png" alt="play button"/>
@@ -57,7 +57,7 @@
                     using (Html.BeginForm("AddSongToPlaylist", "Info", FormMethod.Post))
                     {
                         @Html.Hidden("playlist", playlist.Id.ToString())
-                        @Html.HiddenFor(x => x.Song.Id, new { Name = "song" })
+                        @Html.HiddenFor(x => x.Song.Id, new {Name = "song"})
                         <button type="submit" class="btn btn-default">@playlist.Name</button>
                     }
                 }
@@ -73,30 +73,30 @@
 
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Albums</th>
-            <th>Songs</th>
-        </tr>
+    <tr>
+        <th>Name</th>
+        <th>Albums</th>
+        <th>Songs</th>
+    </tr>
     </thead>
     <tbody>
-        @if (Model.Song.Artists != null)
+    @if (Model.Song.Artists != null)
+    {
+        foreach (var artist in Model.Song.Artists)
         {
-            foreach (var artist in Model.Song.Artists)
-            {
-                <tr>
-                    <td>
-                        @Html.Raw(artist.LinkString())
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join(", ", artist.Albums.Select(x => x.LinkString())))
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join(", ", artist.Songs.Select(x => x.LinkString())))
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.Raw(artist.LinkString())
+                </td>
+                <td>
+                    @Html.Raw(string.Join(", ", artist.Albums.Select(x => x.LinkString())))
+                </td>
+                <td>
+                    @Html.Raw(string.Join(", ", artist.Songs.Select(x => x.LinkString())))
+                </td>
+            </tr>
         }
+    }
     </tbody>
 </table>
 
@@ -104,30 +104,30 @@
 
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Artists</th>
-            <th>Songs</th>
-        </tr>
+    <tr>
+        <th>Name</th>
+        <th>Artists</th>
+        <th>Songs</th>
+    </tr>
     </thead>
     <tbody>
-        @if (Model.Song.Albums != null)
+    @if (Model.Song.Albums != null)
+    {
+        foreach (var album in Model.Song.Albums)
         {
-            foreach (var album in Model.Song.Albums)
-            {
-                <tr>
-                    <td>
-                        @Html.Raw(album.LinkString())
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join(", ", album.Artists.Select(x => x.LinkString())))
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join(", ", album.Songs.Select(x => x.LinkString())))
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.Raw(album.LinkString())
+                </td>
+                <td>
+                    @Html.Raw(string.Join(", ", album.Artists.Select(x => x.LinkString())))
+                </td>
+                <td>
+                    @Html.Raw(string.Join(", ", album.Songs.Select(x => x.LinkString())))
+                </td>
+            </tr>
         }
+    }
     </tbody>
 </table>
 
@@ -136,8 +136,8 @@
 Post a comment:
 @using (Html.BeginForm("Comment", "Info", FormMethod.Post))
 {
-    @Html.HiddenFor(x => x.Song.Id, new { Name = "songid" })
-    @Html.TextBox("Text", "Text", new { @class = "text-primary" })
+    @Html.HiddenFor(x => x.Song.Id, new {Name = "songid"})
+    @Html.TextBox("Text", "Text", new {@class = "text-primary"})
     <button class="btn" type="submit">Comment</button>
 }
 

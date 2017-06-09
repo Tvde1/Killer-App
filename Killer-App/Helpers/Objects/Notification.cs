@@ -4,6 +4,11 @@ namespace Killer_App.Helpers.Objects
 {
     public class Notification : BaseOject
     {
+        private readonly int _artistId;
+        private readonly int _songId;
+
+        private readonly int _userId;
+
         public Notification()
         {
         }
@@ -15,10 +20,6 @@ namespace Killer_App.Helpers.Objects
             _songId = songId;
             _artistId = artistId;
         }
-
-        private readonly int _userId;
-        private readonly int _songId;
-        private readonly int _artistId;
 
         public User User => Provider.UserProvider.FetchUser(_userId);
         public Artist Artist => Provider.ArtistProvider.FetchArtist(_artistId.ToString());

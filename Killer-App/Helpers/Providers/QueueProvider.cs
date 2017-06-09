@@ -7,9 +7,9 @@ namespace Killer_App.Helpers.Providers
 {
     public class QueueProvider
     {
+        private readonly Provider _provider;
         private readonly List<Song> _queue = new List<Song>();
         private readonly Timer _songTimer = new Timer(100);
-        private readonly Provider _provider;
 
         public QueueProvider(Provider provider)
         {
@@ -40,9 +40,7 @@ namespace Killer_App.Helpers.Providers
             }
 
             if (CurrentSong.Duration.Subtract(AtTime).TotalMilliseconds < 100)
-            {
                 Skip();
-            }
 
             AtTime = AtTime.Add(new TimeSpan(0, 0, 0, 0, 100));
         }

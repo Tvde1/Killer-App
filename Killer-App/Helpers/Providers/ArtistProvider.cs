@@ -8,8 +8,8 @@ namespace Killer_App.Helpers.Providers
 {
     public class ArtistProvider
     {
-        private readonly ArtistRepository _repository;
         private readonly Dictionary<int, Artist> _artists = new Dictionary<int, Artist>();
+        private readonly ArtistRepository _repository;
 
         public ArtistProvider(Provider provider, ContextBase contextBase)
         {
@@ -65,7 +65,7 @@ namespace Killer_App.Helpers.Providers
             int result;
             return !int.TryParse(id, out result)
                 ? null
-                : GetArtistsInternal(new[] { result }).First();
+                : GetArtistsInternal(new[] {result}).First();
         }
 
         public bool AddToSong(int artistId, int songId)
