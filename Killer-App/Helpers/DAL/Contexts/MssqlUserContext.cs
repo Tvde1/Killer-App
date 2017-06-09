@@ -50,15 +50,5 @@ namespace Killer_App.Helpers.DAL.Contexts
         {
             return _contextBase.GetData($"SELECT * FROM Notification WHERE UserFk = {userId}");
         }
-
-        public DataTable GetAllArtistUsers()
-        {
-            return _contextBase.GetData("SELECT * FROM [User] WHERE UserPk in (SELECT UserFk FROM Artist)");
-        }
-
-        public DataTable GetArtistUsers(IEnumerable<int> artistIds)
-        {
-            return _contextBase.GetData($"SELECT * FROM Artist WHERE ArtistPk IN ({string.Join(",", artistIds)})");
-        }
     }
 }

@@ -7,7 +7,6 @@ namespace Killer_App.Helpers.DAL.Interfaces
 {
     internal interface ISongContext
     {
-        DataTable GetAllSongs();
         DataTable GetSongs(Album album);
         DataTable GetSongs(Artist artist);
         DataTable SearchSongs(string searchText, SearchModel.SearchMode mode);

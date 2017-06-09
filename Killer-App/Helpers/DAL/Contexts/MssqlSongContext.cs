@@ -16,11 +16,6 @@ namespace Killer_App.Helpers.DAL.Contexts
             _contextBase = contextBase;
         }
 
-        public DataTable GetAllSongs()
-        {
-            return _contextBase.GetData("SELECT * FROM Song");
-        }
-
         public DataTable GetSongs(Album album)
         {
             return _contextBase.GetData($"SELECT SongCk FROM AlbumSong WHERE AlbumCk = {album.Id}");

@@ -168,7 +168,6 @@
     <Compile Include="Helpers\DAL\Repositories\SongRepository.cs" />
     <Compile Include="Helpers\DAL\ObjectCreator.cs" />
     <Compile Include="Helpers\DAL\Repositories\UserRepository.cs" />
-    <Compile Include="Helpers\ExtentionMethods.cs" />
     <Compile Include="Helpers\Providers\AlbumProvider.cs" />
     <Compile Include="Helpers\Providers\ArtistProvider.cs" />
     <Compile Include="Helpers\Providers\Providers.cs" />

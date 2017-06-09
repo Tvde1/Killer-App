@@ -1,15 +1,14 @@
-﻿using Killer_App.Helpers.Providers;
-using Killer_App.Models;
+﻿using System.Collections.Generic;
+using Killer_App.Helpers.Providers;
 
 namespace Killer_App.Helpers.Objects
 {
     public class User : BaseOject
     {
-        public User(int id, string userName, string name, string email, Provider provider)
+        public User(int id, string userName, string email, Provider provider)
         {
             Id = id;
             UserName = userName;
-            FirstName = name;
             Email = email;
             Provider = provider;
         }
@@ -18,16 +17,13 @@ namespace Killer_App.Helpers.Objects
         {
             Id = user.Id;
             UserName = user.UserName;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
             Email = user.Email;
             Provider = user.Provider;
         }
         
         public string UserName { get; }
-        public string FirstName { get; }
-        public string LastName { get; }
-        public string Email { get; }
+        private string Email { get; }
         public string Password { get; set; }
+        public List<Playlist> Playlists => Provider.PlaylistProvider.GetPlaylists(this);
     }
 }

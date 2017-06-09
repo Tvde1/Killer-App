@@ -10,12 +10,10 @@ namespace Killer_App.Helpers.DAL.Repositories
     {
         private readonly IArtistContext _artistContext;
         private readonly ObjectCreator _objectCreator;
-        private readonly IUserContext _userContext;
 
         internal ArtistRepository(Provider providers, ContextBase contextBase)
         {
             _artistContext = new MssqlArtistContext(contextBase);
-            _userContext = new MssqlUserContext(contextBase);
             _objectCreator = new ObjectCreator(providers);
         }
 

@@ -40,11 +40,5 @@ namespace Killer_App.Helpers.DAL.Contexts
             var query = $"INSERT INTO ArtistSong (ArtistCk,SongCk) VALUES ({artistId},{songId})";
             return _contextBase.ExecuteQuery(query);
         }
-
-        public DataTable GetAllArtists()
-        {
-            var query = "SELECT * FROM Artist";
-            return _contextBase.GetData(query);
-        }
     }
 }
