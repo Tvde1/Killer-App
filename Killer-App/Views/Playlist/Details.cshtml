@@ -3,6 +3,33 @@
     ViewBag.Title = "Details";
 }
 
+<button class="btn btn-default" onclick="location.href = '/Queue/AddPlaylist/@Model.Playlist.Id'">Add to queue</button>
+<button class="btn btn-warning" onclick="location.href = '/Playlist/DeletePlaylist/@Model.Playlist.Id'">Delete</button>
+<button class="btn btn-default" data-toggle="modal" data-target="#renameModal">Rename</button>
+
+<div id="renameModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Rename playlist.</h4>
+            </div>
+            @using (Html.BeginForm("RenamePlaylist", "Playlist", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    <p>New name:</p>
+                    @Html.TextBox("newname")
+                    @Html.Hidden("id", Model.Playlist.Id)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-dosmiss="model">Save</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
 <h2>Songs:</h2>
 
 <table class="table table-striped">
@@ -22,8 +49,8 @@
             <td>@Html.Raw(song.LinkString())</td>
             <td>@Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))</td>
             <td>@Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))</td>
-            <td>@song.Duration</td>
-            <td>@Html.ActionLink("Remove", "RemoveFromPlaylist", "Playlist", new { songid = song.Id, playlist = Model.Playlist.Id })</td>
+            <td>@song.Duration.ToString(@"mm\:ss")</td>
+            <td>@Html.ActionLink("Remove", "RemoveFromPlaylist", new { songid = song.Id, playlist = Model.Playlist.Id })</td>
         </tr>
     }
     </tbody>

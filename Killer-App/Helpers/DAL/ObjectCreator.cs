@@ -32,7 +32,7 @@ namespace Killer_App.Helpers.DAL
         {
             return row == null
                 ? null
-                : new User((int) row["UserPk"], (string) row["Username"], "Jan", (string) row["EmailAdress"],
+                : new User((int) row["UserPk"], (string) row["Username"], (string) row["EmailAdress"],
                     _provider);
         }
 
@@ -69,9 +69,10 @@ namespace Killer_App.Helpers.DAL
             if (row == null) return null;
             var id = (int) row["PlaylistPk"];
             var user = (int) row["UserFk"];
+            var name = (string) row["Name"];
             var songs = _provider.PlaylistProvider.GetSongsInPlaylist(id);
 
-            return new Playlist(_provider, id, user, songs);
+            return new Playlist(_provider, id, name, user, songs);
         }
     }
 }

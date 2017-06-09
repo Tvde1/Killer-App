@@ -1,4 +1,5 @@
-﻿@model Killer_App.Models.BaseModel
+﻿@using System.Globalization
+@model Killer_App.Models.BaseModel
 
 <!DOCTYPE html>
 <html>
@@ -124,26 +125,22 @@
             type: "GET",
             url: '@Url.Action("PausePlay", "Queue")'
         });
-
         playState = !playState;
-
-if (playState) {
-    counterUpdate = setInterval(updateTimer, 100);
-} else {
-    clearTimeout(counterUpdate);
-}
-
-        updateButton();
+        if (playState) {
+            counterUpdate = setInterval(updateTimer, 100);
+        } else {
+            clearTimeout(counterUpdate);
         }
-
-        $('#playpause').click(changeButton);
-
         updateButton();
+    }
 
+    $('#playpause').click(changeButton);
+    updateButton();
     const display = document.querySelector('#time');
-
-    let currentDuration = @(Model?.Provider.QueueProvider.AtTime.TotalSeconds.ToString() ?? "null");
-    const totalDuration = @(Model?.Provider.QueueProvider.CurrentSong?.Duration.TotalSeconds.ToString() ?? "null");
+    let currentDuration =
+        @(Model?.Provider.QueueProvider.AtTime.TotalSeconds.ToString(CultureInfo.InvariantCulture) ?? "null");
+    const totalDuration =
+        @(Model?.Provider.QueueProvider.CurrentSong?.Duration.TotalSeconds.ToString(CultureInfo.InvariantCulture) ?? "null");
 
 
         function updateBar() {

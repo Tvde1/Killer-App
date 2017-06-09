@@ -30,7 +30,7 @@ namespace Killer_App.Tests
             Assert.IsNull(album);
 
             var albums = _provider.AlbumProvider.GetAlbumIds((Song) null);
-            Assert.IsNotNull(albums);
+            Assert.IsNull(albums);
         }
     }
 }
