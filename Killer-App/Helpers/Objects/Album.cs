@@ -19,7 +19,7 @@ namespace Killer_App.Helpers.Objects
             _songIds = _provider.SongProvider.GetSongIds(this);
             _artistIds = _provider.ArtistProvider.GetArtistIds(this);
         }
-        
+
         public string Name { get; }
         public List<Song> Songs => _provider.SongProvider.FetchSongs(_songIds);
         public List<Artist> Artists => _provider.ArtistProvider.GetArtists(_artistIds);

@@ -9,14 +9,14 @@ namespace Killer_App.Controllers
     {
         public ActionResult Index()
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
 
             var tempModel = TempData["QueueModel"] as QueueModel;
             if (tempModel != null)
                 return View(tempModel);
 
-            var model = new QueueModel { Provider = provider };
+            var model = new QueueModel {Provider = provider};
             model.UpdateItems();
 
             return View(model);
@@ -24,7 +24,7 @@ namespace Killer_App.Controllers
 
         public ActionResult Skip()
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
             provider.QueueProvider.Skip();
 
@@ -33,7 +33,7 @@ namespace Killer_App.Controllers
 
         public ActionResult PausePlay()
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
 
             provider.QueueProvider.StartStopTimer();
@@ -43,7 +43,7 @@ namespace Killer_App.Controllers
 
         public ActionResult Play(string songid)
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
             provider.QueueProvider.Add(provider.SongProvider.FetchSong(songid));
 
@@ -52,7 +52,7 @@ namespace Killer_App.Controllers
 
         public ActionResult Restart()
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
             provider.QueueProvider.Restart();
 
@@ -61,7 +61,7 @@ namespace Killer_App.Controllers
 
         public ActionResult AddPlaylist(int id)
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
 
             var playlist = provider.PlaylistProvider.GetPlaylist(id.ToString());
@@ -73,12 +73,12 @@ namespace Killer_App.Controllers
                 Playlist = playlist
             };
             TempData["TempPlaylistDetailsModel"] = model;
-            return RedirectToAction("Details", "Playlist", new { id });
+            return RedirectToAction("Details", "Playlist", new {id});
         }
 
         public ActionResult Remove(string id)
         {
-            var provider = (Provider)Session["Provider"];
+            var provider = (Provider) Session["Provider"];
             if (provider == null) return GoToSignIn();
 
             var model = new QueueModel

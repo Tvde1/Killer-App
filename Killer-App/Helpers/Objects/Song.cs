@@ -25,7 +25,7 @@ namespace Killer_App.Helpers.Objects
             _artistIds = Provider.ArtistProvider.GetArtistIds(this);
             _albumIds = Provider.AlbumProvider.GetAlbumIds(this);
         }
-        
+
 
         [DataMember]
         public string Name { get; set; }

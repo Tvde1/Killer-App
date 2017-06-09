@@ -4,104 +4,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Killer-App</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Killer-App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Search", "Search", "Home")</li>
-                    <li>@Html.ActionLink("Stats", "Stats", "Home")</li>
-                    <li>@Html.ActionLink("Playlists", "Index", "Playlist")</li>
-                    <li>@Html.ActionLink("Notifications", "Index", "Notification")</li>
-                    <li>@Html.ActionLink("Queue", "Index", "Queue")</li>
-                </ul>
-            </div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Killer-App", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Search", "Search", "Home")</li>
+                <li>@Html.ActionLink("Stats", "Stats", "Home")</li>
+                <li>@Html.ActionLink("Playlists", "Index", "Playlist")</li>
+                <li>@Html.ActionLink("Notifications", "Index", "Notification")</li>
+                <li>@Html.ActionLink("Queue", "Index", "Queue")</li>
+            </ul>
         </div>
     </div>
+</div>
 
-    <div class="container body-content">
+<div class="container body-content">
 
-        @if (Model.Error != null)
-        {
-            <div class="alert alert-danger" style="margin-top: 20px">
-                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-                <strong>Error!</strong> @Model.Error
-            </div>
-        }
-        else if (Model.Sucess != null)
-        {
-            <div class="alert alert-success" style="margin-top: 20px">
-                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-                <strong>Sucess!</strong> @Model.Sucess
-            </div>
-        }
-        else if (Model.Warning != null)
-        {
-            <div class="alert alert-warning" style="margin-top: 20px">
-                <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
-                <strong>Warning!</strong> @Model.Warning
-            </div>
-        }
+    @if (Model.Error != null)
+    {
+        <div class="alert alert-danger" style="margin-top: 20px">
+            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <strong>Error!</strong> @Model.Error
+        </div>
+    }
+    else if (Model.Sucess != null)
+    {
+        <div class="alert alert-success" style="margin-top: 20px">
+            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <strong>Sucess!</strong> @Model.Sucess
+        </div>
+    }
+    else if (Model.Warning != null)
+    {
+        <div class="alert alert-warning" style="margin-top: 20px">
+            <a class="close" onclick="$('.alert').hide()" aria-label="close">&times;</a>
+            <strong>Warning!</strong> @Model.Warning
+        </div>
+    }
 
-        @RenderBody()
-        <hr />
-    </div>
+    @RenderBody()
+    <hr/>
+</div>
 
-    <div class="footer-spacer"></div>
+<div class="footer-spacer"></div>
 
-    <div id="SongDisplay">
-        @{
-            var artistAlbumString = $"{Model.Provider.QueueProvider.CurrentSong?.Artists.First()?.LinkString()} - {Model.Provider.QueueProvider.CurrentSong?.Albums.First()?.LinkString()}";
-        }
-        <h3>
-            <span id="songName">@Html.Raw(Model.Provider.QueueProvider.CurrentSong?.LinkString().Replace("'", "\\'") ?? "Not playing.")</span>
-        </h3>
-        <span id="artistAlbum">@Html.Raw(artistAlbumString.Replace("'", "\\'"))</span>
+<div id="SongDisplay">
+    @{
+        var artistAlbumString = $"{Model.Provider.QueueProvider.CurrentSong?.Artists.First()?.LinkString()} - {Model.Provider.QueueProvider.CurrentSong?.Albums.First()?.LinkString()}";
+    }
+    <h3>
+        <span id="songName">@Html.Raw(Model.Provider.QueueProvider.CurrentSong?.LinkString().Replace("'", "\\'") ?? "Not playing.")</span>
+    </h3>
+    <span id="artistAlbum">@Html.Raw(artistAlbumString.Replace("'", "\\'"))</span>
 
-        <br />
-        <br />
+    <br/>
+    <br/>
 
-        <img id="prev" src="/Content/Images/previous.png" alt="Previous" height="20" /> @*&nbsp;*@
-        <img id="playpause" src="/Content/Images/pause.png" alt="" height="20" /> @*&nbsp;*@
-        <img id="skip" src="/Content/Images/skip.png" alt="Skip" height="20" /> <br />
+    <img id="prev" src="/Content/Images/previous.png" alt="Previous" height="20"/> @*&nbsp;*@
+    <img id="playpause" src="/Content/Images/pause.png" alt="" height="20"/> @*&nbsp;*@
+    <img id="skip" src="/Content/Images/skip.png" alt="Skip" height="20"/> <br/>
 
-        <div class="progress-custom">
-            <div class="progress-value">
-                <div id="time">
-                    00:00
-                </div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="00" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>
-            </div>
-            <div class="progress-value">
-                @(Model?.Provider.QueueProvider.CurrentSong?.Duration.ToString(@"mm\:ss"))
+    <div class="progress-custom">
+        <div class="progress-value">
+            <div id="time">
+                00:00
             </div>
         </div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="00" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>
+        </div>
+        <div class="progress-value">
+            @(Model?.Provider.QueueProvider.CurrentSong?.Duration.ToString(@"mm\:ss"))
+        </div>
     </div>
+</div>
 
-    1
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script>
+1
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
 
     let playState = @Model.Provider.QueueProvider.Playing.ToString().ToLower();
-        let counterUpdate = setInterval(updateTimer, 100);
+    let counterUpdate = setInterval(updateTimer, 100);
 
     $('#prev').click(function() {
         location.href = '@Url.Action("Restart", "Queue")';
@@ -119,9 +119,9 @@
         }
     }
 
-        function changeButton() {
+    function changeButton() {
 
-            $.ajax({
+        $.ajax({
             type: "GET",
             url: '@Url.Action("PausePlay", "Queue")'
         });
@@ -143,23 +143,23 @@
         @(Model?.Provider.QueueProvider.CurrentSong?.Duration.TotalSeconds.ToString(CultureInfo.InvariantCulture) ?? "null");
 
 
-        function updateBar() {
-            const bar = 100 * currentDuration / totalDuration;
+    function updateBar() {
+        const bar = 100 * currentDuration / totalDuration;
 
-            let minutes = parseInt(currentDuration / 60, 10);
-            let seconds = parseInt(currentDuration % 60, 10);
+        let minutes = parseInt(currentDuration / 60, 10);
+        let seconds = parseInt(currentDuration % 60, 10);
 
-            minutes = minutes < 10 ? `0${minutes}` : minutes;
-            seconds = seconds < 10 ? `0${seconds}` : seconds;
+        minutes = minutes < 10 ? `0${minutes}` : minutes;
+        seconds = seconds < 10 ? `0${seconds}` : seconds;
 
-            if (minutes === 0 && seconds === 0) {
-                document.href = '@Url.Action("Skip", "Queue")';
-            }
-
-            display.textContent = minutes + ":" + seconds;
-
-            $('.progress-bar').css('width', bar + '%');
+        if (minutes === 0 && seconds === 0) {
+            document.href = '@Url.Action("Skip", "Queue")';
         }
+
+        display.textContent = minutes + ":" + seconds;
+
+        $('.progress-bar').css('width', bar + '%');
+    }
 
     updateBar();
 
@@ -176,11 +176,11 @@
 
         updateBar();
 
-            currentDuration = currentDuration + 0.1;
+        currentDuration = currentDuration + 0.1;
 
-        };
+    };
 
-    </script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+</script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

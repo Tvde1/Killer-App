@@ -70,7 +70,7 @@ namespace Killer_App.Helpers.Providers
         public Song FetchSong(string idString)
         {
             int result;
-            return !int.TryParse(idString, out result) ? null : GetSongsInternal(new[] { result }).First();
+            return !int.TryParse(idString, out result) ? null : GetSongsInternal(new[] {result}).First();
         }
 
         public Song GetRandomSong()

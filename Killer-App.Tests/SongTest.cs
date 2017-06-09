@@ -29,7 +29,7 @@ namespace Killer_App.Tests
             var song = _provider.SongProvider.FetchSong("Jan");
             Assert.IsNull(song);
 
-            var songs = _provider.SongProvider.GetSongIds((Album)null);
+            var songs = _provider.SongProvider.GetSongIds((Album) null);
             Assert.IsNull(songs);
 
             var recommendedSongs = _provider.SongProvider.GetRecommendedSongs(null);

@@ -16,7 +16,7 @@ namespace Killer_App.Controllers
             if (tempModel != null)
                 return View(tempModel);
 
-            var model = new PlaylistModel { Provider = provider };
+            var model = new PlaylistModel {Provider = provider};
             model.UpdatePlaylist();
 
             return View(model);
@@ -65,7 +65,7 @@ namespace Killer_App.Controllers
             var result = provider.PlaylistProvider.AddPlaylist(name, provider.UserProvider.CurrentUser);
 
             model.UpdatePlaylist();
-            
+
             model.Error = result;
             if (result == null)
                 model.Sucess = "The playlist has been added!";
@@ -129,7 +129,7 @@ namespace Killer_App.Controllers
                 Provider = provider,
                 Playlist = playlist,
                 Error = result,
-                Sucess = result != null ? null : "Renamed your playlist!" 
+                Sucess = result != null ? null : "Renamed your playlist!"
             };
 
             TempData["TempPlaylistDetailsModel"] = newModel;

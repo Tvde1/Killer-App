@@ -29,7 +29,7 @@ namespace Killer_App.Tests
             var artist = _provider.ArtistProvider.FetchArtist("Jan");
             Assert.IsNull(artist);
 
-            var albums = _provider.ArtistProvider.GetArtistIds((Song)null);
+            var albums = _provider.ArtistProvider.GetArtistIds((Song) null);
             Assert.IsNull(albums);
         }
     }

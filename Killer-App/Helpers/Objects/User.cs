@@ -20,7 +20,7 @@ namespace Killer_App.Helpers.Objects
             Email = user.Email;
             Provider = user.Provider;
         }
-        
+
         public string UserName { get; }
         private string Email { get; }
         public string Password { get; set; }
