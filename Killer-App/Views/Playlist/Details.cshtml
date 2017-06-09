@@ -1,0 +1,30 @@
+﻿@model Killer_App.Models.Playlist.PlaylistDetailsModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Songs:</h2>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Artist(s)</th>
+        <th>Album(s)</th>
+        <th>Duration</th>
+        <th>Controls</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var song in Model.Playlist.Songs)
+    {
+        <tr>
+            <td>@Html.Raw(song.LinkString())</td>
+            <td>@Html.Raw(string.Join(", ", song.Artists.Select(x => x.LinkString())))</td>
+            <td>@Html.Raw(string.Join(", ", song.Albums.Select(x => x.LinkString())))</td>
+            <td>@song.Duration</td>
+            <td>@Html.ActionLink("Remove", "RemoveFromPlaylist", "Playlist", new { songid = song.Id, playlist = Model.Playlist.Id })</td>
+        </tr>
+    }
+    </tbody>
+</table>

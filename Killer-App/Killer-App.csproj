@@ -180,6 +180,7 @@
     <Compile Include="Models\Home\SearchModel.cs" />
     <Compile Include="Models\Info\InfoModel.cs" />
     <Compile Include="Models\Notification\NotificationModel.cs" />
+    <Compile Include="Models\Playlist\PlaylistDetailsModel.cs" />
     <Compile Include="Models\Playlist\PlaylistModel.cs" />
     <Compile Include="Models\Queue\QueueModel.cs" />
     <Compile Include="Models\Signin\SigninModel.cs" />
@@ -206,6 +207,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Comment.cshtml" />
     <Content Include="Views\Queue\Index.cshtml" />
     <Content Include="Views\Playlist\Index.cshtml" />
+    <Content Include="Views\Playlist\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

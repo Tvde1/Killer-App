@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using Killer_App.Helpers.DAL.Interfaces;
 
 namespace Killer_App.Helpers.DAL.Contexts
@@ -20,7 +21,41 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public List<int> GetSongIdsFromPlaylist(int id)
         {
-            return ObjectCreator.CreateList(_contextBase.GetData($"SELECT PlaylistPk FROM Playlist WHERE PlaylistFk = {id}"), row => (int)row["PlaylistPk"]);
+            return ObjectCreator.CreateList(_contextBase.GetData($"SELECT PlaylistPk FROM Playlist WHERE PlaylistPk = {id}"), row => (int)row["PlaylistPk"]);
+        }
+
+        public bool AddSongToPlaylist(int song, int playlist)
+        {
+            return _contextBase.ExecuteQuery($"INSERT INTO PlaylistSong (PlaylistCk,SongCk) VALUES ({playlist},{song})");
+        }
+
+        public bool RemoveSongFromPlaylist(int playlist, int song)
+        {
+            return _contextBase.ExecuteQuery($"DELETE FROM PlaylistSong WHERE PlaylistCk = {playlist} AND SongCk = {song}");
+        }
+
+        public bool DoesPlaylistExist(string name, int user)
+        {
+            var command = new SqlCommand("SELECT Name FROM Playlist WHERE Name = @name AND UserFk = @user");
+            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@user", user);
+
+            var data = _contextBase.GetData(command);
+            return data.Rows.Count != 0;
+        }
+
+        public bool AddPlaylist(string name, int userId)
+        {
+            var query = new SqlCommand("INSERT INTO Playlist (Name,UserFk) VALUES (@name,@user)");
+            query.Parameters.AddWithValue("@name", name);
+            query.Parameters.AddWithValue("@user", userId);
+            return _contextBase.ExecuteQuery(query);
+        }
+
+        public DataRow GetPlaylist(string id)
+        {
+            var data = _contextBase.GetData($"SELECT * FROM Playlist WHERE PlaylistPk = {id}");
+            return data.Rows.Count == 0 ? null : data.Rows[1];
         }
     }
 }

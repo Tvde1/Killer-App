@@ -26,7 +26,33 @@ namespace Killer_App.Helpers.DAL.Repositories
 
         public List<int> GetSongsInPlaylist(int id)
         {
-           return _playlistContext.GetSongIdsFromPlaylist(id);
+            return _playlistContext.GetSongIdsFromPlaylist(id);
+        }
+
+        public bool AddSongToPlaylist(int song, int playlist)
+        {
+            return _playlistContext.AddSongToPlaylist(song, playlist);
+        }
+
+        public bool RemoveSongFromPlaylist(int playlist, int song)
+        {
+            return _playlistContext.RemoveSongFromPlaylist(playlist, song);
+        }
+
+        public bool DoesPlaylistExist(string name, int currentUserId)
+        {
+            return _playlistContext.DoesPlaylistExist(name, currentUserId);
+        }
+
+        public bool AddPlaylist(string name, int userId)
+        {
+            return _playlistContext.AddPlaylist(name, userId);
+        }
+
+        public Playlist GetPlaylist(string id)
+        {
+            var data = _playlistContext.GetPlaylist(id);
+            return data == null ? null : _objectCreator.CreatePlaylist(data);
         }
     }
 }
