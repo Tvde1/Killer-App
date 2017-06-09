@@ -21,7 +21,7 @@ namespace Killer_App.Helpers.DAL.Contexts
 
         public List<int> GetSongIdsFromPlaylist(int id)
         {
-            return ObjectCreator.CreateList(_contextBase.GetData($"SELECT PlaylistPk FROM Playlist WHERE PlaylistPk = {id}"), row => (int)row["PlaylistPk"]);
+            return ObjectCreator.CreateList(_contextBase.GetData($"SELECT SongCk FROM PlaylistSong WHERE PlaylistCk = {id}"), row => (int)row["SongCk"]);
         }
 
         public bool AddSongToPlaylist(int song, int playlist)
@@ -55,7 +55,26 @@ namespace Killer_App.Helpers.DAL.Contexts
         public DataRow GetPlaylist(string id)
         {
             var data = _contextBase.GetData($"SELECT * FROM Playlist WHERE PlaylistPk = {id}");
-            return data.Rows.Count == 0 ? null : data.Rows[1];
+            return data.Rows.Count == 0 ? null : data.Rows[0];
+        }
+
+        public bool DoesPlaylistExist(int id, int user)
+        {
+            var data = _contextBase.GetData($"SELECT PlaylistPk FROM Playlist WHERE PlaylistPk = {id} AND UserFk = {user}");
+            return data.Rows.Count != 0;
+        }
+
+        public bool DeletePlaylist(int id)
+        {
+            return _contextBase.ExecuteQuery($"DELETE FROM Playlist WHERE PlaylistPk = {id}");
+        }
+
+        public bool RenamePlaylist(int id, string name)
+        {
+            var query = new SqlCommand("UPDATE Playlist SET Name = @name WHERE PlaylistPk = @id");
+            query.Parameters.AddWithValue("@name", name);
+            query.Parameters.AddWithValue("@id", id);
+            return _contextBase.ExecuteQuery(query);
         }
     }
 }

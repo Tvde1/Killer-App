@@ -3,9 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Playlist</h2>
-
+<br />
 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#playlistModal">Add Playlist</button>
 
 <div id="playlistModal" class="modal fade" role="dialog">
@@ -32,6 +30,9 @@
     </div>
 </div>
 <br /> <br />
+
+<h2>Playlists</h2>
+
 @foreach (var playlist in Model.Playlists)
 {
     <button class="btn btn-default" onclick="location.href='/Playlist/Details/@playlist.Id'">@playlist.Name</button><br />

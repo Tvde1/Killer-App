@@ -8,13 +8,13 @@ namespace Killer_App.Helpers.Providers
     public class QueueProvider
     {
         private readonly List<Song> _queue = new List<Song>();
-
         private readonly Timer _songTimer = new Timer(100);
+        private readonly Provider _provider;
 
         public QueueProvider(Provider provider)
         {
-            Play(provider.SongProvider.FetchSong("201"));
-
+            _provider = provider;
+            //Play(provider.SongProvider.FetchSong("201"));
             _songTimer.Elapsed += (sender, args) => TimerTick();
         }
 
@@ -50,15 +50,20 @@ namespace Killer_App.Helpers.Providers
         public void Add(Song song)
         {
             _queue.Add(song);
+            if (CurrentSong == null)
+                Skip();
         }
 
-        public void Add(List<Song> songs)
+        public void Add(IEnumerable<Song> songs)
         {
-            songs.ForEach(_queue.Add);
+            _queue.AddRange(songs);
+            if (CurrentSong == null)
+                Skip();
         }
 
-        public bool Remove(Song song)
+        public bool Remove(int songId)
         {
+            var song = _provider.SongProvider.FetchSong(songId.ToString());
             return _queue.Remove(song);
         }
 

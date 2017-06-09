@@ -53,5 +53,20 @@ namespace Killer_App.Helpers.DAL.Repositories
             var data = _playlistContext.GetPlaylist(id);
             return data == null ? null : _objectCreator.CreatePlaylist(data);
         }
+
+        public bool DoesPlaylistExist(int id, int currentUserId)
+        {
+            return _playlistContext.DoesPlaylistExist(id, currentUserId);
+        }
+
+        public bool DeletePlaylist(int id)
+        {
+            return _playlistContext.DeletePlaylist(id);
+        }
+
+        public bool RenamePlaylist(int id, string name)
+        {
+            return _playlistContext.RenamePlaylist(id, name);
+        }
     }
 }
