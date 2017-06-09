@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Killer_App.Helpers.DAL;
 using Killer_App.Helpers.DAL.Repositories;
 using Killer_App.Helpers.Objects;
@@ -9,13 +8,11 @@ namespace Killer_App.Helpers.Providers
     public class PlaylistProvider
     {
         private readonly Provider _provider;
-        private readonly ContextBase _contextBase;
         private readonly PlaylistRepository _repository;
 
         public PlaylistProvider(Provider provider, ContextBase contextBase)
         {
             _provider = provider;
-            _contextBase = contextBase;
             _repository = new PlaylistRepository(provider, contextBase);
         }
 
@@ -36,10 +33,10 @@ namespace Killer_App.Helpers.Providers
 
         public string RemoveSongFromPlaylist(int playlist, int song)
         {
-            return _repository.RemoveSongFromPlaylist(playlist, song) ? "There was a problem with adding the song to the playlist." : null;
+            return _repository.RemoveSongFromPlaylist(playlist, song) ? null : "There was a problem with adding the song to the playlist.";
         }
 
-        public bool DoesPlaylistExist(string name, int currentUserId)
+        private bool DoesPlaylistExist(string name, int currentUserId)
         {
             return _repository.DoesPlaylistExist(name, currentUserId);
         }
@@ -50,7 +47,7 @@ namespace Killer_App.Helpers.Providers
                 return "The name is empty.";
             if (_provider.PlaylistProvider.DoesPlaylistExist(name, user.Id))
                 return "This playlist already exists.";
-            if (_repository.AddPlaylist(name, user.Id))
+            if (!_repository.AddPlaylist(name, user.Id))
                 return "An error occured while adding the playlist.";
             return null;
         }
@@ -58,6 +55,29 @@ namespace Killer_App.Helpers.Providers
         public Playlist GetPlaylist(string id)
         {
             return _repository.GetPlaylist(id);
+        }
+
+        public string DeletePlaylist(int id)
+        {
+            if (!_repository.DoesPlaylistExist(id, _provider.UserProvider.CurrentUser.Id))
+                return "You don't have this playlist.";
+
+            var result = _repository.DeletePlaylist(id);
+            return result ? null : "An error occorred wile deleting your playlist.";
+        }
+
+        public string RenamePlaylist(string id, string newName)
+        {
+            int intId;
+            if (!int.TryParse(id, out intId) || string.IsNullOrEmpty(newName))
+                return "Inputs aren't correct.";
+
+            if (!_provider.UserProvider.CurrentUser.Playlists.Exists(x => x.Id == intId))
+                return "You don't own this playlist.";
+
+            var result = _repository.RenamePlaylist(intId, newName);
+
+            return result == false ? "An error has occured while renaming your playlist." : null;
         }
     }
 }

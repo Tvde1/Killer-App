@@ -21,7 +21,7 @@
     Platform: @Request.Browser.Platform<br/>
     Ip: @Request.UserHostAddress<br/>
     Hostname: @Request.UserHostName<br/>
-    Identity: @Request.LogonUserIdentity.Name
+    Identity: @(Request.LogonUserIdentity?.Name)
 
     <hr/>
 

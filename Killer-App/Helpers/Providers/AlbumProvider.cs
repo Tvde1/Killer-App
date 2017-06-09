@@ -16,11 +16,11 @@ namespace Killer_App.Helpers.Providers
             _repository = new AlbumRepository(provider, contextBase);
 
             //AssignAlbums();
-            //UpdateAlbums();
         }
 
         public IReadOnlyList<Album> Albums => _albums?.Select(x => x.Value).ToList() ?? new List<Album>();
 
+        //Give all songs a random album.
         private void AssignAlbums()
         {
             _repository.AssignAlumArtists();
@@ -44,7 +44,8 @@ namespace Killer_App.Helpers.Providers
         private List<Album> GetAlbumsInternal(IEnumerable<int> ids)
         {
             if (ids == null) return null;
-            var songsToFetch = ids.Where(x => !_albums.ContainsKey(x)).ToList();
+            var idEnum = ids as int[] ?? ids.ToArray();
+            var songsToFetch = idEnum.Where(x => !_albums.ContainsKey(x)).ToList();
 
             if (songsToFetch.Any())
             {
@@ -54,7 +55,7 @@ namespace Killer_App.Helpers.Providers
                 newAlbums.ForEach(x => _albums.Add(x.Id, x));
             }
 
-            return ids.Select(id => _albums[id]).ToList();
+            return idEnum.Select(id => _albums[id]).ToList();
         }
 
         public Album FetchAlbum(string id)
